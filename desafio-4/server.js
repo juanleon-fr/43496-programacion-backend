@@ -1,9 +1,13 @@
 const Contenedor = require('./Contenedor');
 const express = require('express');
 const app = express();
+const { Router } = express;
+const routerProductos = Router();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use('/api/productos', routerProductos);
 
 const file = new Contenedor('productos.json');
 
@@ -26,24 +30,23 @@ app.post('/form', async (req, res) => {
 	res.send(await file.save(body));
 });
 
-app.post('/api/productos', async (req, res) => {
+routerProductos.post('', async (req, res) => {
 	const { body } = req;
 	res.send(await file.save(body));
 });
 
-
-app.get('/api/productos', async (req, res) => {
+routerProductos.get('', async (req, res) => {
 	const productos = await file.getAll();
 	res.json(productos);
 });
 
-app.get('/api/productos/:id', async (req, res) => {
+routerProductos.get('/:id', async (req, res) => {
 	const { id } = req.params;
 	const producto = await file.getById(id);
 	res.json(producto);
 });
 
-app.put('/api/productos/:id', async (req, res) => {
+routerProductos.put('/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
 		const { title, price, thumbnail } = req.body;
@@ -54,7 +57,7 @@ app.put('/api/productos/:id', async (req, res) => {
 	}
 });
 
-app.delete('/api/productos/:id', async (req, res) => {
+routerProductos.delete('/:id', async (req, res) => {
 	const { id } = req.params;
 	const result = await file.deleteById(id);
 	if (result === 'deleted') {
