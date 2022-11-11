@@ -1,0 +1,33 @@
+<section id="productos">
+
+  <div class="title">
+    <h1>
+      Productos
+    </h1>
+  </div>
+  {{#if productsExist}}
+  <div>
+    {{#each products}}
+    <div>
+      <div>
+        <img src="{{this.thumbnail}}" alt="{{this.title}}" style="width: 200px;">
+        <p>{{this.price}}</p>
+      </div>
+      <div class="product--card__data">
+        <div>
+          <h3 class="color-30">{{this.title}}</h3>
+          <h4 class="color-30">-----</h4>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    </tbody>
+    </table>
+    Sin productos
+  </div>
+  {{/if}}
+
+</section>
