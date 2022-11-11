@@ -1,0 +1,13 @@
+extends layouts/main-layout.pug
+
+block content
+
+    secion
+        form(action='/form' method='POST')
+            label(for='titleInput') Title
+            input(type='text' id='titleInput' name='title')
+            label(for='titleInput') Price
+            input(type='number' id='priceInput' name='price')
+            label(for='titleInput') Picture URL
+            input(type='text' id='thumbnailInput' name='thumbnail')
+            button(type='submit') Submit

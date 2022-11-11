@@ -1,4 +1,4 @@
-const Contenedor = require('./Contenedor');
+const Contenedor = require('./classes/Contenedor');
 const express = require('express');
 const app = express();
 const { Router } = express;
@@ -6,10 +6,11 @@ const routerProductos = Router();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+const { engine } = require('express-handlebars');
 
 app.use('/api/productos', routerProductos);
 
-const file = new Contenedor('./api/productos.json');
+const file = new Contenedor('./src/api/productos.json');
 
 const port = process.env.PORT || 8080;
 
@@ -19,23 +20,32 @@ app.listen(port, () => {
 	console.log(`Listening on port http://localhost:${port}`);
 });
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + './public'));
 
-app.set('view engine', 'pug');
-app.set('views', './views');
+app.set('view engine', 'hbs');
+app.set('views', './src/views');
+app.engine(
+	'hbs',
+	engine({
+		extname: '.hbs',
+		defaultLayout: 'index.hbs',
+		layoutsDir: __dirname + '/views/layouts',
+		partialsDir: __dirname + '/views/partials',
+	})
+);
 
 app.get('/', (req, res) => {
-	res.render('pages/index');
+	res.render('inicio');
 });
 
 app.get('/form', (req, res) => {
-	res.render('pages/form');
+	res.render('form');
 });
 
 app.post('/form', async (req, res) => {
 	const { body } = req;
 	await file.save(body);
-	res.render('pages/gracias')
+	res.render('gracias')
 });
 
 routerProductos.post('', async (req, res) => {
@@ -46,7 +56,7 @@ routerProductos.post('', async (req, res) => {
 routerProductos.get('', async (req, res) => {
 	const productos = await file.getAll();
 	const productsExist = productos.length != 0
-	res.render('pages/productos', {products: productos, productsExist })
+	res.render('products', {products: productos, productsExist })
 });
 
 routerProductos.get('/:id', async (req, res) => {

@@ -1,0 +1,18 @@
+extends layouts/main-layout.pug
+
+block content
+    section
+        h1 Lista de Productos
+        div
+            if productsExist
+                for element in products
+                    div
+                        img(src=element.thumbnail alt=element.title style="width: 200px;")
+                        p #{element.price}
+                    div
+                        h3 #{element.title}
+                        h4 -----
+                        br
+                        br
+            else 
+                span Sin productos

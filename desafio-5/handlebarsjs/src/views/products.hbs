@@ -1,0 +1,27 @@
+<section>
+
+  <h1>
+    Productos
+  </h1>
+  {{#if productsExist}}
+  <div>
+    {{#each products}}
+    <div>
+      <div>
+        <img src="{{this.thumbnail}}" alt="{{this.title}}" style="width: 200px;">
+        <p>{{this.price}}</p>
+      </div>
+      <div>
+        <h3>{{this.title}}</h3>
+        <h4>-----</h4>
+        <br>
+        <br>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    Sin productos
+  </div>
+  {{/if}}
+
+</section>

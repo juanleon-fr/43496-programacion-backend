@@ -6,7 +6,6 @@ const routerProductos = Router();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const { engine } = require('express-handlebars');
 
 app.use('/api/productos', routerProductos);
 
@@ -22,30 +21,20 @@ app.listen(port, () => {
 
 app.use(express.static(__dirname + '/public'));
 
-app.set('view engine', 'hbs');
-app.set('views', './views');
-app.engine(
-	'hbs',
-	engine({
-		extname: '.hbs',
-		defaultLayout: 'index.hbs',
-		layoutsDir: __dirname + '/views/layouts',
-		partialsDir: __dirname + '/views/partials',
-	})
-);
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-	res.render('inicio');
+	res.render('pages/index');
 });
 
 app.get('/form', (req, res) => {
-	res.render('form');
+	res.render('pages/form');
 });
 
 app.post('/form', async (req, res) => {
 	const { body } = req;
 	await file.save(body);
-	res.render('gracias')
+	res.render('pages/gracias')
 });
 
 routerProductos.post('', async (req, res) => {
@@ -56,7 +45,7 @@ routerProductos.post('', async (req, res) => {
 routerProductos.get('', async (req, res) => {
 	const productos = await file.getAll();
 	const productsExist = productos.length != 0
-	res.render('products', {products: productos, productsExist })
+	res.render('pages/productos', {products: productos, productsExist })
 });
 
 routerProductos.get('/:id', async (req, res) => {

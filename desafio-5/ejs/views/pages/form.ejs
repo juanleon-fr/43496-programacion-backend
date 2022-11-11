@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body>
+		<%- include('../partials/navbar'); %>
+		<section>
+			<form action="/form" method="POST">
+				<label for="titleInput">Title</label>
+				<input type="text" id="titleInput" aria-describedby="emailHelp" name="title" />
+				<label for="priceInput">Price</label>
+				<input type="text" id="priceInput" aria-describedby="emailHelp" name="price" />
+				<label for="thumbnailInput">Pïcture URL</label>
+				<input type="text" id="thumbnailInput" aria-describedby="emailHelp" name="thumbnail" />
+				<button type="submit">Submit</button>
+			</form>
+		</section>
+		<%- include('../partials/footer'); %>
+	</body>
+</html>
