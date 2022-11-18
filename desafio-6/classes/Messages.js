@@ -1,95 +1,108 @@
 const fs = require('fs');
 
+const errMessage = (err, func) => {
+	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
+};
+
 class Messages {
 	constructor() {
-		this.filePath = '../api/mensajes.json';
+		this.filePath = 'api/mensajes.json';
 	}
 
 	getAll = async () => {
 		try {
-			const archivo = await fs.promises.readFile(this.filePath);
-			const productos = JSON.parse(archivo);
+			const readfile = await fs.promises.readFile(this.filePath);
+			const productos = JSON.parse(readfile);
 			return productos;
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
-	syncGetAll = () => {
-		try {
-			const archivo = fs.readFileSync(this.filePath);
-			const productos = JSON.parse(archivo);
-			return productos;
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	// syncGetAll = () => {
+	// 	try {
+	// 		const readfile = fs.readFileSync(this.filePath);
+	// 		const productos = JSON.parse(readfile);
+	// 		return productos;
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
-	save = async (producto) => {
+	save = async (msg) => {
 		try {
-			const productos = await this.getAll();
-			const id = productos.length === 0 ? 1 : productos[productos.length - 1].id + 1;
-			producto.id = id;
-			productos.push(producto);
-			await fs.promises.writeFile(this.filePath, JSON.stringify(productos, null, 3));
-			console.log(`Se salvo el mensaje con el id ${id}`);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	getById = async (id) => {
-		try {
-			const productos = await this.getAll();
-			const productoEncontrado = productos.find((producto) => producto.id == id);
-			if (!productoEncontrado) return console.log('El id del pruducto no existe');
-			console.log(`Producto encontrado con el id ${id}: ${JSON.stringify(productoEncontrado)}`);
-			return productoEncontrado;
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	deleteById = async (id) => {
-		try {
-			const productos = await this.getAll();
-			const productoEncontrado = productos.find((producto) => producto.id == id);
-			if (!productoEncontrado) return console.log('El id del pruducto no existe');
-			const productosFiltrados = productos.filter((producto) => producto.id != id);
-			await fs.promises.writeFile(this.filePath, JSON.stringify(productosFiltrados, null, 3));
-			console.log(`Producto con el id ${id}, borrado exitosamente!`);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	updateById = async (id, nombre, precio, thumbnail) => {
-		try {
-			const productos = await this.getAll();
-			const item = productos.find((prod) => prod.id === Number(id));
-			if (item) {
-				item.nombre = nombre;
-				item.precio = precio;
-				item.thumbnail = thumbnail;
-				console.log(item);
-				await fs.promises.writeFile(this.filePath, JSON.stringify(productos, null, 2));
-				return item;
+			let msgList = await this.getAll();
+			if (msgList.length === 0) {
+				msg.id = 1;
 			} else {
-				return { error: 'Product not found' };
+				const lastElement = msgList.slice(-1)[0];
+				msg.id = lastElement.id + 1;
 			}
+			msgList = [...msgList, msg];
+			console.log(msgList)
+			await fs.promises.writeFile(`./${this.filePath}`, JSON.stringify(msgList));
+			return;
 		} catch (err) {
-			throw new Error(error);
+			errMessage(err, 'save');
 		}
 	};
 
-	deleteAll = async () => {
-		try {
-			await fs.promises.writeFile(this.filePath, JSON.stringify([], null, 3));
-			console.log('Se ha borrado todo el array de productos exitosamente!');
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	// getById = async (id) => {
+	// 	try {
+	// 		let msgList = await this.getAll();
+	// 		const msgFound = msgList.find((element) => element.id === Number(id));
+	// 		if (msgFound) return msgFound;
+	// 		return { error: 'producto no encontrado' };
+	// 	} catch (err) {
+	// 		errMessage(err, 'getById');
+	// 	}
+	// };
+
+	// updateById = async (id, title, price, thumbnail) => {
+	// 	try {
+	// 		let result = await this.getById(id);
+	// 		if (result.error === 'producto no encontrado') {
+	// 			return result;
+	// 		}
+	// 		let list = await this.getAll();
+	// 		console.log({ list });
+	// 		if (isNaN(price)) return { error: 'El precio debe ser un número válido' };
+	// 		const itemIndex = list.findIndex((element) => element.id === Number(id));
+	// 		list[itemIndex] = {
+	// 			title: title,
+	// 			price: Number(price),
+	// 			thumbnail: thumbnail,
+	// 			id: Number(id),
+	// 		};
+	// 		await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
+	// 		return 'updated';
+	// 	} catch (err) {
+	// 		errMessage(err, 'save');
+	// 	}
+	// };
+
+	// deleteById = async (id) => {
+	// 	try {
+	// 		let result = await this.getById(id);
+	// 		if (result.error === 'producto no encontrado') {
+	// 			return result;
+	// 		}
+	// 		let list = await this.getAll();
+	// 		const newProducts = list.filter((element) => element.id !== Number(id));
+	// 		await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newProducts));
+	// 		return 'deleted';
+	// 	} catch (err) {
+	// 		errMessage(err, 'deleteById');
+	// 	}
+	// };
+
+	// deleteAll = async () => {
+	// 	try {
+	// 		fs.promises.writeFile(`./${this.fileName}`, JSON.stringify([]));
+	// 	} catch (err) {
+	// 		errMessage(err, 'deleteAll');
+	// 	}
+	// };
 }
 
 module.exports = Messages;

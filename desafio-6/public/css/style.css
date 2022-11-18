@@ -6,11 +6,26 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.megacontainer .form-chat-container {
-  grid-column: 1/2;
+.megacontainer .chat-container {
+  grid-column: 2/3;
 }
 .megacontainer .products-container {
-  grid-column: 2/3;
+  grid-column: 1/2;
+}
+.megacontainer .products-container .products-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+#msg-list-container {
+  color: blue;
+  font-weight: bold;
+}
+#msg-list-container span {
+  color: brown;
+  font-weight: normal;
+}
+#msg-list-container span span {
+  color: green;
+  font-style: italic;
 }/*# sourceMappingURL=style.css.map */

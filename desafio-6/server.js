@@ -2,8 +2,7 @@ const Contenedor = require('./classes/Contenedor');
 const Messages = require('./classes/Messages');
 
 let current = new Date();
-const time = current.getDay() + '/' + current.getMonth() + '/' + current.getFullYear() + ' ' + current.getHours() + ':' + current.getMinutes();
-console.log(time)
+const timestamp = current.getDay() + '/' + current.getMonth() + '/' + current.getFullYear() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
 
 const express = require('express');
 const app = express();
@@ -19,8 +18,8 @@ app.use('/api/productos', routerProductos);
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer);
 
-const file = new Contenedor('./api/productos.json');
-const messages = new Messages('./api/productos.json');
+const products = new Contenedor('./api/productos.json');
+const messages = new Messages();
 
 const port = process.env.PORT || 8080;
 
@@ -50,24 +49,24 @@ app.get('/', (req, res) => {
 
 // app.post('/form', async (req, res) => {
 // 	const { body } = req;
-// 	await file.save(body);
+// 	await products.save(body);
 // 	res.render('gracias')
 // });
 
-// routerProductos.post('', async (req, res) => {
-// 	const { body } = req;
-// 	res.send(await file.save(body));
-// });
+routerProductos.post('', async (req, res) => {
+	const { body } = req;
+	res.send(await products.save(body));
+});
 
 // routerProductos.get('', async (req, res) => {
-// 	const productos = await file.getAll();
+// 	const productos = await products.getAll();
 // 	const productsExist = productos.length != 0
 // 	res.render('products', {products: productos, productsExist })
 // });
 
 // routerProductos.get('/:id', async (req, res) => {
 // 	const { id } = req.params;
-// 	const producto = await file.getById(id);
+// 	const producto = await products.getById(id);
 // 	res.json(producto);
 // });
 
@@ -75,7 +74,7 @@ app.get('/', (req, res) => {
 // 	try {
 // 		const { id } = req.params;
 // 		const { title, price, thumbnail } = req.body;
-// 		await file.updateById(id, title, price, thumbnail);
+// 		await products.updateById(id, title, price, thumbnail);
 // 		res.json({ succes: true });
 // 	} catch (error) {
 // 		res.json({ error: true, msj: 'error' });
@@ -84,7 +83,7 @@ app.get('/', (req, res) => {
 
 // routerProductos.delete('/:id', async (req, res) => {
 // 	const { id } = req.params;
-// 	const result = await file.deleteById(id);
+// 	const result = await products.deleteById(id);
 // 	if (result === 'deleted') {
 // 		res.json({
 // 			success: true,
@@ -98,10 +97,17 @@ app.get('/', (req, res) => {
 io.on('connection', async (socket) => {
 	console.log(`Client ${socket.id} connected`);
 
-	socket.emit('product-list', await file.getAll());
+	socket.emit('product-list', await products.getAll());
 
-	socket.on('product', async (data) => {
-		await file.save(data);
+	socket.emit('msg-list', await messages.getAll());
+
+	socket.on('new-product', async (data) => {
+		await products.save(data)
+		io.emit('product-list', await products.getAll());
 	});
 
+	socket.on('new-msg', async (data) => {
+		await messages.save({ socketid: socket.id, timestamp: timestamp, ...data });
+		io.emit('msg-list', await messages.getAll());
+	});
 });

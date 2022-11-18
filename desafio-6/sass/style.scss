@@ -5,15 +5,29 @@ html {
 .megacontainer {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	.form-chat-container {
-		grid-column: 1/2;
+	.chat-container {
+		grid-column: 2/3;
 	}
 	.products-container {
-		grid-column: 2/3;
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-
+		grid-column: 1/2;
+		.products-grid-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+		}
 	}
 }
 
-
+#msg-list-container {
+	color: blue;
+	font-weight: bold;
+	span {
+		//timestamp
+		color: brown;
+		font-weight: normal;
+		span {
+			//msgcontent
+			color: green;
+			font-style: italic;
+		}
+	}
+}
