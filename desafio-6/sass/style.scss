@@ -10,11 +10,14 @@ html {
 	}
 	.products-container {
 		grid-column: 1/2;
-		.products-grid-container {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-		}
 	}
+}
+
+#product-list {
+	display: grid;
+	gap: 1rem;
+	grid-auto-rows: 30rem;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 #msg-list-container {

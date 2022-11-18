@@ -12,8 +12,11 @@ html {
 .megacontainer .products-container {
   grid-column: 1/2;
 }
-.megacontainer .products-container .products-grid-container {
+
+#product-list {
   display: grid;
+  gap: 1rem;
+  grid-auto-rows: 30rem;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
