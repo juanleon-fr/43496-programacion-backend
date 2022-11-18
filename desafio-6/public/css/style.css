@@ -1,0 +1,16 @@
+html {
+  font-family: sans-serif;
+}
+
+.megacontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.megacontainer .form-chat-container {
+  grid-column: 1/2;
+}
+.megacontainer .products-container {
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}/*# sourceMappingURL=style.css.map */
