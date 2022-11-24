@@ -3,6 +3,7 @@ const app = express();
 const routeProductos = require('./routes/productos');
 const routeCarrito = require('./routes/carrito');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 let current = new Date();
 const timestamp = current.getDay() + '/' + current.getMonth() + '/' + current.getFullYear() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
@@ -11,6 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.json());
+
+app.use(cors())
 
 app.use('/api/productos', routeProductos);
 app.use('/api/carrito', routeCarrito);

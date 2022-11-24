@@ -1,0 +1,39 @@
+//template made by Juan León Hoyos
+
+//bg and main colors should always have good contrast
+//hilite color could be a color in between bg and main colors
+
+//background colors
+$color-60: #ffffff;
+$color-60-dim: #ebebeb;
+
+//main color
+$color-30: #0e1213;
+$color-30hl: #3d4041;
+$color-30a: #0d111210;
+$color-30b: #e4e4e4;
+
+
+//highlight or call-to-action color
+$color-10: #e29f29;
+$color-10hl: #e2b260;
+
+.color-60 {
+    color: $color-60;
+}
+
+.color-60-dim {
+    color: $color-60-dim;
+}
+
+.color-30 {
+    color: $color-30;
+}
+
+.color-30a {
+    color: $color-30a;
+}
+
+.color-10 {
+    color: $color-10;
+}

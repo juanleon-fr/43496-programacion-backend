@@ -1,0 +1,107 @@
+.cartContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.emptycart {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 800px;
+	p {
+		color: $color-30;
+		font-size: 1.5rem;
+		span {
+			a {
+				text-decoration: underline;
+				color: inherit;
+			}
+		}
+		span:hover {
+			color: $color-10;
+		}
+	}
+}
+
+.cartContainer {
+	ul {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 30px;
+		li {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 10px;
+			.cartItem {
+				padding: 20px 50px;
+				background-color: $color-60;
+				display: flex;
+				flex-direction: row;
+				width: fit-content;
+				height: fit-content;
+				gap: 20px;
+				.cartItemImg {
+					width: 100px;
+					height: 140px;
+					overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+					img {
+						height: 100%;
+					}
+				}
+				.cartItemDetails {
+					width: 500px;
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					justify-content: flex-end;
+					gap: 10px;
+					div {
+						width: 160px;
+						display: flex;
+						flex-direction: column;
+						align-items: flex-end;
+						span:last-child {
+                            font-family: $sectypog;
+                            font-style: italic;
+                            font-weight: 400;
+                            font-size: 1.2rem;
+                            
+						}
+                        span:first-child {
+                            font-weight: 800;
+                        }
+					}
+				}
+			}
+		}
+	}
+}
+
+.itemTitle {
+    padding: unset;
+    width: 220px;
+    text-align: unset;
+    span {
+        font-size: 1.5rem;
+        font-family: $maintypog;
+        text-transform: uppercase;
+        font-weight: 800;
+    }
+}
+
+.totalPrice {
+    font-weight: 600;
+    font-size: 1.2rem;
+}

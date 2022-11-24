@@ -1,0 +1,343 @@
+//insert here header height
+$header-height: 60px;
+//insert here header height
+
+html {
+	scroll-behavior: smooth;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+input {
+	text-decoration: none;
+	border: none;
+	font-family: unset;
+	color: unset;
+	width: fit-content;
+	text-align: center;
+}
+
+button {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+body {
+	background-color: $color-60-dim;
+	font-size: 1rem;
+	line-height: normal;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	#root {
+		height: 100%;
+		width: 100%;
+		.App {
+			height: 100%;
+			width: 100%;
+		}
+	}
+}
+
+.content {
+	height: 100%;
+	width: 100%;
+}
+
+//scrollbar
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: $color-60; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: $color-30; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: $color-30hl; 
+  }
+
+  ::-webkit-scrollbar-button:single-button {
+    background-color: $color-60-dim;
+  }
+
+//basic section sizing
+section {
+	min-height: 100%;
+	height: fit-content;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background-size: cover;
+	background-position: center;
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 50px repeat(3, 1fr) 50px;
+	grid-template-rows: $header-height auto;
+}
+
+//containers
+
+.container80 {
+	max-width: 1600px;
+	width: calc(100vw - 400px);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+}
+
+.rightorbottom {
+	align-items: flex-end;
+}
+
+.leftortop {
+	align-items: flex-start;
+}
+
+.container100 {
+	max-width: 1900px;
+	width: 90vw;
+	background-color: aqua;
+}
+
+
+// headlines and text
+
+.mainHeadline {
+	font-family: $maintypog;
+	letter-spacing: -0.01em;
+	font-weight: 800;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 3rem;
+}
+
+.mainText {
+	font-size: 1.5rem;
+}
+
+//buttons and hyperlinks
+
+button {
+	cursor: pointer;
+}
+
+.btn {
+	position: relative;
+	overflow: hidden;
+	font-weight: 500;
+	padding: 1.2em;
+	padding-top: 0.6em;
+	padding-bottom: 0.6em;
+	// border-radius: 1.2em;
+	transition: 0.4s;
+	height: min-content;
+}
+
+.btn:active,
+.btn:hover {
+	transition: 0.2s;
+}
+
+.btn:hover {
+	background-color: $color-30a;
+}
+
+.btn-color-60 {
+	background-color: $color-60;
+	color: $color-30;
+}
+
+.btn-color-60:hover {
+	background-color: $color-30;
+	color: $color-60;
+}
+
+.btn-color-60-alt {
+	background-color: $color-60;
+	color: $color-30;
+}
+
+.btn-color-60-alt:hover {
+	background-color: $color-10;
+	color: $color-30;
+}
+
+.btn-color-30 {
+	background-color: $color-30;
+	color: $color-60;
+}
+
+.btn-color-30:hover {
+	background-color: $color-30hl;
+}
+
+.btn-color-30-alt {
+	background-color: $color-30;
+	color: $color-60;
+}
+
+.btn-color-30-alt:hover {
+	background-color: $color-60;
+	color: $color-30;
+}
+
+
+.btn-color-10 {
+	background-color: $color-10;
+	color: $color-30;
+}
+
+.btn-color-10:hover {
+	background-color: $color-30;
+	color: $color-60;
+}
+
+.btn-color-10-alt {
+	background-color: $color-10;
+	color: $color-30;
+}
+
+.btn-color-10-alt:hover {
+	background-color: $color-60;
+	color: $color-30;
+	;
+}
+
+.btn-width-100 {
+	width: 100%;
+}
+
+.hlink {
+	text-decoration: underline;
+	transition: 0.4s;
+}
+
+.hlink:hover {
+	color: $color-10;
+}
+
+.hlink-color-10 {
+	text-decoration: underline;
+	transition: 0.4s;
+	color: $color-10;
+}
+
+.hlink-color-10:hover {
+	color: $color-30;
+}
+
+$cart-size: 40px;
+
+.cart--icon {
+	position: fixed;
+	width: $cart-size;
+	height: $cart-size;
+	padding: 10px;
+	border-radius: 100px;
+	top: calc($header-height + 30px);
+	left: 50px;
+	cursor: pointer;
+}
+
+.cart--number {
+	font-size: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	width: 1.5rem;
+	height: 1.5rem;
+	z-index: 5;
+	padding: 1px;
+	border-radius: 1.5rem;
+	top: calc($header-height + 30px);
+	left: calc(2 * $cart-size + 10px);
+	cursor: pointer;
+	color: $color-60;
+	background-color: $color-30;
+}
+
+.login-btn {
+	padding: 1.6em;
+	padding-top: 0.6em;
+	padding-bottom: 0.6em;
+}
+
+// elements
+
+.box-shadow:hover {
+	box-shadow: 0px 10px 6px -8px rgba($color: $color-30, $alpha: 0.2);
+}
+
+.translate-on-hover:hover {
+	transform: translate(0,-2px);
+	.precio {
+		transform: translate(0,-6px);
+	}
+}
+
+.scale-on-hover:hover {
+	transform: scale(101%);
+}
+
+.card {
+	border:solid 1px $color-30b;
+	border-radius: $elembr;
+	overflow: hidden;
+}
+
+.bg-color-10 {
+	background-color: $color-10;
+}
+
+.bg-color-30 {
+	background-color: $color-30;
+}
+
+.bg-color-60 {
+	background-color: $color-60;
+}
+
+// Special Buttons
+
+.blackbar {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -30%;
+	margin: auto;
+	width: 20%;
+	height: 100%;
+	mix-blend-mode: soft-light;
+	background-color: $color-60;
+	transition: 0s;
+}
+
+.btn:hover {
+	.blackbar {
+		transform: translate(650%);
+		transition: 0.4s;
+		transition-delay: 0.1s;
+	}
+}

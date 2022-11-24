@@ -1,0 +1,128 @@
+//header and navigation
+
+header {
+	background-color: $color-60;
+	border-bottom: solid 1px $color-30b;
+	height: $header-height;
+	position: sticky;
+	top: 0;
+	width: 100%;
+	height: $header-height;
+	z-index: 10;
+	overflow: hidden;
+	* {
+		color: $color-30;
+	}
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 80px;
+	height: $header-height;
+	.nav-logo {
+		height: fit-content;
+		width: fit-content;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		.nav-icon {
+			position: relative;
+		}
+		button {
+			width: fit-content;
+			height: fit-content;
+			display: flex;
+			align-items: center;
+
+			img {
+				height: calc($header-height - 26px);
+				position: center;
+				transition: 0.25s;
+			}
+		}
+
+		.nav-logotype {
+			display: none;
+		}
+	}
+	.circle {
+		position: absolute;
+		background-color: $color-10;
+		overflow: visible;
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		z-index: -1;
+		transition: 0.25s;
+		opacity: 0;
+		background-color: $color-30;
+	}
+	.line {
+		position: absolute;
+		background-color: $color-10;
+		width: 50px;
+		height: $header-height;
+		left: -50%;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		z-index: 1;
+		background-color: none;
+		mix-blend-mode: hard-light;
+		background-color: $color-60;
+		transition: 0s;
+		opacity: 0.6;
+	}
+	.nav-logo:hover {
+		.nav-icon {
+			img {
+				filter: invert(100%) sepia(0%) saturate(0%) brightness(150%) contrast(180%);
+			}
+		}
+		.circle {
+			opacity: 1;
+			transform: scale(1100%);
+		}
+		.line {
+			transform: translate(380%, 0);
+			transition: 0.5s;
+			transition-delay: 0.1s;
+		}
+	}
+	.nav-menu {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 14px;
+	}
+}
+
+.hamburger {
+	display: none;
+}
+
+@media screen and (min-width: 1024px) {
+	nav {
+		.nav-logo {
+			gap: 8px;
+			.nav-logotype {
+				display: flex;
+				width: fit-content;
+				height: fit-content;
+				align-items: center;
+				overflow: hidden;
+				position: relative;
+			}
+		}
+	}
+}
