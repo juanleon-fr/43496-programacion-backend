@@ -6,7 +6,7 @@ const errMessage = (err, func) => {
 
 class Contenedor {
 	constructor() {
-		this.fileName = './src/api/productos.json';
+		this.fileName = 'src/api/productos.json';
 	}
 
 	getAll = async () => {

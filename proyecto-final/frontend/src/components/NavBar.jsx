@@ -29,7 +29,7 @@ function NavBar() {
           				<Link to='/products/tshirts'><li className='nav-item'><SpecialBtn>Remeras</SpecialBtn></li></Link>
           				<Link to='/products/hoodies'><li className='nav-item'><SpecialBtn>Buzos</SpecialBtn></li></Link>
 						<Link to='/products/pants'><li className='nav-item'><SpecialBtn>Pantalones</SpecialBtn></li></Link>
-						<li className='nav-item' id='login-li'><SpecialBtn className={'btn-color-10'}>Botón de adorno!</SpecialBtn></li>
+						<li className='nav-item' id='login-li'><SpecialBtn className={'btn-color-10'} onClick={() => global.toggleAdmin()}>Toggle Admin! {global.isAdmin}</SpecialBtn></li>
 					</ul>
 				</nav>
 			</header>

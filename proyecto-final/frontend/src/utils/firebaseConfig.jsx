@@ -48,16 +48,18 @@ export async function fsFetchDocs() {
 // };
 
 export const fsFetchDocById = async (id) => {
-	const docRef = doc(db, 'products', id);
-	const docSnap = await getDoc(docRef);
-	if (docSnap.exists()) {
-		const item = docSnap.data();
-		item.id = id;
-		return item;
-	} else {
-		// doc.data() will be undefined in this case
-		console.log('No such document!');
-	}
+	let product = await fetch(`${api}productos/${id}`).then((res) => res.json());
+	return product;
+	// const docRef = doc(db, 'products', id);
+	// const docSnap = await getDoc(docRef);
+	// if (docSnap.exists()) {
+	// 	const item = docSnap.data();
+	// 	item.id = id;
+	// 	return item;
+	// } else {
+	// 	// doc.data() will be undefined in this case
+	// 	console.log('No such document!');
+	// }
 };
 
 // export const fsSetDocOrder = async (order) => {

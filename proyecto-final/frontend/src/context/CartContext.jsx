@@ -6,6 +6,7 @@ const CartContextProvider = ({ children }) => {
 	const [cartList, setCartList] = useState([]);
 	const [totalCount, setTotalCount] = useState(0);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [isAdmin, setIisAdmin] = useState('OFF');
 
 	//cartupdate
 	useEffect(() => {
@@ -46,7 +47,16 @@ const CartContextProvider = ({ children }) => {
 		if (cartList.find((item) => item.id === id)) return true;
 	};
 
-	return <CartContext.Provider value={{ cartList, addItem, removeItem, clear, totalCount, totalPrice }}>{children}</CartContext.Provider>;
+	const toggleAdmin = () => {
+		if (isAdmin === 'OFF') {
+			setIisAdmin('ON');
+			return;
+		}
+		setIisAdmin('OFF');
+		
+	};
+
+	return <CartContext.Provider value={{ cartList, addItem, removeItem, clear, totalCount, totalPrice, toggleAdmin, isAdmin }}>{children}</CartContext.Provider>;
 };
 
 export default CartContextProvider;
