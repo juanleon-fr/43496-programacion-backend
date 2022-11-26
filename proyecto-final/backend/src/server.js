@@ -5,10 +5,6 @@ const routeCarrito = require('./routes/carrito');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-let current = new Date();
-const timestampAlt = current.getDay() + '/' + current.getMonth() + '/' + current.getFullYear() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
-const timestamp = Date.now();
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -18,6 +14,7 @@ app.use(cors());
 
 app.use('/api/productos', routeProductos);
 app.use('/api/carrito', routeCarrito);
+app.use('/*', async (req, res) => {res.json({ error : -2, descripcion: `ruta '${req.url}' método '${req.method}' no implementada`})})
 // resto de rutas sin implementacion! tirar error
 
 const port = process.env.PORT || 8080;

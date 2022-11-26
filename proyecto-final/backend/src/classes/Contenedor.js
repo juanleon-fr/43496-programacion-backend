@@ -29,6 +29,7 @@ class Contenedor {
 				const lastElement = list.slice(-1)[0];
 				item.id = lastElement.id + 1;
 			}
+			item.timestamp = Date.now();
 			list = [...list, item];
 			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
 			return item;
@@ -48,22 +49,29 @@ class Contenedor {
 		}
 	};
 
-	updateById = async (id, title, price, thumbnail) => {
+	updateById = async (id, body) => {
 		try {
 			let result = await this.getById(id);
 			if (result.error === 'producto no encontrado') {
 				return result;
 			}
 			let list = await this.getAll();
-			console.log({ list });
-			if (isNaN(price)) return { error: 'El precio debe ser un número válido' };
 			const itemIndex = list.findIndex((element) => element.id === Number(id));
+			const setItem = { ...body };
+			delete setItem.id;
+			if (body.price !== undefined) {
+				if (isNaN(body.price)) return { error: 'El precio debe ser un número válido' };
+				setItem.price = Number(body.price);
+			}
+			if (body.stock !== undefined) {
+				if (isNaN(body.stock)) return { error: 'El stock debe ser un número válido' };
+				setItem.stock = Number(body.stock);
+			}
 			list[itemIndex] = {
-				title: title,
-				price: Number(price),
-				thumbnail: thumbnail,
-				id: Number(id),
+				...list[itemIndex],
+				...setItem,
 			};
+			list[itemIndex].timestamp = Date.now();
 			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
 			return 'updated';
 		} catch (err) {

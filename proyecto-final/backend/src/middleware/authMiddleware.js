@@ -1,8 +1,7 @@
 const isAdmin = true;
 
 const authMiddleware = (req, res, next) => {
-	console.log(req);
-	if (isAdmin === true) {
+	if (isAdmin) {
 		next();
 	} else {
 		return res.status(401).json({ error: 401, descripcion: `ruta ${req.url} método ${req.method} no autorizado` });

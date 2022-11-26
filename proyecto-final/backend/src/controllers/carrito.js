@@ -4,35 +4,21 @@ const Contenedor = require('../classes/Contenedor');
 const carritoContainer = new CarritoContainer();
 const products = new Contenedor();
 
-const newCartList = (prop) => {
-	if (prop === []) {
-		return []
-	}
-}
-
-
 const newCart = async (req, res, next) => {
 	const { body } = req;
-	res.json(await carritoContainer.save(body));
+	res.json(await carritoContainer.newCart(body));
 };
 
 const deleteCartById = async (req, res, next) => {
 	const { id } = req.params;
 	const result = await carritoContainer.deleteById(id);
-	if (result === 'deleted') {
-		res.json({
-			success: true,
-			msg: 'Carrito eliminado.',
-		});
-	} else {
-		res.json(result);
-	}
+	res.json(result);
 };
 
 const getCartItemsById = async (req, res, next) => {
 	const { id } = req.params;
 	const cart = await carritoContainer.getById(id);
-	res.json(cart);
+	res.json(cart.productos);
 };
 
 const getCarts = async (req, res, next) => {
@@ -43,23 +29,14 @@ const getCarts = async (req, res, next) => {
 const newCartItemById = async (req, res, next) => {
 	const { id } = req.params;
 	const { body } = req;
-	console.log(body);
-	const cartItem = body;
-	
-	res.json(await carritoContainer.save(cartItem));
+	const cart = await carritoContainer.addToCart(id, body.id_prod);
+	res.json(cart);
 };
 
 const deleteCartItemById = async (req, res, next) => {
-	const { id } = req.params;
-	const result = await carritoContainer.deleteById(id);
-	if (result === 'deleted') {
-		res.json({
-			success: true,
-			msg: 'Producto eliminado.',
-		});
-	} else {
-		res.json(result);
-	}
+	const { id, id_prod } = req.params;
+	const result = await carritoContainer.removeFromCart(id, id_prod);
+	res.json(result);
 };
 
 module.exports = {
