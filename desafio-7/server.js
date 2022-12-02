@@ -17,8 +17,8 @@ app.use('/api/productos', routerProductos);
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer);
 
-const products = new Contenedor();
-const messages = new Messages();
+const products = new Contenedor('products');
+const messages = new Messages('messages');
 
 const port = process.env.PORT || 8080;
 

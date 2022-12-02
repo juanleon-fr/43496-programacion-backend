@@ -9,7 +9,7 @@ knex.schema.createTable('accounts', table => {
 
 knex.schema
 	.createTable('messages', (table) => {
-		table.increments('id'), table.string('socketid'), table.string('timestamp'), table.string('email'), table.string('mensaje');
+		table.increments('id'), table.string('socketid'), table.string('timestamp'), table.string('email'), table.string('msg');
 	})
 	.then(() => {
 		console.log('tabla creada');
@@ -28,23 +28,24 @@ knex('messages')
 			socketid: '1111111111',
 			timestamp: '123123132',
 			email: 'ricardodarin@gmail.com',
-			mensaje: 'Hola Guille',
+			msg: 'Hola Guille',
 		},
 		{
 			socketid: '2222222222',
 			timestamp: '123123132',
 			email: 'ricardodarin@gmail.com',
-			mensaje: 'Cómo te va papá?',
+			msg: 'Cómo te va papá?',
 		},
 		{
 			socketid: '1111111111',
 			timestamp: '123123123',
 			email: 'francellaguille@gmail.com',
-			mensaje: 'Todo piola por aca ricky',
+			msg: 'Todo piola por aca ricky',
 		},
 	])
-	.then(() => {
+	.then((res) => {
 		console.log('insert successful');
+		console.log(res)
 	})
 	.catch((err) => {
 		console.log(err);

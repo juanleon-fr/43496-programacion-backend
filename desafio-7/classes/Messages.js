@@ -1,7 +1,8 @@
-const { optionsSQLite } = require("../options/sqlite.js");
+const { optionsSQLite } = require('../options/sqlite.js');
+const knex = require('knex')(optionsSQLite);
 
 const errMessage = (err, func) => {
-	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
+	console.log(`Se ha producido un error al ejecutar ${func}\n (mensajes) ${err}`);
 };
 
 class Messages {
