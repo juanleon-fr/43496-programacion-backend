@@ -1,0 +1,146 @@
+
+use ecommerce
+
+db.mensajes.insert([
+    {
+        "socketid": "1",
+        "timestamp": "",
+        "email": "pedropicapiedra@gmail.com",
+        "mensaje": "Hola"
+    },
+    {
+        "socketid": "1",
+        "timestamp": "",
+        "email": "pedropicapiedra@gmail.com",
+        "mensaje": "No hay nadie aca??"
+    },
+    {
+        "socketid": "1",
+        "timestamp": "",
+        "email": "pedropicapiedra@gmail.com",
+        "mensaje": "bue alto embole"
+    },
+    {
+        "socketid": "2",
+        "timestamp": "",
+        "email": "pablitomarmol@gmail.com",
+        "mensaje": "Tranqui hermano recien entro"
+    },
+    {
+        "socketid": "1",
+        "timestamp": "",
+        "email": "pedropicapiedra@gmail.com",
+        "mensaje": "esooo amigo que onda"
+    },
+    {
+        "socketid": "2",
+        "timestamp": "",
+        "email": "pablitomarmol@gmail.com",
+        "mensaje": "Perdon amigo me tengo que ir a tomar la leche chau"
+    },
+    {
+        "socketid": "1",
+        "timestamp": "",
+        "email": "pedropicapiedra@gmail.com",
+        "mensaje": "Naaaa me estas jodiendo, alto ortiva"
+    },
+    {
+        "socketid": "2",
+        "timestamp": "",
+        "email": "pablitomarmol@gmail.com",
+        "mensaje": "Na tranqui amigo era chiste, estoy tomando la leche ahora en la compu"
+    },
+    {
+        "socketid": "1",
+        "timestamp": "",
+        "email": "pedropicapiedra@gmail.com",
+        "mensaje": "buena capo, mira terminate la merienda que sale un counter"
+    },
+    {
+        "socketid": "2",
+        "timestamp": "",
+        "email": "pablitomarmol@gmail.com",
+        "mensaje": "de unaaaaaaaa"
+    }
+])
+
+db.productos.insert([
+    {
+        "title": "Remera Kelvin",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667911/Entropy/productos/remeras/remera-1_o5xtoe.jpg",
+        "price": 100
+    },
+    {
+        "title": "Remera Chaos",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667910/Entropy/productos/remeras/remera-2_yb4xgh.jpg",
+        "price": 150
+    },
+    {
+        "title": "Remera Matter",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667907/Entropy/productos/remeras/remera-3_rlosee.jpg",
+        "price": 300
+    },
+    {
+        "title": "Remera Disorder",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667911/Entropy/productos/remeras/remera-4_ypciuj.jpg",
+        "price": 3100
+    },
+    {
+        "title": "Remera Energy",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667918/Entropy/productos/remeras/remera-5_folvq6.jpg",
+        "price": 320
+    },
+    {
+        "title": "Remera Force",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667914/Entropy/productos/remeras/remera-6_yk6yk1.jpg",
+        "price": 200
+    },
+    {
+        "title": "Remera Disrupt",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667910/Entropy/productos/remeras/remera-7_gqdimd.jpg",
+        "price": 1500
+    },
+    {
+        "title": "Remera Impulse",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667911/Entropy/productos/remeras/remera-8_z06esd.jpg",
+        "price": 4700
+    },
+    {
+        "title": "Remera Momentum",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667913/Entropy/productos/remeras/remera-9_e2llsu.jpg",
+        "price": 3600
+    },
+    {
+        "title": "Buzo Albert",
+        "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667907/Entropy/productos/buzos/buzo-albert_iqocyb.jpg",
+        "price": 5000
+    }
+])
+
+db.mensajes.find().pretty()
+db.productos.find().pretty()
+
+db.mensajes.count()
+db.productos.count()
+
+db.productos.insertOne({
+    "title": "Buzo Pedrito",
+    "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667907/Entropy/productos/buzos/buzo-albert_iqocyb.jpg",
+    "price": 130
+})
+
+db.productos.find({price: {$lt: 1000}}).pretty()
+db.productos.find({price: {$gte: 1000, $lte: 3000}}).pretty()
+db.productos.find({price: {$gt: 3000}}).pretty()
+db.productos.aggregate([
+    {$sort: {price: 1 }},
+    {$project: {title: 1, _id: 0}},
+    {$skip: 2},
+    {$limit: 1}
+])
+
+db.productos.updateMany({},{$set: {stock: 100}})
+
+db.productos.updateMany({price: {$lt: 1000}},{$set: {stock: 0}})
+db.productos.deleteMany({price: {$lt: 1000}})
+
