@@ -1,7 +1,6 @@
-
 use ecommerce
 
-db.mensajes.insert([
+db.mensajes.insertMany([
     {
         "socketid": "1",
         "timestamp": "",
@@ -64,7 +63,7 @@ db.mensajes.insert([
     }
 ])
 
-db.productos.insert([
+db.productos.insertMany([
     {
         "title": "Remera Kelvin",
         "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667911/Entropy/productos/remeras/remera-1_o5xtoe.jpg",
@@ -120,8 +119,8 @@ db.productos.insert([
 db.mensajes.find().pretty()
 db.productos.find().pretty()
 
-db.mensajes.count()
-db.productos.count()
+db.mensajes.countDocuments({})
+db.productos.countDocuments({})
 
 db.productos.insertOne({
     "title": "Buzo Pedrito",
@@ -144,3 +143,17 @@ db.productos.updateMany({},{$set: {stock: 100}})
 db.productos.updateMany({price: {$lt: 1000}},{$set: {stock: 0}})
 db.productos.deleteMany({price: {$lt: 1000}})
 
+use admin
+
+db.createUser({user: "admin", pwd: "admin1234", roles: [{role: "readWrite", db: "ecommerce"}]})
+db.createUser({user: "pepe", pwd: "asd456", roles: [{role: "read", db: "ecommerce"}]})
+
+..........
+
+mongo -u pepe -p asd456
+
+db.productos.insertOne({
+    "title": "Buzo Pedrito",
+    "thumbnail": "https://res.cloudinary.com/dxsntbs0t/image/upload/v1662667907/Entropy/productos/buzos/buzo-albert_iqocyb.jpg",
+    "price": 130
+})
