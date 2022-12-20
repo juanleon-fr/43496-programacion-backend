@@ -4,5 +4,5 @@
 ....(Proximamente con React)
 
 ## PARA PROBAR EL PROYECTO CON POSTMAN:
-Ir al siguiente repositorio para poder clonar fácilmente todo el proyecto y la collection para probar en Postman:
-https://github.com/juanleon-fr/backend-primera-entrega
+·Usar https://download-directory.github.io/ para descargar facilmente la carpeta backend 
+·Probar con Postman el proyecto con la collection que se encuentra en la carpeta POSTMAN
