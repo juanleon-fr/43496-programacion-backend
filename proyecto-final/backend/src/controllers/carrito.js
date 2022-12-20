@@ -1,8 +1,5 @@
-const routerProductos = require('../routes/productos');
-const CarritoContainer = require('../classes/CarritoContainer');
-const Contenedor = require('../classes/Contenedor');
+const { CarritoContainer } = require('../classes/fsContainer');
 const carritoContainer = new CarritoContainer();
-const products = new Contenedor();
 
 const newCart = async (req, res, next) => {
 	const { body } = req;

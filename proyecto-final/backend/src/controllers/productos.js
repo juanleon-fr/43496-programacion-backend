@@ -1,7 +1,6 @@
-const routerProductos = require('../routes/productos');
-const Contenedor = require('../classes/Contenedor');
+const { ProductosContainer } = require('../classes/fsContainer');
 
-const products = new Contenedor();
+const products = new ProductosContainer();
 
 const getProds = async (req, res, next) => {
 	const productos = await products.getAll();
