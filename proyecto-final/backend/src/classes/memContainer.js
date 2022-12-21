@@ -1,30 +1,26 @@
-let prodList = require('../api/productos.json');
+let productList = require('../api/productos.json');
 let cartList = require('../api/carritos.json');
-
-const errMessage = (err, func) => {
-	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
-};
 
 class ProductosContainer {
 	getAll = () => {
-		return prodList;
+		return productList;
 	};
 
 	save = (item) => {
 		if (isNaN(item.price)) return { error: 'El precio debe ser un número válido' };
-		if (prodList.length === 0) {
+		if (productList.length === 0) {
 			item.id = 1;
 		} else {
-			const lastElement = prodList.slice(-1)[0];
+			const lastElement = productList.slice(-1)[0];
 			item.id = lastElement.id + 1;
 		}
 		item.timestamp = Date.now();
-		prodList = [...prodList, item];
+		productList = [...productList, item];
 		return item;
 	};
 
 	getById = (id) => {
-		const itemFound = prodList.find((element) => element.id === Number(id));
+		const itemFound = productList.find((element) => element.id === Number(id));
 		if (itemFound) return itemFound;
 		return { error: 'producto no encontrado' };
 	};
@@ -34,7 +30,7 @@ class ProductosContainer {
 		if (result.error === 'producto no encontrado') {
 			return result;
 		}
-		const itemIndex = prodList.findIndex((element) => element.id === Number(id));
+		const itemIndex = productList.findIndex((element) => element.id === Number(id));
 		const setItem = { ...body };
 		delete setItem.id;
 		if (body.price !== undefined) {
@@ -45,11 +41,11 @@ class ProductosContainer {
 			if (isNaN(body.stock)) return { error: 'El stock debe ser un número válido' };
 			setItem.stock = Number(body.stock);
 		}
-		prodList[itemIndex] = {
-			...prodList[itemIndex],
+		productList[itemIndex] = {
+			...productList[itemIndex],
 			...setItem,
 		};
-		prodList[itemIndex].timestamp = Date.now();
+		productList[itemIndex].timestamp = Date.now();
 		return 'updated';
 	};
 
@@ -58,13 +54,13 @@ class ProductosContainer {
 		if (result.error === 'producto no encontrado') {
 			return result;
 		}
-		prodList = prodList.filter((element) => element.id !== Number(id));
+		productList = productList.filter((element) => element.id !== Number(id));
 		fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newProducts));
 		return 'deleted';
 	};
 
 	deleteAll = () => {
-		prodList = [];
+		productList = [];
 	};
 }
 

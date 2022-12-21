@@ -1,6 +1,8 @@
-const { ProductosContainer } = require('../classes/fsContainer');
+const instancia = require('../daos/index');
+const products = new instancia.productos;
 
-const products = new ProductosContainer();
+// const FsContainer = require('../containers/FsContainer');
+// const products = new FsContainer('./src/db/productos.json');
 
 const getProds = async (req, res, next) => {
 	const productos = await products.getAll();

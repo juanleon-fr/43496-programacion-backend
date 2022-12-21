@@ -4,13 +4,26 @@ const errMessage = (err, func) => {
 	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
 };
 
-class ProductosContainer {
-	constructor() {
-		this.fileName = 'src/api/productos.json';
+class FsContainer {
+	constructor(route) {
+		this.fileName = route;
 	}
+
+	assignId = async () => {
+		let id;
+		const thisList = await this.getAll();
+		if (thisList.length === 0) {
+			id = 1;
+		} else {
+			const lastElement = thisList.slice(-1)[0];
+			id = lastElement.id + 1;
+		}
+		return id;
+	};
 
 	getAll = async () => {
 		try {
+			console.log(this.fileName);
 			const file = await fs.promises.readFile(`./${this.fileName}`, 'utf-8');
 			const list = JSON.parse(file);
 			return list;
@@ -19,33 +32,26 @@ class ProductosContainer {
 		}
 	};
 
-	save = async (item) => {
-		try {
-			if (isNaN(item.price)) return { error: 'El precio debe ser un número válido' };
-			let list = await this.getAll();
-			if (list.length === 0) {
-				item.id = 1;
-			} else {
-				const lastElement = list.slice(-1)[0];
-				item.id = lastElement.id + 1;
-			}
-			item.timestamp = Date.now();
-			list = [...list, item];
-			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
-			return item;
-		} catch (err) {
-			errMessage(err, 'save');
-		}
-	};
-
 	getById = async (id) => {
 		try {
-			let list = await this.getAll();
+			const list = await this.getAll();
 			const itemFound = list.find((element) => element.id === Number(id));
 			if (itemFound) return itemFound;
 			return { error: 'producto no encontrado' };
 		} catch (err) {
 			errMessage(err, 'getById');
+		}
+	};
+
+	save = async (obj) => {
+		try {
+			obj.id = await this.assignId();
+			obj.timestamp = Date.now();
+			list.push(obj);
+			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
+			return obj;
+		} catch (err) {
+			errMessage(err, 'save');
 		}
 	};
 
@@ -86,8 +92,8 @@ class ProductosContainer {
 				return result;
 			}
 			let list = await this.getAll();
-			const newProducts = list.filter((element) => element.id !== Number(id));
-			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newProducts));
+			const newList = list.filter((element) => element.id !== Number(id));
+			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newList));
 			return 'deleted';
 		} catch (err) {
 			errMessage(err, 'deleteById');
@@ -101,24 +107,6 @@ class ProductosContainer {
 			errMessage(err, 'deleteAll');
 		}
 	};
-}
-
-class CarritoContainer {
-	constructor() {
-		this.fileName = 'src/api/carritos.json';
-	}
-
-	assignId = async () => {
-		let id;
-		const cartList = await this.getAll();
-		if (cartList.length === 0) {
-			id = 1;
-		} else {
-			const lastElement = cartList.slice(-1)[0];
-			id = lastElement.id + 1;
-		}
-		return id;
-	};
 
 	newCart = async (body) => {
 		let cart = {};
@@ -128,56 +116,8 @@ class CarritoContainer {
 		return this.save(cart);
 	};
 
-	getAll = async () => {
-		try {
-			const file = await fs.promises.readFile(`./${this.fileName}`, 'utf-8');
-			const cartList = JSON.parse(file);
-			return cartList;
-		} catch (err) {
-			errMessage(err, 'getAll');
-		}
-	};
-
-	save = async (cart) => {
-		let cartList = await this.getAll();
-		const cartfind = await this.getById(cart.id);
-		if (cartfind.hasOwnProperty('error')) {
-			cartList = [...cartList, cart];
-		} else {
-			const index = cartList.findIndex((element) => element.id == cart.id);
-			cartList[index] = cart;
-		}
-		await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(cartList));
-		return { success: true, cartList: cartList };
-	};
-
-	getById = async (id) => {
-		try {
-			let cartList = await this.getAll();
-			const cartFound = cartList.find((element) => element.id === Number(id));
-			if (cartFound) return cartFound;
-			return { success: false, error: 'carrito no encontrado' };
-		} catch (err) {
-			errMessage(err, 'getById');
-		}
-	};
-
-	cartInit = async (id) => {
-		try {
-			const cartfind = await this.getById(id);
-			if (cartfind.hasOwnProperty('error')) {
-				cart.id = await this.assignId();
-				cart.timestamp = Date.now();
-				cart.productos = [];
-				return cart;
-			}
-			return cartfind;
-		} catch (err) {
-			errMessage(err, 'cartInit');
-		}
-	};
-
 	addToCart = async (id, id_prod) => {
+		const productList = require('../db/productos.json');
 		const producto = productList.find((element) => element.id == id_prod);
 		let cart = await this.getById(id);
 		if (cart.hasOwnProperty('error')) return cart;
@@ -194,29 +134,6 @@ class CarritoContainer {
 		cart.productos = cart.productos.filter((element) => element.id != id_prod);
 		return this.save(cart);
 	};
-
-	deleteById = async (id) => {
-		try {
-			let result = await this.getById(id);
-			if (result.hasOwnProperty('error')) {
-				return result;
-			}
-			let cartList = await this.getAll();
-			const newCartList = cartList.filter((element) => element.id !== Number(id));
-			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newCartList));
-			return { success: true, cartList: newCartList };
-		} catch (err) {
-			errMessage(err, 'deleteById');
-		}
-	};
-
-	deleteAll = async () => {
-		try {
-			fs.promises.writeFile(`./${this.fileName}`, JSON.stringify([]));
-		} catch (err) {
-			errMessage(err, 'deleteAll');
-		}
-	};
 }
 
-module.exports = { CarritoContainer, ProductosContainer };
+module.exports = FsContainer;

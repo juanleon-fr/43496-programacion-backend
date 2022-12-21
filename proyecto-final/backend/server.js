@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const routeProductos = require('./routes/productos');
-const routeCarrito = require('./routes/carrito');
+const routeProductos = require('./src/routes/productos');
+const routeCarrito = require('./src/routes/carrito');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
