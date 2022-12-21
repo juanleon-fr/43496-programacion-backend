@@ -4,5 +4,5 @@
 ....(Proximamente con React)
 
 ## PARA PROBAR EL PROYECTO CON POSTMAN:
-·Usar https://download-directory.github.io/ para descargar facilmente la carpeta backend <br>
+·Usar <a href="https://download-directory.github.io/" target="_blank">download-directory.github.io</a> para descargar facilmente la carpeta backend <br>
 ·Probar con Postman el proyecto con la collection que se encuentra en la carpeta POSTMAN
