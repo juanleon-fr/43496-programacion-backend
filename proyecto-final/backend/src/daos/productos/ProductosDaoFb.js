@@ -1,10 +1,10 @@
-const FsContainer = require('../../classes/FsContainer');
+const FbContainer = require('../../classes/FbContainer');
 
-class ProductosDaoFs extends FsContainer {
+class ProductosDaoFb extends FbContainer {
 	constructor() {
-		super('src/db/productos.json');
+		super('products');
 		console.log('Usando Firebase Firestore');
 	}
 }
 
-module.exports = ProductosDaoFs;
+module.exports = ProductosDaoFb;

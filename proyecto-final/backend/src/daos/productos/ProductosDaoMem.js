@@ -1,10 +1,10 @@
-const FsContainer = require('../../classes/FsContainer');
+const MemContainer = require('../../classes/MemContainer');
 
-class ProductosDaoFs extends FsContainer {
+class ProductosDaoMem extends MemContainer {
 	constructor() {
-		super('src/db/productos.json');
+		super('../db/productos.json');
 		console.log('Usando memoria');
 	}
 }
 
-module.exports = ProductosDaoFs;
+module.exports = ProductosDaoMem;

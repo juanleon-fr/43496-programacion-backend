@@ -1,9 +1,9 @@
-const FsContainer = require('../../classes/FsContainer');
+const FbContainer = require('../../classes/FbContainer');
 
-class CarritosDaoFs extends FsContainer {
+class CarritosDaoFb extends FbContainer {
 	constructor() {
-		super('src/db/productos.json');
+		super('carts');
 	}
 }
 
-module.exports = CarritosDaoFs;
+module.exports = CarritosDaoFb;

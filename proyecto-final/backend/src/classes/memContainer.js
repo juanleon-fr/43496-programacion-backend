@@ -1,153 +1,96 @@
-let productList = require('../api/productos.json');
-let cartList = require('../api/carritos.json');
-
-class ProductosContainer {
-	getAll = () => {
-		return productList;
-	};
-
-	save = (item) => {
-		if (isNaN(item.price)) return { error: 'El precio debe ser un número válido' };
-		if (productList.length === 0) {
-			item.id = 1;
-		} else {
-			const lastElement = productList.slice(-1)[0];
-			item.id = lastElement.id + 1;
-		}
-		item.timestamp = Date.now();
-		productList = [...productList, item];
-		return item;
-	};
-
-	getById = (id) => {
-		const itemFound = productList.find((element) => element.id === Number(id));
-		if (itemFound) return itemFound;
-		return { error: 'producto no encontrado' };
-	};
-
-	updateById = (id, body) => {
-		let result = this.getById(id);
-		if (result.error === 'producto no encontrado') {
-			return result;
-		}
-		const itemIndex = productList.findIndex((element) => element.id === Number(id));
-		const setItem = { ...body };
-		delete setItem.id;
-		if (body.price !== undefined) {
-			if (isNaN(body.price)) return { error: 'El precio debe ser un número válido' };
-			setItem.price = Number(body.price);
-		}
-		if (body.stock !== undefined) {
-			if (isNaN(body.stock)) return { error: 'El stock debe ser un número válido' };
-			setItem.stock = Number(body.stock);
-		}
-		productList[itemIndex] = {
-			...productList[itemIndex],
-			...setItem,
-		};
-		productList[itemIndex].timestamp = Date.now();
-		return 'updated';
-	};
-
-	deleteById = (id) => {
-		let result = this.getById(id);
-		if (result.error === 'producto no encontrado') {
-			return result;
-		}
-		productList = productList.filter((element) => element.id !== Number(id));
-		fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newProducts));
-		return 'deleted';
-	};
-
-	deleteAll = () => {
-		productList = [];
-	};
-}
-
-class CarritoContainer {
+class MemContainer {
+	constructor(route) {
+		this.list = require(route);
+	}
 	assignId = () => {
 		let id;
-		if (cartList.length === 0) {
+		const thisList = this.getAll();
+		if (thisList.length === 0) {
 			id = 1;
 		} else {
-			const lastElement = cartList.slice(-1)[0];
+			const lastElement = thisList.slice(-1)[0];
 			id = lastElement.id + 1;
 		}
 		return id;
 	};
 
-	newCart = async (body) => {
+	getAll = () => {
+		return this.list;
+	};
+
+	getById = (id) => {
+		return this.list.find((element) => element.id === Number(id));
+	};
+
+	saveNew = (obj) => {
+		obj.id = this.assignId();
+		obj.timestamp = Date.now();
+		this.list.push(obj);
+		return this.list;
+	};
+
+	save = (obj) => {
+		this.list.push(obj);
+		return this.list;
+	};
+
+	updateById = (id, body) => {
+		let listItem = this.getById(id);
+		if (listItem.error === 'producto no encontrado') {
+			return listItem;
+		}
+		const itemIndex = this.getAll().findIndex((element) => element.id === Number(id));
+		const setItem = { ...body };
+		this.list[itemIndex] = {
+			...this.list[itemIndex],
+			...setItem,
+		};
+		this.list[itemIndex].timestamp = Date.now();
+		return 'updated';
+	};
+
+	deleteById = (id) => {
+		let listItem = this.getById(id);
+		console.log(listItem);
+		if (typeof listItem === 'undefined') {
+			return { error: 'item not found' };
+		}
+		this.list = this.getAll().filter((element) => element.id !== Number(id));
+		return { success: true };
+	};
+
+	deleteAll = () => {
+		this.list = [];
+	};
+
+	newCart = (body) => {
 		let cart = {};
-		cart.id = await this.assignId();
+		cart.id = this.assignId();
 		cart.timestamp = Date.now();
+		console.log(body);
 		cart.products = body.products;
 		return this.save(cart);
 	};
 
-	getAll = () => {
-		return cartList;
-	};
-
-	save = (cart) => {
-		const cartfind = this.getById(cart.id);
-		if (cartfind.hasOwnProperty('error')) {
-			cartList = [...cartList, cart];
-		} else {
-			const index = cartList.findIndex((element) => element.id == cart.id);
-			cartList[index] = cart;
-		}
-		return { success: true, cartList: cartList };
-	};
-
-	getById = (id) => {
-		const cartFound = cartList.find((element) => element.id === Number(id));
-		if (cartFound) return cartFound;
-		return { success: false, error: 'carrito no encontrado' };
-	};
-
-	cartInit = (id) => {
-		const cartfind = this.getById(id);
-		if (cartfind.hasOwnProperty('error')) {
-			cart.id = this.assignId();
-			cart.timestamp = Date.now();
-			cart.productos = [];
-			return cart;
-		}
-		return cartfind;
-	};
-
-	addToCart = (id, id_prod) => {
-		const producto = productList.find((element) => element.id == id_prod);
+	addToCart = (id, product) => {
 		let cart = this.getById(id);
-		if (cart.hasOwnProperty('error')) return cart;
-		let productInCart = cart.productos.find((element) => element.id == producto.id);
-		if (typeof productInCart === 'object') return [{ success: false, issue: 'product already in cart' }];
-		cart.productos = [...cart.productos, producto];
-		return this.save(cart);
+		if (typeof cart === 'undefined') return { success: false, error: 'Invalid cart id' };
+		const productInCart = cart.products.find((element) => element.id === Number(product.id));
+		if (typeof productInCart !== 'undefined') return { success: false, issue: 'product already in cart' };
+		const cartIndex = this.list.findIndex((element) => element.id === Number(id));
+		cart.products.push(product);
+		this.list[cartIndex] = cart;
+		return { success: true, cart: this.list[cartIndex] };
 	};
 
 	removeFromCart = (id, id_prod) => {
 		let cart = this.getById(id);
-		let productInCart = cart.productos.find((element) => element.id == id_prod);
-		if (typeof productInCart !== 'object') return [{ success: false, issue: 'product not present in cart' }];
-		cart.productos = cart.productos.filter((element) => element.id != id_prod);
-		return this.save(cart);
-	};
-
-	deleteById = (id) => {
-		let result = this.getById(id);
-		if (result.hasOwnProperty('error')) {
-			return result;
-		}
-		let cartList = this.getAll();
-		const newCartList = cartList.filter((element) => element.id !== Number(id));
-		fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newCartList));
-		return { success: true, cartList: newCartList };
-	};
-
-	deleteAll = () => {
-		cartList = [];
+		if (typeof cart === 'undefined') return { success: false, error: 'Could not find cart id' };
+		const cartIndex = this.list.findIndex((element) => element.id === Number(id));
+		const setCart = cart.products.filter((element) => element.id === id_prod);
+		this.list[cartIndex] = setCart;
+		return { success: true, cart: this.list[cartIndex].products };
 	};
 }
 
-module.exports = { CarritoContainer, ProductosContainer };
+module.exports = MemContainer;

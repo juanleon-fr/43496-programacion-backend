@@ -23,7 +23,6 @@ class FsContainer {
 
 	getAll = async () => {
 		try {
-			console.log(this.fileName);
 			const file = await fs.promises.readFile(`./${this.fileName}`, 'utf-8');
 			const list = JSON.parse(file);
 			return list;
@@ -43,7 +42,7 @@ class FsContainer {
 		}
 	};
 
-	save = async (obj) => {
+	saveNew = async (obj) => {
 		try {
 			obj.id = await this.assignId();
 			obj.timestamp = Date.now();
@@ -116,9 +115,9 @@ class FsContainer {
 		return this.save(cart);
 	};
 
-	addToCart = async (id, id_prod) => {
+	addToCart = async (id, product) => {
 		const productList = require('../db/productos.json');
-		const producto = productList.find((element) => element.id == id_prod);
+		const producto = productList.find((element) => element.id == product.id);
 		let cart = await this.getById(id);
 		if (cart.hasOwnProperty('error')) return cart;
 		let productInCart = cart.products.find((element) => element.id == producto.id);
@@ -127,11 +126,11 @@ class FsContainer {
 		return this.save(cart);
 	};
 
-	removeFromCart = async (id, id_prod) => {
+	removeFromCart = async (id, product) => {
 		let cart = await this.getById(id);
-		let productInCart = cart.products.find((element) => element.id == id_prod);
+		let productInCart = cart.products.find((element) => element.id == product.id);
 		if (typeof productInCart !== 'object') return [{ success: false, issue: 'product not present in cart' }];
-		cart.productos = cart.productos.filter((element) => element.id != id_prod);
+		cart.productos = cart.productos.filter((element) => element.id != product.id);
 		return this.save(cart);
 	};
 }
