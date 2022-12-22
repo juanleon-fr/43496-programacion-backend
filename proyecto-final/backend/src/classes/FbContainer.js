@@ -91,6 +91,38 @@ class FbContainer {
 		}
 	};
 
+	newCart = async (body) => {
+		let cart = {};
+		cart.id = await this.assignId();
+		cart.timestamp = Date.now();
+		cart.products = body.products;
+		try {
+			const res = await this.collection.doc(`${cart.id}`).set(cart);
+			return res;
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	addToCart = async (id, product) => {
+		let cart = await this.getById(id);
+		const found = cart.products.find((element) => element.id === product.id);
+		if (typeof found !== 'undefined') {
+			return [{ success: false, issue: 'product already in cart' }];
+		}
+		cart.products.push(product);
+		return this.updateById(id, cart);
+	};
+
+	removeFromCart = async (id, id_prod) => {
+		let cart = await this.getById(id);
+		if (isNaN(id_prod)) return [{ success: false, issue: 'invalid id' }];
+		let productInCart = cart.products.find((element) => element.id === Number(id_prod));
+		if (typeof productInCart === 'undefined') return [{ success: false, issue: 'product not present in cart' }];
+		cart.products = cart.products.filter((element) => element.id != id_prod);
+		return this.updateById(id, cart);
+	};
+
 	// guardartodo = async () => {
 	// 	const arr = require('../db/productos.json');
 	// 	arr.forEach((obj) => {
