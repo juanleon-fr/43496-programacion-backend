@@ -1,8 +1,5 @@
 const instancia = require('../daos/index');
-const products = new instancia.productos;
-
-// const FsContainer = require('../containers/FsContainer');
-// const products = new FsContainer('./src/db/productos.json');
+const products = new instancia.productos();
 
 const getProds = async (req, res, next) => {
 	const productos = await products.getAll();
@@ -17,7 +14,7 @@ const getProdById = async (req, res, next) => {
 
 const newProd = async (req, res, next) => {
 	const { body } = req;
-	const result = await products.save(body);
+	const result = await products.saveNew(body);
 	res.json(result);
 };
 

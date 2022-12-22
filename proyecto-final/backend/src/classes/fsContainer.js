@@ -112,7 +112,7 @@ class FsContainer {
 		let cart = {};
 		cart.id = await this.assignId();
 		cart.timestamp = Date.now();
-		cart.productos = body.productos;
+		cart.products = body.products;
 		return this.save(cart);
 	};
 
@@ -121,7 +121,7 @@ class FsContainer {
 		const producto = productList.find((element) => element.id == id_prod);
 		let cart = await this.getById(id);
 		if (cart.hasOwnProperty('error')) return cart;
-		let productInCart = cart.productos.find((element) => element.id == producto.id);
+		let productInCart = cart.products.find((element) => element.id == producto.id);
 		if (typeof productInCart === 'object') return [{ success: false, issue: 'product already in cart' }];
 		cart.productos = [...cart.productos, producto];
 		return this.save(cart);
@@ -129,7 +129,7 @@ class FsContainer {
 
 	removeFromCart = async (id, id_prod) => {
 		let cart = await this.getById(id);
-		let productInCart = cart.productos.find((element) => element.id == id_prod);
+		let productInCart = cart.products.find((element) => element.id == id_prod);
 		if (typeof productInCart !== 'object') return [{ success: false, issue: 'product not present in cart' }];
 		cart.productos = cart.productos.filter((element) => element.id != id_prod);
 		return this.save(cart);

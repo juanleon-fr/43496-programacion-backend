@@ -4,7 +4,7 @@
 ....(Proximamente con React)
 
 ## PARA USAR ATLAS/FIREBASE/FILESYSTEM/MEMORIA:
-·Las clases para cada
+·Modificar INSTANCIA en el archivo .env con una de las opciones disponibles
 
 ## PARA PROBAR EL PROYECTO CON POSTMAN:
 ·Usar <a href="https://download-directory.github.io/" target="_blank">download-directory.github.io</a> para descargar facilmente la carpeta backend <br>

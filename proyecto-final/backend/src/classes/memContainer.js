@@ -80,7 +80,7 @@ class CarritoContainer {
 		let cart = {};
 		cart.id = await this.assignId();
 		cart.timestamp = Date.now();
-		cart.productos = body.productos;
+		cart.products = body.products;
 		return this.save(cart);
 	};
 

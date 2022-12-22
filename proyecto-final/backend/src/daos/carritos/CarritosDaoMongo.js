@@ -1,9 +1,15 @@
-const FsContainer = require('../../classes/FsContainer');
+const MongoContainer = require('../../classes/MongoContainer');
+const cartModel = require('../../models/cartModel.js');
+const name = cartModel.cartCollection;
+const schema = cartModel.cartSchema;
 
-class CarritosDaoFs extends FsContainer {
+class CarritosDaoMongo extends MongoContainer {
 	constructor() {
-		super('src/db/productos.json');
+		super({
+			name: name,
+			schema: schema,
+		});
 	}
 }
 
-module.exports = CarritosDaoFs;
+module.exports = CarritosDaoMongo;

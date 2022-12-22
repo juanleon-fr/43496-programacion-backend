@@ -1,7 +1,6 @@
 const instancia = require('../daos/index');
-const carts = new instancia.carritos;
-// const FsContainer = require('../containers/FsContainer');
-// const carts = new FsContainer('./src/db/carritos.json');
+const carts = new instancia.carritos();
+const products = new instancia.productos();
 
 const newCart = async (req, res, next) => {
 	const { body } = req;
@@ -17,7 +16,7 @@ const deleteCartById = async (req, res, next) => {
 const getCartItemsById = async (req, res, next) => {
 	const { id } = req.params;
 	const cart = await carts.getById(id);
-	res.json(cart.productos);
+	res.json(cart.products);
 };
 
 const getCarts = async (req, res, next) => {
@@ -27,8 +26,9 @@ const getCarts = async (req, res, next) => {
 
 const newCartItemById = async (req, res, next) => {
 	const { id } = req.params;
-	const { body } = req;
-	const cart = await carts.addToCart(id, body.id_prod);
+	const body = req.body;
+	const producto = await products.getById(body.id_prod);
+	const cart = await carts.addToCart(id, producto);
 	res.json(cart);
 };
 

@@ -1,10 +1,16 @@
-const FsContainer = require('../../classes/FsContainer');
+const MongoContainer = require('../../classes/MongoContainer');
+const productModel = require('../../models/productModel.js');
+const name = productModel.productCollection;
+const schema = productModel.productSchema;
 
-class ProductosDaoFs extends FsContainer {
+class ProductosDaoMongo extends MongoContainer {
 	constructor() {
-		super('src/db/productos.json');
-		console.log('Usando MongoDB');
+		super({
+			name: name,
+			schema: schema,
+		});
+		console.log('usando MongoDB');
 	}
 }
 
-module.exports = ProductosDaoFs;
+module.exports = ProductosDaoMongo;
