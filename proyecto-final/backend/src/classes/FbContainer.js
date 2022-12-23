@@ -14,14 +14,18 @@ class FbContainer {
 
 	assignId = async () => {
 		let id;
-		const thisList = await this.getAll();
-		if (thisList.length === 0) {
-			id = 1;
-		} else {
-			const lastElement = thisList.slice(-1)[0];
-			id = lastElement.id + 1;
+		try {
+			const thisList = await this.getAll();
+			if (thisList.length === 0) {
+				id = 1;
+			} else {
+				const lastElement = thisList.slice(-1)[0];
+				id = lastElement.id + 1;
+			}
+			return id;
+		} catch (err) {
+			errMessage(err, 'assignId');
 		}
-		return id;
 	};
 
 	getAll = async () => {
@@ -33,7 +37,7 @@ class FbContainer {
 			});
 			return list;
 		} catch (err) {
-			console.log(err);
+			errMessage(err, 'getAll');
 		}
 	};
 
@@ -44,7 +48,7 @@ class FbContainer {
 			const res = await this.collection.doc(`${obj.id}`).set(obj);
 			return res;
 		} catch (err) {
-			console.log(err);
+			errMessage(err, 'saveNew');
 		}
 	};
 
@@ -57,17 +61,17 @@ class FbContainer {
 			});
 			return docFetch;
 		} catch (err) {
-			console.log(err);
+			errMessage(err, 'getById');
 		}
 	};
 
 	updateById = async (id, obj) => {
 		try {
-			const doc = await this.collection.doc(`${id}`);
+			const doc = this.collection.doc(`${id}`);
 			let res = await doc.update(obj);
 			return res;
-		} catch (e) {
-			console.log(e);
+		} catch (err) {
+			errMessage(err, 'updateById');
 		}
 	};
 
@@ -76,18 +80,18 @@ class FbContainer {
 			console.log(obj);
 			const res = await this.collection.doc(`${id}`).delete();
 			return res;
-		} catch (e) {
-			console.log(e);
+		} catch (err) {
+			errMessage(err, 'deleteById');
 		}
 	};
 
 	deleteAll = async () => {
 		try {
-			const col = await this.collection.doc();
+			const col = this.collection.doc();
 			const res = await col.delete();
 			return res;
 		} catch (err) {
-			console.log(err);
+			errMessage(err, 'deleteAll');
 		}
 	};
 
@@ -100,27 +104,41 @@ class FbContainer {
 			const res = await this.collection.doc(`${cart.id}`).set(cart);
 			return res;
 		} catch (err) {
-			console.log(err);
+			errMessage(err, 'newCart');
 		}
 	};
 
 	addToCart = async (id, product) => {
-		let cart = await this.getById(id);
-		const found = cart.products.find((element) => element.id === product.id);
-		if (typeof found !== 'undefined') {
-			return [{ success: false, issue: 'product already in cart' }];
+		try {
+			let cart = await this.getById(id);
+			if (typeof cart === 'undefined') {
+				return { success: false, issue: 'cart not found' };
+			}
+			const found = cart.products.find((element) => element.id === product.id);
+			if (typeof found !== 'undefined') {
+				return { success: false, issue: 'product already in cart' };
+			}
+			cart.products.push(product);
+			return this.updateById(id, cart);
+		} catch (err) {
+			errMessage(err, 'addToCart');
 		}
-		cart.products.push(product);
-		return this.updateById(id, cart);
 	};
 
 	removeFromCart = async (id, id_prod) => {
-		let cart = await this.getById(id);
-		if (isNaN(id_prod)) return [{ success: false, issue: 'invalid id' }];
-		let productInCart = cart.products.find((element) => element.id === Number(id_prod));
-		if (typeof productInCart === 'undefined') return [{ success: false, issue: 'product not present in cart' }];
-		cart.products = cart.products.filter((element) => element.id != id_prod);
-		return this.updateById(id, cart);
+		try {
+			let cart = await this.getById(id);
+			if (isNaN(id_prod)) return { success: false, issue: 'invalid id' };
+			if (typeof cart === 'undefined') {
+				return { success: false, issue: 'cart not found' };
+			}
+			let productInCart = cart.products.find((element) => element.id === Number(id_prod));
+			if (typeof productInCart === 'undefined') return { success: false, issue: 'product not present in cart' };
+			cart.products = cart.products.filter((element) => element.id != id_prod);
+			return this.updateById(id, cart);
+		} catch (err) {
+			errMessage(err, 'removeFromCart');
+		}
 	};
 
 	// guardartodo = async () => {
@@ -128,7 +146,7 @@ class FbContainer {
 	// 	arr.forEach((obj) => {
 	// 		setTimeout(() => {
 	// 			this.saveNew(obj);
-	// 		}, 1500);
+	// 		}, 1000);
 	// 	});
 	// };
 }

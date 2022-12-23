@@ -11,14 +11,18 @@ class FsContainer {
 
 	assignId = async () => {
 		let id;
-		const thisList = await this.getAll();
-		if (thisList.length === 0) {
-			id = 1;
-		} else {
-			const lastElement = thisList.slice(-1)[0];
-			id = lastElement.id + 1;
+		try {
+			const thisList = await this.getAll();
+			if (thisList.length === 0) {
+				id = 1;
+			} else {
+				const lastElement = thisList.slice(-1)[0];
+				id = lastElement.id + 1;
+			}
+			return id;
+		} catch (err) {
+			errMessage(err, 'assignId');
 		}
-		return id;
 	};
 
 	getAll = async () => {
@@ -80,7 +84,7 @@ class FsContainer {
 			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
 			return 'updated';
 		} catch (err) {
-			errMessage(err, 'save');
+			errMessage(err, 'updateById');
 		}
 	};
 
@@ -109,29 +113,41 @@ class FsContainer {
 
 	newCart = async (body) => {
 		let cart = {};
-		cart.id = await this.assignId();
-		cart.timestamp = Date.now();
-		cart.products = body.products;
-		return this.save(cart);
+		try {
+			cart.id = await this.assignId();
+			cart.timestamp = Date.now();
+			cart.products = body.products;
+			return this.save(cart);
+		} catch (err) {
+			errMessage(err, 'newCart');
+		}
 	};
 
 	addToCart = async (id, product) => {
-		const productList = require('../db/productos.json');
-		const producto = productList.find((element) => element.id == product.id);
-		let cart = await this.getById(id);
-		if (cart.hasOwnProperty('error')) return cart;
-		let productInCart = cart.products.find((element) => element.id == producto.id);
-		if (typeof productInCart === 'object') return [{ success: false, issue: 'product already in cart' }];
-		cart.productos = [...cart.productos, producto];
-		return this.save(cart);
+		try {
+			const productList = require('../db/productos.json');
+			const producto = productList.find((element) => element.id == product.id);
+			let cart = await this.getById(id);
+			if (cart.hasOwnProperty('error')) return cart;
+			let productInCart = cart.products.find((element) => element.id == producto.id);
+			if (typeof productInCart === 'object') return [{ success: false, issue: 'product already in cart' }];
+			cart.productos = [...cart.productos, producto];
+			return this.save(cart);
+		} catch (err) {
+			errMessage(err, 'addToCart');
+		}
 	};
 
 	removeFromCart = async (id, product) => {
-		let cart = await this.getById(id);
-		let productInCart = cart.products.find((element) => element.id == product.id);
-		if (typeof productInCart !== 'object') return [{ success: false, issue: 'product not present in cart' }];
-		cart.productos = cart.productos.filter((element) => element.id != product.id);
-		return this.save(cart);
+		try {
+			let cart = await this.getById(id);
+			let productInCart = cart.products.find((element) => element.id == product.id);
+			if (typeof productInCart !== 'object') return [{ success: false, issue: 'product not present in cart' }];
+			cart.productos = cart.productos.filter((element) => element.id != product.id);
+			return this.save(cart);
+		} catch (err) {
+			errMessage(err, 'removeFromCart');
+		}
 	};
 }
 

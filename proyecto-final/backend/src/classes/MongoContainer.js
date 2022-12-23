@@ -13,19 +13,23 @@ class MongoContainer {
 
 	assignId = async () => {
 		let id;
-		const thisList = await this.getAll();
-		if (thisList.length === 0) {
-			id = 1;
-		} else {
-			const lastElement = thisList.slice(-1)[0];
-			id = lastElement.id + 1;
+		try {
+			const thisList = await this.getAll();
+			if (thisList.length === 0) {
+				id = 1;
+			} else {
+				const lastElement = thisList.slice(-1)[0];
+				id = lastElement.id + 1;
+			}
+			return id;
+		} catch (err) {
+			errMessage(err, 'assignId');
 		}
-		return id;
 	};
 
 	getAll = async () => {
 		try {
-			const objs = await this.model.find();
+			const objs = this.model.find();
 			return objs;
 		} catch (err) {
 			errMessage(err, 'getAll');
@@ -33,62 +37,95 @@ class MongoContainer {
 	};
 
 	getById = async (id) => {
-		const res = await this.model.find({ id: id });
-		if (res.length > 0) {
-			return res[0];
+		try {
+			const res = this.model.find({ id: id });
+			if (res.length > 0) {
+				return res[0];
+			}
+			return { error: 'producto no encontrado' };
+		} catch (err) {
+			errMessage(err, 'getById');
 		}
-		return { error: 'producto no encontrado' };
 	};
 
 	saveNew = async (obj) => {
-		obj.id = await this.assignId();
-		obj.timestamp = Date.now();
-		const res = await this.model.create(obj);
-		return res;
+		try {
+			obj.id = await this.assignId();
+			obj.timestamp = Date.now();
+			const res = await this.model.create(obj);
+			return res;
+		} catch (err) {
+			errMessage(err, 'saveNew');
+		}
 	};
 
 	updateById = async (id, body) => {
-		const res = await this.model.updateOne({ id: id }, body, { new: true });
-		return this.getById(id);
+		try {
+			const docUpdate = this.model.updateOne({ id: id }, body, { new: true });
+			const res = { ...docUpdate, updated: this.getById(id) };
+			return res;
+		} catch (err) {
+			errMessage(err, 'updateById');
+		}
 	};
 
 	deleteById = async (id) => {
-		const deleted = await this.model.find({ id: id });
-		const res = await this.model.find({ id: id }).remove();
-		return { success: true, res: res, deleted: deleted[0] };
+		try {
+			const deleted = this.model.find({ id: id });
+			const res = this.model.find({ id: id }).remove();
+			return { success: true, res: res, deleted: deleted[0] };
+		} catch (err) {
+			errMessage(err, 'deleteById');
+		}
 	};
 
 	deleteAll = async () => {
-		const res = await this.model.deleteMany({});
-		return { success: true, res: res };
+		try {
+			const res = this.model.deleteMany({});
+			return { success: true, res: res };
+		} catch (err) {
+			errMessage(err, 'deleteAll');
+		}
 	};
 
 	newCart = async (body) => {
 		let cart = {};
-		cart.id = await this.assignId();
-		cart.timestamp = Date.now();
-		cart.products = body.products;
-		const res = await this.model.create(cart);
-		return res;
+		try {
+			cart.id = await this.assignId();
+			cart.timestamp = Date.now();
+			cart.products = body.products;
+			const res = await this.model.create(cart);
+			return res;
+		} catch (err) {
+			errMessage(err, 'newCart');
+		}
 	};
 
 	addToCart = async (id, product) => {
-		let cart = await this.getById(id);
-		const found = cart.products.find((element) => element.id === product.id);
-		if (typeof found !== 'undefined') {
-			return [{ success: false, issue: 'product already in cart' }];
+		try {
+			let cart = await this.getById(id);
+			const found = cart.products.find((element) => element.id === product.id);
+			if (typeof found !== 'undefined') {
+				return [{ success: false, issue: 'product already in cart' }];
+			}
+			cart.products.push(product);
+			return this.updateById(id, cart);
+		} catch (err) {
+			errMessage(err, 'addToCart');
 		}
-		cart.products.push(product);
-		return this.updateById(id, cart);
 	};
 
 	removeFromCart = async (id, id_prod) => {
-		let cart = await this.getById(id);
-		if (isNaN(id_prod)) return [{ success: false, issue: 'invalid id' }];
-		let productInCart = cart.products.find((element) => element.id === Number(id_prod));
-		if (typeof productInCart === 'undefined') return [{ success: false, issue: 'product not present in cart' }];
-		cart.products = cart.products.filter((element) => element.id != id_prod);
-		return this.updateById(id, cart);
+		try {
+			let cart = await this.getById(id);
+			if (isNaN(id_prod)) return [{ success: false, issue: 'invalid id' }];
+			let productInCart = cart.products.find((element) => element.id === Number(id_prod));
+			if (typeof productInCart === 'undefined') return [{ success: false, issue: 'product not present in cart' }];
+			cart.products = cart.products.filter((element) => element.id != id_prod);
+			return this.updateById(id, cart);
+		} catch (err) {
+			errMessage(err, 'removeFromCart');
+		}
 	};
 }
 
