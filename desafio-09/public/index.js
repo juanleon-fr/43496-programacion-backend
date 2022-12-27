@@ -26,6 +26,7 @@ const sendMessage = () => {
 };
 
 socket.on('product-list', (data) => {
+	console.log({ data });
 	let html = '';
 	data.forEach((element) => {
 		html += `

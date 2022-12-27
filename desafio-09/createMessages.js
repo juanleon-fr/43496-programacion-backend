@@ -2,14 +2,15 @@ const { optionsSQLite } = require('./options/sqlite.js');
 
 const knex = require('knex')(optionsSQLite);
 
-knex.schema.createTable('accounts', table => {
-
-})
-
+knex.schema.createTable('accounts', (table) => {});
 
 knex.schema
 	.createTable('messages', (table) => {
-		table.increments('id'), table.string('socketid'), table.string('timestamp'), table.string('email'), table.string('msg');
+		table.increments('id');
+		table.string('socketid');
+		table.string('timestamp');
+		table.string('email');
+		table.string('msg');
 	})
 	.then(() => {
 		console.log('tabla creada');
@@ -45,7 +46,7 @@ knex('messages')
 	])
 	.then((res) => {
 		console.log('insert successful');
-		console.log(res)
+		console.log(res);
 	})
 	.catch((err) => {
 		console.log(err);

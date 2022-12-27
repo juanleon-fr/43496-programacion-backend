@@ -3,7 +3,10 @@ const knex = require('knex')(optionsMySQL);
 
 knex.schema
 	.createTable('products', (table) => {
-		table.increments('id'), table.string('title'), table.integer('price'), table.string('thumbnail');
+		table.increments('id');
+		table.string('title');
+		table.integer('price');
+		table.string('thumbnail');
 	})
 	.then(() => {
 		console.log('todo bien');

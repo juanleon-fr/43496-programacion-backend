@@ -4,15 +4,20 @@ const express = require('express');
 const app = express();
 const { Router } = express;
 const routerProductos = Router();
+const routerProdTest = Router();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const { engine } = require('express-handlebars');
 
+const ContenedorFaker = require('./classes/ContenedorFaker');
+const prodFaker = new ContenedorFaker();
+
 const current = new Date();
 const timestamp = current.getDay() + '/' + current.getMonth() + '/' + current.getFullYear() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
 
 app.use('/api/productos', routerProductos);
+app.use('/api/productos-test', routerProdTest);
 
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer);
@@ -46,6 +51,10 @@ app.get('/', (req, res) => {
 	res.render('./layouts/index');
 });
 
+routerProdTest.get('', async (req, res) => {
+	res.render('./layouts/productsfake');
+});
+
 routerProductos.post('', async (req, res) => {
 	const { body } = req;
 	res.send(await products.save(body));
@@ -54,7 +63,7 @@ routerProductos.post('', async (req, res) => {
 io.on('connection', async (socket) => {
 	console.log(`Client ${socket.id} connected`);
 
-	socket.emit('product-list', await products.getAll());
+	socket.emit('product-list', prodFaker.getAll(5));
 
 	socket.emit('msg-list', await messages.getAll());
 
