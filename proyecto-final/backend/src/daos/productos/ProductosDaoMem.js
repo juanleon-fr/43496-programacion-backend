@@ -1,4 +1,4 @@
-const MemContainer = require('../../classes/MemContainer');
+import MemContainer from '../../classes/MemContainer.js';
 
 class ProductosDaoMem extends MemContainer {
 	constructor() {
@@ -7,4 +7,4 @@ class ProductosDaoMem extends MemContainer {
 	}
 }
 
-module.exports = ProductosDaoMem;
+export default ProductosDaoMem;

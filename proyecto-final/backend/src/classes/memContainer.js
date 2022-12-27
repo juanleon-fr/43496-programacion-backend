@@ -93,4 +93,4 @@ class MemContainer {
 	};
 }
 
-module.exports = MemContainer;
+export default MemContainer;

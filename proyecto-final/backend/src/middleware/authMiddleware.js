@@ -9,4 +9,4 @@ const authMiddleware = (req, res, next) => {
 };
 
 // const permissions = { carrito: { get: true, post: true, put: true, delete: true }, productos: { get: true, post: true, put: true, delete: true } };
-module.exports = authMiddleware;
+export default authMiddleware;

@@ -1,21 +1,21 @@
-const { Router } = require('express');
-const express = require('express');
+import express, { Router } from 'express';
 const routeProductos = Router();
-const productosController = require('../controllers/productos');
-const authMiddleware = require('../middleware/authMiddleware')
+import controllers from '../controllers/productos.js';
+const { getProds, getProdById, newProd, updateProdById, deleteProdById } = controllers;
+import authMiddleware from '../middleware/authMiddleware.js';
 
 const app = express();
 
 app.use('/api/productos', routeProductos);
 
-routeProductos.get('/', productosController.getProds);
+routeProductos.get('/', getProds);
 
-routeProductos.get('/:id', productosController.getProdById);
+routeProductos.get('/:id', getProdById);
 
-routeProductos.post('/', authMiddleware, productosController.newProd);
+routeProductos.post('/', authMiddleware, newProd);
 
-routeProductos.put('/:id', authMiddleware, productosController.updateProdById);
+routeProductos.put('/:id', authMiddleware, updateProdById);
 
-routeProductos.delete('/:id', authMiddleware, productosController.deleteProdById);
+routeProductos.delete('/:id', authMiddleware, deleteProdById);
 
-module.exports = routeProductos;
+export default routeProductos;

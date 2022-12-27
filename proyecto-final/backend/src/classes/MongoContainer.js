@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const connectMongo = require('../connectMongo');
+import { model } from 'mongoose';
+import connectMongo from '../connectMongo.js';
 const url = 'mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority';
 const errMessage = (err, func) => {
 	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
@@ -7,7 +7,7 @@ const errMessage = (err, func) => {
 
 class MongoContainer {
 	constructor(modelDat) {
-		this.model = mongoose.model(modelDat.name, modelDat.schema);
+		this.model = model(modelDat.name, modelDat.schema);
 		connectMongo(url);
 	}
 
@@ -129,4 +129,4 @@ class MongoContainer {
 	};
 }
 
-module.exports = MongoContainer;
+export default MongoContainer;

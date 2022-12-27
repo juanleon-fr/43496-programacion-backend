@@ -1,4 +1,4 @@
-const MemContainer = require('../../classes/MemContainer');
+import MemContainer from '../../classes/MemContainer.js';
 
 class CarritosDaoMem extends MemContainer {
 	constructor() {
@@ -6,4 +6,4 @@ class CarritosDaoMem extends MemContainer {
 	}
 }
 
-module.exports = CarritosDaoMem;
+export default CarritosDaoMem;

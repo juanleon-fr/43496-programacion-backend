@@ -1,4 +1,4 @@
-const fs = require('fs');
+import { promises } from 'fs';
 
 const errMessage = (err, func) => {
 	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
@@ -27,7 +27,7 @@ class FsContainer {
 
 	getAll = async () => {
 		try {
-			const file = await fs.promises.readFile(`./${this.fileName}`, 'utf-8');
+			const file = await promises.readFile(`./${this.fileName}`, 'utf-8');
 			const list = JSON.parse(file);
 			return list;
 		} catch (err) {
@@ -51,7 +51,7 @@ class FsContainer {
 			obj.id = await this.assignId();
 			obj.timestamp = Date.now();
 			list.push(obj);
-			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
+			await promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
 			return obj;
 		} catch (err) {
 			errMessage(err, 'save');
@@ -81,7 +81,7 @@ class FsContainer {
 				...setItem,
 			};
 			list[itemIndex].timestamp = Date.now();
-			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
+			await promises.writeFile(`./${this.fileName}`, JSON.stringify(list));
 			return 'updated';
 		} catch (err) {
 			errMessage(err, 'updateById');
@@ -96,7 +96,7 @@ class FsContainer {
 			}
 			let list = await this.getAll();
 			const newList = list.filter((element) => element.id !== Number(id));
-			await fs.promises.writeFile(`./${this.fileName}`, JSON.stringify(newList));
+			await promises.writeFile(`./${this.fileName}`, JSON.stringify(newList));
 			return 'deleted';
 		} catch (err) {
 			errMessage(err, 'deleteById');
@@ -105,7 +105,7 @@ class FsContainer {
 
 	deleteAll = async () => {
 		try {
-			fs.promises.writeFile(`./${this.fileName}`, JSON.stringify([]));
+			promises.writeFile(`./${this.fileName}`, JSON.stringify([]));
 		} catch (err) {
 			errMessage(err, 'deleteAll');
 		}
@@ -151,4 +151,4 @@ class FsContainer {
 	};
 }
 
-module.exports = FsContainer;
+export default FsContainer;

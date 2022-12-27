@@ -1,4 +1,4 @@
-const FbContainer = require('../../classes/FbContainer');
+import FbContainer from '../../classes/FbContainer.js';
 
 class ProductosDaoFb extends FbContainer {
 	constructor() {
@@ -7,4 +7,4 @@ class ProductosDaoFb extends FbContainer {
 	}
 }
 
-module.exports = ProductosDaoFb;
+export default ProductosDaoFb;

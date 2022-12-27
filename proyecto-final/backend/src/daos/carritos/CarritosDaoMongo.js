@@ -1,5 +1,5 @@
-const MongoContainer = require('../../classes/MongoContainer');
-const cartModel = require('../../models/cartModel.js');
+import MongoContainer from '../../classes/MongoContainer.js';
+import cartModel from '../../models/cartModel.js';
 const name = cartModel.cartCollection;
 const schema = cartModel.cartSchema;
 
@@ -12,4 +12,4 @@ class CarritosDaoMongo extends MongoContainer {
 	}
 }
 
-module.exports = CarritosDaoMongo;
+export default CarritosDaoMongo;

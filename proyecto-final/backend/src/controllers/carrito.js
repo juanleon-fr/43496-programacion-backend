@@ -1,4 +1,4 @@
-const instancia = require('../daos/index');
+import instancia from '../daos/index.js';
 const carts = new instancia.carritos();
 const products = new instancia.productos();
 
@@ -38,7 +38,7 @@ const deleteCartItemById = async (req, res, next) => {
 	res.json(result);
 };
 
-module.exports = {
+export default {
 	newCart,
 	deleteCartById,
 	getCartItemsById,

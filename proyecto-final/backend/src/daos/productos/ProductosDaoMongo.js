@@ -1,16 +1,15 @@
-const MongoContainer = require('../../classes/MongoContainer');
-const productModel = require('../../models/productModel.js');
-const name = productModel.productCollection;
-const schema = productModel.productSchema;
+import MongoContainer from '../../classes/MongoContainer.js';
+import productModel from '../../models/productModel.js';
+const { productCollection, productSchema } = productModel;
 
 class ProductosDaoMongo extends MongoContainer {
 	constructor() {
 		super({
-			name: name,
-			schema: schema,
+			name: productCollection,
+			schema: productSchema,
 		});
 		console.log('usando MongoDB');
 	}
 }
 
-module.exports = ProductosDaoMongo;
+export default ProductosDaoMongo;

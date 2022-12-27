@@ -1,10 +1,12 @@
-const admin = require('firebase-admin');
-const { getFirestore } = require('firebase-admin/firestore');
-const serviceAccount = require('../../credentials.json');
+import admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
+import { readFile } from 'fs/promises';
+const serviceAccount = JSON.parse(await readFile(new URL('../../credentials.json', import.meta.url)));
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
 });
+
 const db = getFirestore();
 
 class FbContainer {
@@ -151,4 +153,4 @@ class FbContainer {
 	// };
 }
 
-module.exports = FbContainer;
+export default FbContainer;

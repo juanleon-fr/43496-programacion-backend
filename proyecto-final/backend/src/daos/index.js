@@ -1,12 +1,13 @@
-const CarritosDaoMem = require('./carritos/CarritosDaoMem');
-const ProductosDaoMem = require('./productos/ProductosDaoMem');
-const CarritosDaoFs = require('./carritos/CarritosDaoFs');
-const ProductosDaoFs = require('./productos/ProductosDaoFs');
-const CarritosDaoMongo = require('./carritos/CarritosDaoMongo');
-const ProductosDaoMongo = require('./productos/ProductosDaoMongo');
-const CarritosDaoFb = require('./carritos/CarritosDaoFb');
-const ProductosDaoFb = require('./productos/ProductosDaoFb');
-require('dotenv').config();
+import CarritosDaoMem from './carritos/CarritosDaoMem.js';
+import ProductosDaoMem from './productos/ProductosDaoMem.js';
+import CarritosDaoFs from './carritos/CarritosDaoFs.js';
+import ProductosDaoFs from './productos/ProductosDaoFs.js';
+import CarritosDaoMongo from './carritos/CarritosDaoMongo.js';
+import ProductosDaoMongo from './productos/ProductosDaoMongo.js';
+import CarritosDaoFb from './carritos/CarritosDaoFb.js';
+import ProductosDaoFb from './productos/ProductosDaoFb.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const instancias = [
 	{ nombre: ProductosDaoMem, id: 'memoria', descripcion: 'productos' },
@@ -17,16 +18,16 @@ const instancias = [
 
 	{ nombre: ProductosDaoMongo, id: 'mongo', descripcion: 'productos' },
 	{ nombre: CarritosDaoMongo, id: 'mongo', descripcion: 'carritos' },
-	
+
 	{ nombre: ProductosDaoFb, id: 'firebase', descripcion: 'productos' },
 	{ nombre: CarritosDaoFb, id: 'firebase', descripcion: 'carritos' },
 ];
 
 const instancia = instancias.filter((element) => element.id == process.env.INSTANCIA);
 
-const resultado = {
+const result = {
 	[instancia[0].descripcion]: instancia[0].nombre,
 	[instancia[1].descripcion]: instancia[1].nombre,
 };
 
-module.exports = resultado;
+export default result;

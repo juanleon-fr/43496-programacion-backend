@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+import { Schema } from 'mongoose';
 
 const productCollection = 'productos';
 
@@ -18,4 +18,4 @@ const productSchema = new Schema(
 	{ versionKey: false }
 );
 
-module.exports = { productCollection, productSchema };
+export default { productCollection, productSchema };

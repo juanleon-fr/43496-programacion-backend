@@ -1,4 +1,4 @@
-const FsContainer = require('../../classes/FsContainer');
+import FsContainer from '../../classes/FsContainer.js';
 
 class ProductosDaoFs extends FsContainer {
 	constructor() {
@@ -7,4 +7,4 @@ class ProductosDaoFs extends FsContainer {
 	}
 }
 
-module.exports = ProductosDaoFs;
+export default ProductosDaoFs;
