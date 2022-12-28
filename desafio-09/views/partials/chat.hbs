@@ -3,13 +3,33 @@
     <div>
         <h4>Enviar mensajes</h4>
         <div>
-            <label for='emailInput'>Email:</label>
-            <input type='email' class="input" id='emailInput' name='email' />
+            <label for='aliasInput'>Email:</label>
+            <input type='email' class="input" id='aliasInput' name='email' />
+            <label for='nameInput'>Nombre:</label>
+            <input type='text' class="input" id='nameInput' name='name' />
+            <label for='lastNameInput'>Apellido:</label>
+            <input type='text' class="input" id='lastNameInput' name='lastName' />
+            <label for='ageInput'>edad:</label>
+            <input type='number' class="input" id='ageInput' name='age' />
+
             <label for='msgInput'>Mensaje</label>
-            <input type='text' class="input" id='msgInput' name='msg' style="width: 500px; height: 200px;"/>
+            <input type='text' class="input" id='msgInput' name='msg' style="width: 500px; height: 200px;" />
+
             <button onclick="sendMessage()">Send</button>
         </div>
         <h4>Lista de mensajes</h4>
         <div id="msg-list-container"></div>
     </div>
 </section>
+
+{{!-- {
+author: {
+id: { type: String, required: true },
+nombre: { type: String, required: true },
+apellido: { type: String, required: true },
+edad: { type: Number, required: true },
+alias: { type: String, required: true },
+avatar: { type: String, required: true },
+},
+text: { type: String, required: true },
+} --}}

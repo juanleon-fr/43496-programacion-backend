@@ -51,6 +51,8 @@ socket.on('msg-list', (data) => {
 	data.forEach((element) => {
 		html += `
         <div>
+		<div>
+		<img src="" alt="nada" style="width: 50px;></div>
         <p>${element.email} <span>(at ${element.timestamp}): <span>${element.msg}</span></span></p>
         </div> 
         `;
