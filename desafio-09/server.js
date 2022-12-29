@@ -75,6 +75,7 @@ const getAllNorm = async () => {
 	};
 	const msgListSchema = [msgSchema];
 	const normalized = normalize(msgList, msgListSchema);
+	console.log(JSON.stringify(normalized, null, 4));
 	return normalized;
 };
 

@@ -1,5 +1,7 @@
 const socket = io();
 
+// const { denormalize, schema } = require('normalizr');
+
 const sendProduct = () => {
 	const title = document.getElementById('titleInput').value;
 	const price = document.getElementById('priceInput').value;
@@ -26,7 +28,6 @@ const sendMessage = () => {
 };
 
 socket.on('product-list', (data) => {
-	console.log({ data });
 	let html = '';
 	data.forEach((element) => {
 		html += `
@@ -47,15 +48,68 @@ socket.on('product-list', (data) => {
 });
 
 socket.on('msg-list', (data) => {
+	// denormalizar data
+	// const dataraw = {
+	// 	entities: {
+	// 		authors: {
+	// 			'rickydarin@gmail.com': {
+	// 				id: 'rickydarin@gmail.com',
+	// 				nombre: 'Ricardo',
+	// 				apellido: 'Darín',
+	// 				edad: 10,
+	// 				alias: 'rickymaster',
+	// 				avatar: 'https://i.pinimg.com/originals/ab/6c/69/ab6c69b36287628b0eba043827c1c74a.jpg',
+	// 			},
+	// 			'francellita77@gmail.com': {
+	// 				id: 'francellita77@gmail.com',
+	// 				nombre: 'Guillermo',
+	// 				apellido: 'Francella',
+	// 				edad: 12,
+	// 				alias: 'pepeargento',
+	// 				avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRgTNYnoXrvO_WRCQe9aWhgLhnaMLRc82J3Q&usqp=CAU',
+	// 			},
+	// 		},
+	// 	},
+	// 	result: [
+	// 		{
+	// 			author: 'rickydarin@gmail.com',
+	// 			text: 'hola',
+	// 		},
+	// 		{
+	// 			author: 'francellita77@gmail.com',
+	// 			text: 'buen dia... hermosa mañana verdad?',
+	// 		},
+	// 		{
+	// 			author: 'rickydarin@gmail.com',
+	// 			text: 'sabes que si papa',
+	// 		},
+	// 		{
+	// 			author: 'francellita77@gmail.com',
+	// 			text: 'bueno te dejo que me tengo que ir al super a comprar vinagre',
+	// 		},
+	// 		{
+	// 			author: 'rickydarin@gmail.com',
+	// 			text: 'chau master',
+	// 		},
+	// 	],
+	// };
+	const entities = data.entities;
+	const authorSchema = new schema.Entity('authors');
+	const msgSchema = {
+		author: authorSchema,
+	};
+	const msgListSchema = [msgSchema];
+	const agorasim = denormalize(data, msgListSchema, entities);
+	console.log(agorasim);
 	let html = '';
-	data.forEach((element) => {
-		html += `
-        <div>
-		<div>
-		<img src="" alt="nada" style="width: 50px;></div>
-        <p>${element.email} <span>(at ${element.timestamp}): <span>${element.msg}</span></span></p>
-        </div> 
-        `;
-	});
-	document.getElementById('msg-list-container').innerHTML = html;
+	// data.forEach((element) => {
+	// 	html += `
+	//     <div>
+	// 	<div>
+	// 	<img src=${element.author.avatar} alt="nada" style="width: 50px;></div>
+	//     <p>${element.author.nombre} ${element.author.apellido}<span>(${element.author.id}): <span>${element.text}</span></span></p>
+	//     </div>
+	//     `;
+	// });
+	// document.getElementById('msg-list-container').innerHTML = html;
 });
