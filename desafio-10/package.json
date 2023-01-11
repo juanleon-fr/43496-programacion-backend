@@ -1,5 +1,5 @@
 {
-	"name": "desafio-5",
+	"name": "desafio-10",
 	"version": "1.0.0",
 	"description": "",
 	"main": "server.js",
@@ -12,16 +12,18 @@
 	"dependencies": {
 		"express": "^4.18.2",
 		"express-handlebars": "^6.0.6",
+		"express-session": "^1.17.3",
 		"knex": "^0.21.21",
 		"mongoose": "^6.8.2",
+		"connect-mongo": "^4.6.0",
 		"mysql": "^2.18.1",
+		"normalizr": "^3.6.1",
 		"socket.io": "^4.5.1",
-		"sqlite3": "^5.0.2",
-		"normalizr": "^3.6.1"
+		"sqlite3": "^5.0.2"
 	},
 	"devDependencies": {
-		"body-parser": "^1.20.1",
 		"@faker-js/faker": "^7.6.0",
+		"body-parser": "1.20.1",
 		"faker": "^5.5.3",
 		"faker-js": "^1.0.0",
 		"nodemon": "^2.0.20"

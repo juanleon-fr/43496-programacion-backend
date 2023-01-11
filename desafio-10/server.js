@@ -10,6 +10,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const { engine } = require('express-handlebars');
 
+const MongoStore = require('connect-mongo');
+
+const session = require('express-session');
+
 const ContenedorFaker = require('./classes/ContenedorFaker');
 const prodFaker = new ContenedorFaker();
 
@@ -43,15 +47,11 @@ app.engine(
 	'hbs',
 	engine({
 		extname: '.hbs',
-		defaultLayout: 'index.hbs',
+		defaultLayout: null,
 		layoutsDir: __dirname + '/views/layouts',
 		partialsDir: __dirname + '/views/partials',
 	})
 );
-
-app.get('/', (req, res) => {
-	res.render('./layouts/index');
-});
 
 routerProdTest.get('', async (req, res) => {
 	res.render('./layouts/productsfake');
@@ -81,7 +81,9 @@ const getAllNorm = async () => {
 io.on('connection', async (socket) => {
 	console.log(`Client ${socket.id} connected`);
 
-	socket.emit('product-list', prodFaker.getAll(5));
+	socket.emit('product-list', prodFaker.getAll(15));
+
+	// socket.emit('product-list', products.getAll());
 
 	socket.emit('msg-list', getAllNorm());
 
@@ -99,4 +101,71 @@ io.on('connection', async (socket) => {
 		await messages.save({ socketid: socket.id, timestamp: timestamp, ...data });
 		io.emit('msg-list', getAllNorm());
 	});
+});
+
+//desafio 10
+
+const auth = (req, res, next) => {
+	if (req.session.username) {
+		return next();
+	} else {
+		return res.redirect('/login');
+	}
+};
+
+app.use(
+	session({
+		store: MongoStore.create({
+			mongoUrl: 'mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority',
+			mongoOptions: {
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+			},
+			ttl: 60,
+		}),
+		secret: 'keepitshut',
+		resave: false,
+		saveUninitialized: false,
+		ttl: 600000,
+	})
+);
+
+app.get('/', (req, res) => {
+	console.log(req.session.username);
+	res.render('./layouts/index', { username: req.session.username });
+});
+
+app.get('/showsession', (req, res) => {
+	res.json(req.session);
+});
+
+app.get('/logout', auth, (req, res) => {
+	const username = req.session.username;
+	req.session.destroy((err) => {
+		if (err) {
+			res.send('could not logout');
+		} else {
+			res.render('./layouts/logout', { username: username });
+		}
+	});
+});
+
+app.get('/login', (req, res) => {
+	if (req.session.username) {
+		res.render('./layouts/index');
+	} else {
+		res.render('./layouts/login');
+	}
+});
+
+app.post('/login', async (req, res) => {
+	const { username, password } = await req.body;
+	req.session.username = username;
+	req.session.password = password;
+	req.session.admin = true;
+	res.redirect('/');
+});
+
+app.get('/privado', auth, (req, res) => {
+	res.render('./layouts/private', { username: req.session.username });
 });
