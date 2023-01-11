@@ -10,10 +10,13 @@
     </div>
     <br>
     <div>
-        Hasta luego, {{username}}
+        Hasta luego, {{username}}. Serás redirigido en 2 segundos.
     </div>
     <script>
-        
+        function redirect() {
+            document.location.href = '/';
+        }
+        setTimeout(redirect, 2000);
     </script>
     {{> footer}}
     {{> scripts}}

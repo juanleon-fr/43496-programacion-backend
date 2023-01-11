@@ -1,6 +1,8 @@
 const Contenedor = require('./classes/Contenedor');
 const Messages = require('./classes/Messages');
 const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const app = express();
 const { Router } = express;
 const routerProductos = Router();
@@ -10,9 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const { engine } = require('express-handlebars');
 
-const MongoStore = require('connect-mongo');
 
-const session = require('express-session');
 
 const ContenedorFaker = require('./classes/ContenedorFaker');
 const prodFaker = new ContenedorFaker();
@@ -123,7 +123,7 @@ app.use(
 			},
 			ttl: 60,
 		}),
-		secret: 'keepitshut',
+		secret: 'secreto',
 		resave: false,
 		saveUninitialized: false,
 		ttl: 600000,
@@ -164,8 +164,4 @@ app.post('/login', async (req, res) => {
 	req.session.password = password;
 	req.session.admin = true;
 	res.redirect('/');
-});
-
-app.get('/privado', auth, (req, res) => {
-	res.render('./layouts/private', { username: req.session.username });
 });
