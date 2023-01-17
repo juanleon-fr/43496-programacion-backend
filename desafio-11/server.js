@@ -152,7 +152,7 @@ app.get('/logout', auth, (req, res) => {
 
 app.get('/login', auth, (req, res) => {
 	const { username, password } = req.user;
-	res.render('./layouts/index', { username: req.session.username });
+	res.render('./layouts/index', { username: req.user.username });
 });
 
 app.post('/login', async (req, res) => {
@@ -166,7 +166,7 @@ app.post('/login', async (req, res) => {
 app.get('/signup', (req, res) => {
 	if (req.isAuthenticated()) {
 		const { username, password } = req.user;
-		res.render('./layouts/index', { username: req.session.username });
+		res.render('./layouts/index', { username: req.user.username });
 	} else {
 		res.render('./layouts/signup');
 	}
