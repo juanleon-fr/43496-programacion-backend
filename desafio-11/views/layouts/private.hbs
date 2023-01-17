@@ -1,0 +1,23 @@
+<html lang='es'>
+
+<head>
+    {{>head}}
+</head>
+
+<body>
+    <div>
+        <section>
+            <h2>Sesión de {{username}}</h2>
+            <div>
+                <form action="/logout" method="GET">
+                    <button type="submit">Cerrar Sesión</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <br>
+    {{> footer}}
+    {{> scripts}}
+</body>
+
+</html>
