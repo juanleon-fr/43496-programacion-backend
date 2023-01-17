@@ -151,7 +151,7 @@ app.get('/logout', auth, (req, res) => {
 });
 
 app.get('/login', auth, (req, res) => {
-	const { username, password } = req.user;
+	const { username, passworda } = req.user;
 	res.render('./layouts/index', { username: req.user.username });
 });
 
