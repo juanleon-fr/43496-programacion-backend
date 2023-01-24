@@ -1,0 +1,25 @@
+<html lang='es'>
+
+<head>
+    {{>head}}
+</head>
+
+<body>
+    <div class="login-container logout-container">
+        Sesión cerrada
+    </div>
+    <br>
+    <div>
+        Hasta luego, {{username}}. Serás redirigido en 2 segundos.
+    </div>
+    <script>
+        function redirect() {
+            document.location.href = '/';
+        }
+        setTimeout(redirect, 2000);
+    </script>
+    {{> footer}}
+    {{> scripts}}
+</body>
+
+</html>
