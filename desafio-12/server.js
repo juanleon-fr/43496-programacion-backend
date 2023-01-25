@@ -14,6 +14,8 @@ const { engine } = require('express-handlebars');
 const userModel = require('./models/userModel');
 const mongoose = require('mongoose');
 
+const config = require('./config');
+
 const ContenedorFaker = require('./classes/ContenedorFaker');
 const prodFaker = new ContenedorFaker();
 
@@ -35,8 +37,8 @@ const port = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-httpServer.listen(port, () => {
-	console.log(`Listening on port http://localhost:${port}`);
+httpServer.listen(config.PORT, () => {
+	console.log(`Listening on http://${config.HOST}:${config.PORT}`);
 });
 
 app.use(express.static(__dirname + '/public'));
@@ -128,7 +130,7 @@ const createHash = (password) => {
 };
 
 mongoose
-	.connect('mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority')
+	.connect(config.DATABASEURL)
 	.then(() => console.log('Connected to Mongo'))
 	.catch((err) => {
 		console.error(err);
@@ -266,3 +268,25 @@ app.post('/signup', async (req, res) => {
 	req.session.admin = true;
 	res.redirect('/');
 });
+
+//desafio 12
+
+const parseArgs = require('minimist');
+const routerFork = require('./routerFork');
+
+const info = (req, res) => {
+	const data = {
+		args: JSON.stringify(parseArgs(process.argv.slice(2))._),
+		os: process.platform,
+		nodeVersion: process.version,
+		memoryUsage: process.memoryUsage().rss,
+		path: JSON.stringify(process.env.PATH),
+		processId: process.pid,
+		dirPath: process.env.PWD,
+	};
+	res.render('./layouts/info', { data: data });
+};
+
+app.get('/info', info);
+
+app.get('/api/randoms', routerFork.random);

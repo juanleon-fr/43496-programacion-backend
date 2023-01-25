@@ -105,14 +105,6 @@ io.on('connection', async (socket) => {
 
 //desafio 11
 
-const auth = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		return next();
-	} else {
-		return res.redirect('/login');
-	}
-};
-
 //desafio 11//
 
 const passport = require('passport');
@@ -258,6 +250,14 @@ app.get('/signup', (req, res) => {
 		res.render('./layouts/signup');
 	}
 });
+
+const auth = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		return res.redirect('/login');
+	}
+};
 
 app.post('/signup', async (req, res) => {
 	const { username, password } = await req.body;
