@@ -1,3 +1,4 @@
+const config = require('./config');
 const Contenedor = require('./classes/Contenedor');
 const Messages = require('./classes/Messages');
 const express = require('express');
@@ -13,8 +14,6 @@ app.use(bodyParser.json());
 const { engine } = require('express-handlebars');
 const userModel = require('./models/userModel');
 const mongoose = require('mongoose');
-
-const config = require('./config');
 
 const ContenedorFaker = require('./classes/ContenedorFaker');
 const prodFaker = new ContenedorFaker();
@@ -104,16 +103,6 @@ io.on('connection', async (socket) => {
 		io.emit('msg-list', getAllNorm());
 	});
 });
-
-//desafio 11
-
-const auth = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		return next();
-	} else {
-		return res.redirect('/login');
-	}
-};
 
 //desafio 11//
 
@@ -205,7 +194,7 @@ passport.deserializeUser((id, done) => {
 app.use(
 	session({
 		store: MongoStore.create({
-			mongoUrl: 'mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority',
+			mongoUrl: config.DATABASEURL,
 			mongoOptions: {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
@@ -218,6 +207,14 @@ app.use(
 		ttl: 600000,
 	})
 );
+
+const auth = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		return res.redirect('/login');
+	}
+};
 
 app.get('/', auth, (req, res) => {
 	console.log(req.session.username);
