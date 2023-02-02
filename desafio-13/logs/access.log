@@ -1,0 +1,6 @@
+127.0.0.1 - - [02/Feb/2023:18:50:06 -0300] "GET /randoms HTTP/1.1" 301 169 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Feb/2023:18:50:06 -0300] "GET /randoms/ HTTP/1.1" 404 147 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Feb/2023:18:50:22 -0300] "GET /randoms/info HTTP/1.1" 404 151 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Feb/2023:18:50:25 -0300] "GET /randoms/ HTTP/1.1" 404 147 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Feb/2023:18:55:58 -0300] "GET /api/randoms HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+127.0.0.1 - - [02/Feb/2023:18:55:58 -0300] "GET /favicon.ico HTTP/1.1" 502 559 "http://localhost/api/randoms" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"

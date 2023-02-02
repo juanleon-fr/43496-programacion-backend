@@ -40,7 +40,7 @@ httpServer.listen(config.PORT, () => {
 	console.log(`Listening on http://${config.HOST}:${config.PORT}`);
 });
 
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'hbs');
 app.set('views', './views');
@@ -238,7 +238,7 @@ app.get('/logout', auth, (req, res) => {
 
 app.get('/login', auth, (req, res) => {
 	const { username, password } = req.user;
-	res.render('./layouts/index', { username: req.user.username });
+	res.render('./layouts/index', { username: username });
 });
 
 app.post('/login', async (req, res) => {
@@ -252,7 +252,7 @@ app.post('/login', async (req, res) => {
 app.get('/signup', (req, res) => {
 	if (req.isAuthenticated()) {
 		const { username, password } = req.user;
-		res.render('./layouts/index', { username: req.user.username });
+		res.render('./layouts/index', { username: username });
 	} else {
 		res.render('./layouts/signup');
 	}
