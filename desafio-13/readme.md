@@ -12,9 +12,9 @@
 
 ## PM2 (terminal en carpeta "node")
 
-·PM2 modo cluster: pm2 start server.js --name="pruebaCluster" --watch -i max -- -- 8080
+·PM2 modo cluster: pm2 start server.js --name="cluster" --watch -i max -- 8080
 
-·PM2 modo fork: pm2 start server.js --name="pruebaFork" --watch -- -- 8080
+·PM2 modo fork: pm2 start server.js --name="fork" --watch -- 8080
 (cambiar puerto si se desea iniciar junto con otro servidor funcionando)
 
 ·Listar los servers: pm2 list
