@@ -34,6 +34,9 @@ app.use('/*', async (req, res) => {
 	logger.log('warn', `${Date.now()} ${req.method} '${req.originalUrl}'`);
 });
 
+const cluster = require('cluster');
+const { cpus } = require('os');
+
 const ContenedorFaker = require('./classes/ContenedorFaker');
 const prodFaker = new ContenedorFaker();
 
@@ -51,15 +54,37 @@ const io = require('socket.io')(httpServer);
 const products = new Contenedor('products');
 const messages = new Messages();
 
-const port = process.env.PORT || 8080;
+const port = parseInt(process.argv[2]) || process.env.PORT || 8080;
+let arg3 = process.argv[3];
+if (arg3 != undefined) {
+	arg3 = arg3.toUpperCase();
+}
+const clusterMode = arg3 == 'CLUSTER';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-httpServer.listen(config.PORT, () => {
+httpServer.listen(port, () => {
 	console.log(`Listening on http://${config.HOST}:${config.PORT}`);
 });
 
 // app.use(express.static(__dirname + '/public'));
+
+// if (modoCluster && cluster.isPrimary) {
+// 	const numCPUs = cpus().length;
+
+// 	console.log(`Número de procesadores: ${numCPUs}`);
+// 	console.log(`PID MASTER ${process.pid}`);
+
+// 	for (let i = 0; i < numCPUs; i++) {
+// 		cluster.fork();
+// 	}
+
+// 	cluster.on('exit', (worker) => {
+// 		console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString());
+// 		cluster.fork();
+// 	});
+// 	return;
+// }
 
 app.set('view engine', 'hbs');
 app.set('views', './views');
