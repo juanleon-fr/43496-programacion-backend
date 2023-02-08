@@ -1,0 +1,36 @@
+html {
+	font-family: sans-serif;
+}
+
+.megacontainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	.chat-container {
+		grid-column: 2/3;
+	}
+	.products-container {
+		grid-column: 1/2;
+	}
+}
+
+#product-list {
+	display: grid;
+	gap: 1rem;
+	grid-auto-rows: 30rem;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+#msg-list-container {
+	color: blue;
+	font-weight: bold;
+	span {
+		//timestamp
+		color: brown;
+		font-weight: normal;
+		span {
+			//msgcontent
+			color: green;
+			font-style: italic;
+		}
+	}
+}
