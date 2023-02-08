@@ -15,6 +15,19 @@ const { engine } = require('express-handlebars');
 const userModel = require('./models/userModel');
 const mongoose = require('mongoose');
 
+//compression
+const compression = require('compression');
+app.use(compression());
+
+//logger
+const path = require('path');
+const winston = require('winston');
+const logDir = './performance/logs';
+const logger = winston.createLogger({
+	level: 'warn',
+	transports: [new winston.transports.File({ filename: path.join(logDir, 'info.log'), level: 'info' }), new winston.transports.File({ filename: path.join(logDir, 'warn.log'), level: 'warn' }), new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' })],
+});
+
 const ContenedorFaker = require('./classes/ContenedorFaker');
 const prodFaker = new ContenedorFaker();
 
@@ -56,11 +69,13 @@ app.engine(
 
 routerProdTest.get('', async (req, res) => {
 	res.render('./layouts/productsfake');
+	logger.log('info', `${Date.now()} GET '/api/productos-test'`);
 });
 
 routerProductos.post('', async (req, res) => {
 	const { body } = req;
 	res.send(await products.save(body));
+	logger.log('info', `${Date.now()} GET '/api/productos'`);
 });
 
 const getAllNorm = async () => {
@@ -219,10 +234,12 @@ const auth = (req, res, next) => {
 app.get('/', auth, (req, res) => {
 	console.log(req.session.username);
 	res.render('./layouts/index', { username: req.session.username });
+	logger.log('info', `${Date.now()} GET '/'`);
 });
 
 app.get('/showsession', (req, res) => {
 	res.json(req.session);
+	logger.log('info', `${Date.now()} GET '/showsession'`);
 });
 
 app.get('/logout', auth, (req, res) => {
@@ -234,11 +251,13 @@ app.get('/logout', auth, (req, res) => {
 			res.render('./layouts/logout', { username: username });
 		}
 	});
+	logger.log('info', `${Date.now()} GET '/logout'`);
 });
 
 app.get('/login', auth, (req, res) => {
 	const { username, password } = req.user;
 	res.render('./layouts/index', { username: username });
+	logger.log('info', `${Date.now()} GET '/login'`);
 });
 
 app.post('/login', async (req, res) => {
@@ -247,6 +266,7 @@ app.post('/login', async (req, res) => {
 	req.session.password = password;
 	req.session.admin = true;
 	res.redirect('/');
+	logger.log('info', `${Date.now()} POST '/login'`);
 });
 
 app.get('/signup', (req, res) => {
@@ -256,6 +276,7 @@ app.get('/signup', (req, res) => {
 	} else {
 		res.render('./layouts/signup');
 	}
+	logger.log('info', `${Date.now()} GET '/signup'`);
 });
 
 app.post('/signup', async (req, res) => {
@@ -264,6 +285,8 @@ app.post('/signup', async (req, res) => {
 	req.session.password = password;
 	req.session.admin = true;
 	res.redirect('/');
+	logger.log('info', `${Date.now()} POST '/signup'`);
+	logger.log('info', `${Date.now()} GET '/'`);
 });
 
 //desafio 12
@@ -282,8 +305,13 @@ const info = (req, res) => {
 		dirPath: process.env.PWD,
 	};
 	res.render('./layouts/info', { data: data });
+	logger.log('info', `${Date.now()} GET '/info'`);
 };
 
 app.get('/info', info);
 
-app.get('/api/randoms', routerFork.random);
+const randomParent = (req, res) => {
+	eval(routerFork.random(req, res));
+};
+
+app.get('/api/randoms', randomParent);
