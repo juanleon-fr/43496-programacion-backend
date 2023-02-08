@@ -25,7 +25,13 @@ const winston = require('winston');
 const logDir = './performance/logs';
 const logger = winston.createLogger({
 	level: 'warn',
-	transports: [new winston.transports.File({ filename: path.join(logDir, 'info.log'), level: 'info' }), new winston.transports.File({ filename: path.join(logDir, 'warn.log'), level: 'warn' }), new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' })],
+	transports: [new winston.transports.Console({ level: 'info' }), new winston.transports.File({ filename: path.join(logDir, 'warn.log'), level: 'warn' }), new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' })],
+});
+
+//rutas no implementadas
+app.use('/*', async (req, res) => {
+	res.json({ error: -2, descripcion: `ruta '${req.originalUrl}' método '${req.method}' no implementada` });
+	logger.log('warn', `${Date.now()} ${req.method} '${req.originalUrl}'`);
 });
 
 const ContenedorFaker = require('./classes/ContenedorFaker');
