@@ -8,11 +8,7 @@ const random = (req, res) => {
 		const { data } = msg;
 		res.json(data);
 	});
-	let cantlog = '?cant=';
-	if (cant) {
-		cantlog = cantlog.concat(cant);
-	}
-	return `logger.log('info', '${Date.now()} GET /api/randoms${cantlog}')`;
+	return `logger.log('info', *backtick*${Date.now()} ${req.method} '${req.originalUrl}'*backtick*)`;
 };
 
 module.exports = { random };

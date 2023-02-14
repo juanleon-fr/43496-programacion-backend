@@ -1,0 +1,251 @@
+Statistical profiling result from nodeprofconsole.log, (88996 ticks, 1 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  87602   98.4%          C:\WINDOWS\SYSTEM32\ntdll.dll
+   1283    1.4%          C:\Program Files\nodejs\node.exe
+     18    0.0%          C:\WINDOWS\System32\KERNELBASE.dll
+      6    0.0%          C:\WINDOWS\System32\KERNEL32.DLL
+      2    0.0%          C:\WINDOWS\system32\mswsock.dll
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+     11    0.0%   12.9%  LazyCompile: *resolve node:path:158:10
+      4    0.0%    4.7%  RegExp: [\x00-\x1f\x27\x5c\x7f-\x9f]|[\ud800-\udbff](?![\udc00-\udfff])|(?<![\ud800-\udbff])[\udc00-\udfff]
+      3    0.0%    3.5%  LazyCompile: *next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:177:16
+      2    0.0%    2.4%  RegExp: (?<=\n)
+      2    0.0%    2.4%  LazyCompile: *writeHead node:_http_server:270:19
+      2    0.0%    2.4%  LazyCompile: *send W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:111:25
+      2    0.0%    2.4%  LazyCompile: *remove node:internal/linkedlist:16:16
+      1    0.0%    1.2%  RegExp: ^\s*([^;\s]*)(?:;|\s|$)
+      1    0.0%    1.2%  RegExp: ^[a-zA-Z_][a-zA-Z_0-9]*$
+      1    0.0%    1.2%  RegExp: ^[\^_`a-zA-Z\-0-9!#$%&'*+.|~]+$
+      1    0.0%    1.2%  RegExp: ^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$
+      1    0.0%    1.2%  RegExp: ^[!#$%&'*+.^_`|~0-9A-Za-z-]+$
+      1    0.0%    1.2%  LazyCompile: *writeOrBuffer node:internal/streams/writable:365:23
+      1    0.0%    1.2%  LazyCompile: *toNamespacedPath node:path:618:19
+      1    0.0%    1.2%  LazyCompile: *strEscape node:internal/util/inspect:475:19
+      1    0.0%    1.2%  LazyCompile: *socketOnDrain node:_http_server:564:23
+      1    0.0%    1.2%  LazyCompile: *slowCases node:internal/util:165:19
+      1    0.0%    1.2%  LazyCompile: *set W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\application.js:359:23
+      1    0.0%    1.2%  LazyCompile: *resOnFinish node:_http_server:793:21
+      1    0.0%    1.2%  LazyCompile: *randomBytes node:internal/crypto/random:91:21
+      1    0.0%    1.2%  LazyCompile: *query W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\middleware\query.js:39:24
+      1    0.0%    1.2%  LazyCompile: *processTicksAndRejections node:internal/process/task_queues:68:35
+      1    0.0%    1.2%  LazyCompile: *parserOnIncoming node:_http_server:857:26
+      1    0.0%    1.2%  LazyCompile: *onResponseHeaders W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\compression\index.js:140:47
+      1    0.0%    1.2%  LazyCompile: *onMessage W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\mongodb\lib\cmap\connection.js:157:14
+      1    0.0%    1.2%  LazyCompile: *normalizeString node:path:66:25
+      1    0.0%    1.2%  LazyCompile: *noop node:internal/util/debuglog:47:14
+      1    0.0%    1.2%  LazyCompile: *info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      1    0.0%    1.2%  LazyCompile: *hash W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:596:14
+      1    0.0%    1.2%  LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:136:31
+      1    0.0%    1.2%  LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\application.js:165:29
+      1    0.0%    1.2%  LazyCompile: *getHeader node:_http_outgoing:590:57
+      1    0.0%    1.2%  LazyCompile: *formatValue node:internal/util/inspect:745:21
+      1    0.0%    1.2%  LazyCompile: *format W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\content-type\index.js:65:17
+      1    0.0%    1.2%  LazyCompile: *endReadableNT node:internal/streams/readable:1338:23
+      1    0.0%    1.2%  LazyCompile: *endReadable node:internal/streams/readable:1328:21
+      1    0.0%    1.2%  LazyCompile: *end node:_http_outgoing:833:45
+      1    0.0%    1.2%  LazyCompile: *emit node:events:475:44
+      1    0.0%    1.2%  LazyCompile: *deserializeObject W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\bson\lib\parser\deserializer.js:65:27
+      1    0.0%    1.2%  LazyCompile: *basename node:path:749:11
+      1    0.0%    1.2%  LazyCompile: *app.<computed> W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\application.js:490:25
+      1    0.0%    1.2%  LazyCompile: *_storeHeader node:_http_outgoing:374:22
+      1    0.0%    1.2%  LazyCompile: *_addListener node:events:555:22
+      1    0.0%    1.2%  LazyCompile: *Writable.write W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\winston\node_modules\readable-stream\lib\_stream_writable.js:288:37
+      1    0.0%    1.2%  LazyCompile: *Socket._writeGeneric node:net:791:42
+      1    0.0%    1.2%  LazyCompile: *Readable.read node:internal/streams/readable:394:35
+      1    0.0%    1.2%  LazyCompile: *OutgoingMessage node:_http_outgoing:97:25
+      1    0.0%    1.2%  LazyCompile: *FastBuffer node:internal/buffer:958:14
+      1    0.0%    1.2%  LazyCompile: *<anonymous> W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\logform\json.js:26:25
+      1    0.0%    1.2%  Function: ^setHasTickScheduled node:internal/process/task_queues:52:29
+      1    0.0%    1.2%  Function: ^processTimers node:internal/timers:487:25
+      1    0.0%    1.2%  Function: ^processIncomingData W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\mongodb\lib\cmap\message_stream.js:84:29
+      1    0.0%    1.2%  Function: ^onHeaders W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\on-headers\index.js:56:20
+      1    0.0%    1.2%  Function: ^newAsyncId node:internal/async_hooks:417:20
+      1    0.0%    1.2%  Function: ^module.exports W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\minimist\index.js:1:27
+      1    0.0%    1.2%  Function: ^isModified W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:425:24
+      1    0.0%    1.2%  Function: ^formatWithOptionsInternal node:internal/util/inspect:2048:35
+      1    0.0%    1.2%  Function: ^formatValue node:internal/util/inspect:745:21
+      1    0.0%    1.2%  Function: ^dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+      1    0.0%    1.2%  Function: ^debug W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\debug\src\debug.js:65:17
+      1    0.0%    1.2%  Function: ^afterWriteTick node:internal/streams/writable:482:24
+      1    0.0%    1.2%  Function: ^addListener node:events:618:58
+      1    0.0%    1.2%  Function: ^Module._nodeModulePaths node:internal/modules/cjs/loader:583:37
+      1    0.0%    1.2%  Function: ^Module._compile node:internal/modules/cjs/loader:1059:37
+      1    0.0%    1.2%  Function: ^Cookie W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\session\cookie.js:25:46
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+     84    0.1%   98.8%  JavaScript
+      0    0.0%    0.0%  C++
+     36    0.0%   42.4%  GC
+  88911   99.9%          Shared libraries
+      1    0.0%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  87602   98.4%  C:\WINDOWS\SYSTEM32\ntdll.dll
+
+   1283    1.4%  C:\Program Files\nodejs\node.exe
+    663   51.7%    C:\Program Files\nodejs\node.exe
+    171   25.8%      Function: ^handleWriteReq node:internal/stream_base_commons:45:24
+    171  100.0%        Function: ^writeGeneric node:internal/stream_base_commons:147:22
+    171  100.0%          Function: ^Socket._writeGeneric node:net:791:42
+    171  100.0%            Function: ^Socket._write node:net:828:35
+     43    6.5%      Function: ^compileFunction node:vm:308:25
+     42   97.7%        Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+     41   97.6%          Function: ^Module._compile node:internal/modules/cjs/loader:1059:37
+     40   97.6%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      1    2.4%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      1    2.4%          LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1059:37
+      1  100.0%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      1    2.3%        LazyCompile: ~wrapSafe node:internal/modules/cjs/loader:1017:18
+      1  100.0%          LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1059:37
+      1  100.0%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1114:37
+     32    4.8%      Function: ^stat node:internal/modules/cjs/loader:151:14
+     22   68.8%        Function: ^tryFile node:internal/modules/cjs/loader:384:17
+     14   63.6%          Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+     14  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      8   36.4%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      8  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+     10   31.3%        Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+     10  100.0%          Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+     10  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+     30    4.5%      LazyCompile: *info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+     15   50.0%        LazyCompile: *dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+     15  100.0%          LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+     15  100.0%            LazyCompile: *next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:177:16
+     11   36.7%        LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+     11  100.0%          Function: ^next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:116:16
+     11  100.0%            Function: ^dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+      4   13.3%        Function: ^handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+      4  100.0%          Function: ^next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:116:16
+      4  100.0%            Function: ^dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+     29    4.4%      Function: ^realpathSync node:fs:2425:22
+     29  100.0%        Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+     28   96.6%          Function: ^tryFile node:internal/modules/cjs/loader:384:17
+     15   53.6%            LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+     12   42.9%            Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      1    3.6%            Function: ^tryPackage node:internal/modules/cjs/loader:338:20
+      1    3.4%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%            LazyCompile: *Module._resolveFilename node:internal/modules/cjs/loader:848:35
+     28    4.2%      C:\Program Files\nodejs\node.exe
+      9   32.1%        LazyCompile: *strEscape node:internal/util/inspect:475:19
+      9  100.0%          LazyCompile: *formatValue node:internal/util/inspect:745:21
+      9  100.0%            LazyCompile: *formatProperty node:internal/util/inspect:1810:24
+      4   14.3%        Function: ^strEscape node:internal/util/inspect:475:19
+      4  100.0%          Function: ^<anonymous> node:internal/util/inspect:1534:14
+      4  100.0%            C:\Program Files\nodejs\node.exe
+      2    7.1%        LazyCompile: *info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      1   50.0%          LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+      1  100.0%            Function: ^next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:116:16
+      1   50.0%          LazyCompile: *dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+      1  100.0%            LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+      2    7.1%        Function: ^realpathSync node:fs:2425:22
+      2  100.0%          Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+      2  100.0%            Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      1    3.6%        LazyCompile: ~isIPv6 node:internal/net:35:16
+      1  100.0%          LazyCompile: ~isIP node:internal/net:39:14
+      1  100.0%            LazyCompile: ~parseSslOptions W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\mongodb\lib\cmap\connect.js:237:25
+      1    3.6%        LazyCompile: *serializeInto W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\bson\lib\parser\serializer.js:553:23
+      1  100.0%          Function: ^serialize W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\bson\lib\bson.js:110:19
+      1  100.0%            Function: ^serializeBson W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\mongodb\lib\cmap\commands.js:379:18
+      1    3.6%        LazyCompile: *parseAcceptEncoding W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\negotiator\lib\encoding.js:31:29
+      1  100.0%          Function: ^preferredEncodings W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\negotiator\lib\encoding.js:138:28
+      1  100.0%            LazyCompile: *onResponseHeaders W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\compression\index.js:140:47
+      1    3.6%        LazyCompile: *header W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:777:29
+      1  100.0%          Function: ^json W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:250:25
+      1  100.0%            Function: ^info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      1    3.6%        LazyCompile: *format W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\content-type\index.js:65:17
+      1  100.0%          LazyCompile: *send W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:111:25
+      1  100.0%            LazyCompile: *info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      1    3.6%        Function: ^removeColors node:internal/util:76:22
+      1  100.0%          Function: ^isBelowBreakLength node:internal/util/inspect:1878:28
+      1  100.0%            Function: ^reduceToSingleString node:internal/util/inspect:1902:30
+      1    3.6%        Function: ^readPackage node:internal/modules/cjs/loader:290:21
+      1  100.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:321:26
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      1    3.6%        Function: ^header W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:777:29
+      1  100.0%          Function: ^json W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:250:25
+      1  100.0%            Function: ^info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      1    3.6%        Function: ^formatPrimitive node:internal/util/inspect:1519:25
+      1  100.0%          Function: ^formatValue node:internal/util/inspect:745:21
+      1  100.0%            Function: ^formatProperty node:internal/util/inspect:1810:24
+      1    3.6%        Function: ^Module node:internal/modules/cjs/loader:172:16
+      1  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      1  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:997:36
+      1    3.6%        Function: ^FastBuffer node:internal/buffer:958:14
+      1  100.0%          Function: ^createUnsafeBuffer node:internal/buffer:1059:28
+      1  100.0%            Function: ^createPool node:buffer:151:20
+     24    3.6%      Function: ^openSync node:fs:576:18
+     24  100.0%        Function: ^readFileSync node:fs:450:22
+     23   95.8%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+     19   82.6%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+      4   17.4%            LazyCompile: *Module._load node:internal/modules/cjs/loader:757:24
+      1    4.2%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      1  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+     12    1.8%      LazyCompile: *hash W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:596:14
+      6   50.0%        LazyCompile: *session W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:179:26
+      6  100.0%          LazyCompile: *trim_prefix W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:293:23
+      6  100.0%            LazyCompile: *next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:177:16
+      6   50.0%        Function: ^isModified W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:425:24
+      5   83.3%          Function: ^shouldSave W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:440:24
+      5  100.0%            LazyCompile: *send W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:111:25
+      1   16.7%          Function: ^shouldSetCookie W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:464:29
+      1  100.0%            Function: ^<anonymous> W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:220:28
+     11    1.7%      Function: ^info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+     11  100.0%        Function: ^handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+     11  100.0%          Function: ^next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:116:16
+     11  100.0%            Function: ^dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+      9    1.4%      LazyCompile: *session W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express-session\index.js:179:26
+      9  100.0%        LazyCompile: *trim_prefix W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:293:23
+      9  100.0%          LazyCompile: *next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\index.js:177:16
+      5   55.6%            Function: ^urlencodedParser W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\body-parser\lib\types\urlencoded.js:79:36
+      4   44.4%            LazyCompile: *urlencodedParser W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\body-parser\lib\types\urlencoded.js:79:36
+      8    1.2%      LazyCompile: *onwrite node:internal/streams/writable:425:17
+      5   62.5%        LazyCompile: *writeOrBuffer node:internal/streams/writable:365:23
+      3   60.0%          LazyCompile: *value node:internal/console/constructor:258:20
+      3  100.0%            Function: ^log node:internal/console/constructor:359:6
+      2   40.0%          LazyCompile: *log W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\winston\lib\winston\transports\console.js:44:6
+      2  100.0%            LazyCompile: *Writable.write W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\winston-transport\node_modules\readable-stream\lib\_stream_writable.js:288:37
+      3   37.5%        LazyCompile: *writevGeneric node:internal/stream_base_commons:122:23
+      3  100.0%          LazyCompile: *Socket._writeGeneric node:net:791:42
+      3  100.0%            Function: ^Socket._writev node:net:823:36
+      8    1.2%      Function: ^writevGeneric node:internal/stream_base_commons:122:23
+      8  100.0%        Function: ^Socket._writeGeneric node:net:791:42
+      8  100.0%          Function: ^Socket._writev node:net:823:36
+      8  100.0%            Function: ^doWrite node:internal/streams/writable:398:17
+      7    1.1%      LazyCompile: *send W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:111:25
+      6   85.7%        LazyCompile: *info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      3   50.0%          LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+      3  100.0%            Function: ^next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:116:16
+      2   33.3%          LazyCompile: *dispatch W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:98:45
+      2  100.0%            LazyCompile: *handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+      1   16.7%          Function: ^handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+      1  100.0%            Function: ^next W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\route.js:116:16
+      1   14.3%        Function: ^json W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\response.js:250:25
+      1  100.0%          Function: ^info W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\server.js:325:14
+      1  100.0%            Function: ^handle W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\desafio-14\node_modules\express\lib\router\layer.js:86:49
+     32    2.5%    LazyCompile: *compileFunction node:vm:308:25
+     32  100.0%      Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+     18   56.3%        LazyCompile: *Module._compile node:internal/modules/cjs/loader:1059:37
+     18  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      9   50.0%            LazyCompile: *Module._load node:internal/modules/cjs/loader:757:24
+      8   44.4%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+      1    5.6%            LazyCompile: *Module.load node:internal/modules/cjs/loader:969:33
+     14   43.8%        Function: ^Module._compile node:internal/modules/cjs/loader:1059:37
+     14  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+     14  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+

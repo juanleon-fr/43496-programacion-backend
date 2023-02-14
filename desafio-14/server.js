@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const { engine } = require('express-handlebars');
 const userModel = require('./models/userModel');
+const { productCollection, productSchema } = require('./models/productModel');
 const mongoose = require('mongoose');
 
 //compression
@@ -26,12 +27,6 @@ const logDir = './performance/logs';
 const logger = winston.createLogger({
 	level: 'warn',
 	transports: [new winston.transports.Console({ level: 'info' }), new winston.transports.File({ filename: path.join(logDir, 'warn.log'), level: 'warn' }), new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' })],
-});
-
-//rutas no implementadas
-app.use('/*', async (req, res) => {
-	res.json({ error: -2, descripcion: `ruta '${req.originalUrl}' método '${req.method}' no implementada` });
-	logger.log('warn', `${Date.now()} ${req.method} '${req.originalUrl}'`);
 });
 
 const cluster = require('cluster');
@@ -51,7 +46,7 @@ app.use('/api/productos-test', routerProdTest);
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer);
 
-const products = new Contenedor('products');
+const products = new Contenedor({ name: productCollection, schema: productSchema });
 const messages = new Messages();
 
 const port = parseInt(process.argv[2]) || process.env.PORT || 8080;
@@ -67,25 +62,6 @@ httpServer.listen(port, () => {
 	console.log(`Listening on http://${config.HOST}:${config.PORT}`);
 });
 
-// app.use(express.static(__dirname + '/public'));
-
-// if (modoCluster && cluster.isPrimary) {
-// 	const numCPUs = cpus().length;
-
-// 	console.log(`Número de procesadores: ${numCPUs}`);
-// 	console.log(`PID MASTER ${process.pid}`);
-
-// 	for (let i = 0; i < numCPUs; i++) {
-// 		cluster.fork();
-// 	}
-
-// 	cluster.on('exit', (worker) => {
-// 		console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString());
-// 		cluster.fork();
-// 	});
-// 	return;
-// }
-
 app.set('view engine', 'hbs');
 app.set('views', './views');
 app.engine(
@@ -98,15 +74,44 @@ app.engine(
 	})
 );
 
-routerProdTest.get('', async (req, res) => {
-	res.render('./layouts/productsfake');
-	logger.log('info', `${Date.now()} GET '/api/productos-test'`);
-});
-
 routerProductos.post('', async (req, res) => {
 	const { body } = req;
-	res.send(await products.save(body));
-	logger.log('info', `${Date.now()} GET '/api/productos'`);
+	res.send(await products.save(body, req));
+});
+
+routerProductos.get('', async (req, res) => {
+	const productos = await products.getAll(req);
+	res.send(productos);
+});
+
+routerProductos.get('/:id', async (req, res) => {
+	const { id } = req.params;
+	const producto = await products.getById(id, req);
+	res.json(producto);
+});
+
+routerProductos.put('/:id', async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { title, price, thumbnail } = req.body;
+		await products.updateById(id, title, price, thumbnail, req);
+		res.json({ succes: true });
+	} catch (error) {
+		res.json({ error: true, msj: 'error' });
+	}
+});
+
+routerProductos.delete('/:id', async (req, res) => {
+	const { id } = req.params;
+	const result = await products.deleteById(id, req);
+	if (result === 'deleted') {
+		res.json({
+			success: true,
+			msg: 'Producto eliminado.',
+		});
+	} else {
+		res.json(result);
+	}
 });
 
 const getAllNorm = async () => {
@@ -265,12 +270,10 @@ const auth = (req, res, next) => {
 app.get('/', auth, (req, res) => {
 	console.log(req.session.username);
 	res.render('./layouts/index', { username: req.session.username });
-	logger.log('info', `${Date.now()} GET '/'`);
 });
 
 app.get('/showsession', (req, res) => {
 	res.json(req.session);
-	logger.log('info', `${Date.now()} GET '/showsession'`);
 });
 
 app.get('/logout', auth, (req, res) => {
@@ -282,13 +285,11 @@ app.get('/logout', auth, (req, res) => {
 			res.render('./layouts/logout', { username: username });
 		}
 	});
-	logger.log('info', `${Date.now()} GET '/logout'`);
 });
 
 app.get('/login', auth, (req, res) => {
 	const { username, password } = req.user;
 	res.render('./layouts/index', { username: username });
-	logger.log('info', `${Date.now()} GET '/login'`);
 });
 
 app.post('/login', async (req, res) => {
@@ -297,7 +298,6 @@ app.post('/login', async (req, res) => {
 	req.session.password = password;
 	req.session.admin = true;
 	res.redirect('/');
-	logger.log('info', `${Date.now()} POST '/login'`);
 });
 
 app.get('/signup', (req, res) => {
@@ -307,7 +307,6 @@ app.get('/signup', (req, res) => {
 	} else {
 		res.render('./layouts/signup');
 	}
-	logger.log('info', `${Date.now()} GET '/signup'`);
 });
 
 app.post('/signup', async (req, res) => {
@@ -316,14 +315,12 @@ app.post('/signup', async (req, res) => {
 	req.session.password = password;
 	req.session.admin = true;
 	res.redirect('/');
-	logger.log('info', `${Date.now()} POST '/signup'`);
-	logger.log('info', `${Date.now()} GET '/'`);
 });
 
 //desafio 12
 
 const parseArgs = require('minimist');
-const routerFork = require('./routerFork');
+// const routerFork = require('./routerFork');
 
 const info = (req, res) => {
 	const data = {
@@ -335,14 +332,23 @@ const info = (req, res) => {
 		processId: process.pid,
 		dirPath: process.env.PWD,
 	};
-	res.render('./layouts/info', { data: data });
-	logger.log('info', `${Date.now()} GET '/info'`);
+	// res.render('./layouts/info', { data: data });
+	// console.log(data);
+	res.json(data);
+	logger.log('info', `${Date.now()} ${req.method} '${req.originalUrl}'`);
 };
 
 app.get('/info', info);
 
-const randomParent = (req, res) => {
-	eval(routerFork.random(req, res));
-};
+// const randomParent = (req, res) => {
+// 	eval(routerFork.random(req, res).replaceAll('*backtick*', '`'));
+// 	logger.log('info', `${Date.now()} ${req.method} '${req.originalUrl}'`);
+// };
 
-app.get('/api/randoms', randomParent);
+// app.get('/api/randoms', randomParent);
+
+//rutas no implementadas
+app.use('/*', async (req, res) => {
+	res.json({ error: -2, descripcion: `ruta '${req.originalUrl}' método '${req.method}' no implementada` });
+	logger.log('warn', `${Date.now()} ${req.method} '${req.originalUrl}'`);
+});
