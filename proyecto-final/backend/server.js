@@ -19,7 +19,7 @@ app.use('/*', async (req, res) => {
 	res.json({ error: -2, descripcion: `ruta '${req.url}' método '${req.method}' no implementada` });
 });
 
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8080;
 
 app.use(urlencoded({ extended: true }));
 app.listen(port, () => {
