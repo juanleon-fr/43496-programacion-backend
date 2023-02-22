@@ -27,7 +27,7 @@ class MongoContainer {
 
 	getAll = async () => {
 		try {
-			const objs = this.model.find();
+			const objs = await this.model.find().sort({ id: 1 });
 			return objs;
 		} catch (err) {
 			errMessage(err, 'getAll');
@@ -36,7 +36,7 @@ class MongoContainer {
 
 	getById = async (id) => {
 		try {
-			const res = this.model.find({ id: id });
+			const res = await this.model.find({ id: id });
 			if (res.length > 0) {
 				return res[0];
 			}
@@ -59,7 +59,7 @@ class MongoContainer {
 
 	updateById = async (id, body) => {
 		try {
-			const docUpdate = this.model.updateOne({ id: id }, body, { new: true });
+			const docUpdate = await this.model.updateOne({ id: id }, body, { new: true });
 			const res = { ...docUpdate, updated: this.getById(id) };
 			return res;
 		} catch (err) {
@@ -69,9 +69,8 @@ class MongoContainer {
 
 	deleteById = async (id) => {
 		try {
-			const deleted = this.model.find({ id: id });
-			const res = this.model.find({ id: id }).remove();
-			return { success: true, res: res, deleted: deleted[0] };
+			const res = await this.model.deleteOne({ id: id });
+			return { success: true, res: res };
 		} catch (err) {
 			errMessage(err, 'deleteById');
 		}
@@ -79,7 +78,7 @@ class MongoContainer {
 
 	deleteAll = async () => {
 		try {
-			const res = this.model.deleteMany({});
+			const res = await this.model.deleteMany({});
 			return { success: true, res: res };
 		} catch (err) {
 			errMessage(err, 'deleteAll');

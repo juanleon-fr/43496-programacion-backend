@@ -3,11 +3,12 @@ import { comparePassword } from './bcrypt.js';
 
 const LocalStrategy = passportLocal.Strategy;
 
-const initializePassport = (passport, getUserByEmail, getUserById) => {
+const passportConfig = (passport, getUserByEmail, getUserById) => {
 	passport.use(
 		'signin',
-		new LocalStrategy((email, password, done) => {
+		new LocalStrategy({ passReqToCallback: true }, (email, password, done) => {
 			getUserByEmail(email).then((user) => {
+				console.log(email, password);
 				if (user === null) {
 					console.log('user Not Found with email ' + email);
 					return done(null, false);
@@ -23,7 +24,6 @@ const initializePassport = (passport, getUserByEmail, getUserById) => {
 	);
 
 	passport.serializeUser((user, done) => {
-		console.log(user);
 		done(null, user._id);
 	});
 
@@ -32,4 +32,4 @@ const initializePassport = (passport, getUserByEmail, getUserById) => {
 	});
 };
 
-export default initializePassport;
+export default passportConfig;
