@@ -79,7 +79,6 @@ class FbContainer {
 
 	deleteById = async (id) => {
 		try {
-			console.log(obj);
 			const res = await this.collection.doc(`${id}`).delete();
 			return res;
 		} catch (err) {

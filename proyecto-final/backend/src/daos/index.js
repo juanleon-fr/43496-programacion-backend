@@ -6,8 +6,6 @@ import CarritosDaoMongo from './carritos/CarritosDaoMongo.js';
 import ProductosDaoMongo from './productos/ProductosDaoMongo.js';
 import CarritosDaoFb from './carritos/CarritosDaoFb.js';
 import ProductosDaoFb from './productos/ProductosDaoFb.js';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const instancias = [
 	{ nombre: ProductosDaoMem, id: 'memoria', descripcion: 'productos' },

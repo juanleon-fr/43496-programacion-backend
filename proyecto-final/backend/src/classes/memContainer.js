@@ -51,7 +51,6 @@ class MemContainer {
 
 	deleteById = (id) => {
 		let listItem = this.getById(id);
-		console.log(listItem);
 		if (typeof listItem === 'undefined') {
 			return { error: 'item not found' };
 		}
@@ -67,7 +66,6 @@ class MemContainer {
 		let cart = {};
 		cart.id = this.assignId();
 		cart.timestamp = Date.now();
-		console.log(body);
 		cart.products = body.products;
 		return this.save(cart);
 	};

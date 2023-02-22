@@ -1,14 +1,12 @@
 import { model } from 'mongoose';
-import connectMongo from '../connectMongo.js';
-const url = 'mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority';
+import { logger } from '../utils/winstonLogger.js';
 const errMessage = (err, func) => {
-	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
+	logger.error(`Date: ${Date.now()} \n Error while running ${func}\n ${err}`);
 };
 
 class MongoContainer {
 	constructor(modelDat) {
 		this.model = model(modelDat.name, modelDat.schema);
-		connectMongo(url);
 	}
 
 	assignId = async () => {

@@ -8,7 +8,6 @@ class ProductosDaoMongo extends MongoContainer {
 			name: productCollection,
 			schema: productSchema,
 		});
-		console.log('usando MongoDB');
 	}
 }
 

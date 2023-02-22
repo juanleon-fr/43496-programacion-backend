@@ -1,7 +1,8 @@
 import { promises } from 'fs';
+import { logger } from '../utils/winstonLogger.js';
 
 const errMessage = (err, func) => {
-	console.log(`Se ha producido un error al ejecutar ${func}\n ${err}`);
+	logger.error(`Date: ${Date.now()} \n Se ha producido un error al ejecutar ${func}\n ${err}`);
 };
 
 class FsContainer {

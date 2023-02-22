@@ -2,7 +2,7 @@ import express, { Router } from 'express';
 const routeProductos = Router();
 import controllers from '../controllers/productos.js';
 const { getProds, getProdById, newProd, updateProdById, deleteProdById } = controllers;
-import authMiddleware from '../middleware/authMiddleware.js';
+import adminPrivileges from '../middleware/adminPrivileges.js';
 
 const app = express();
 
@@ -12,10 +12,10 @@ routeProductos.get('/', getProds);
 
 routeProductos.get('/:id', getProdById);
 
-routeProductos.post('/', authMiddleware, newProd);
+routeProductos.post('/', adminPrivileges, newProd);
 
-routeProductos.put('/:id', authMiddleware, updateProdById);
+routeProductos.put('/:id', adminPrivileges, updateProdById);
 
-routeProductos.delete('/:id', authMiddleware, deleteProdById);
+routeProductos.delete('/:id', adminPrivileges, deleteProdById);
 
 export default routeProductos;
