@@ -39,13 +39,17 @@ app.use(
 );
 app.use(
 	session({
-		store: MongoStore.create({ mongoUrl: uri, dbName: process.env.MONGO_DB }),
+		store: MongoStore.create({
+			mongoUrl: uri,
+			dbName: process.env.MONGO_DB,
+			mongoOptions: {
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+			},
+		}),
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
-		cookie: {
-			secure: false,
-		},
 	})
 );
 app.use(passport.initialize());
@@ -56,7 +60,7 @@ passportConfig(passport, getByEmail, getById);
 // //cors
 // nodeEnv !== 'production' ? app.use(nodeEnv.cors()) : 'production';
 
-//logger
+//winston logger
 import { logger, expressWinston } from './utils/winstonLogger.js';
 // app.use(expressWinston);
 

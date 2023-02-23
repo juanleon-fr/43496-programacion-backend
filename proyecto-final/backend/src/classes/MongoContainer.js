@@ -1,5 +1,6 @@
 import { model } from 'mongoose';
 import { logger } from '../utils/winstonLogger.js';
+import orderModel from '../models/orderModel.js';
 const errMessage = (err, func) => {
 	logger.error(`Date: ${Date.now()} \n Error while running ${func}\n ${err}`);
 };
@@ -7,6 +8,7 @@ const errMessage = (err, func) => {
 class MongoContainer {
 	constructor(modelDat) {
 		this.model = model(modelDat.name, modelDat.schema);
+		this.schema = modelDat.schema;
 	}
 
 	assignId = async () => {
@@ -88,7 +90,7 @@ class MongoContainer {
 	newCart = async (body) => {
 		let cart = {};
 		try {
-			cart.id = await this.assignId();
+			cart.id = body.id;
 			cart.timestamp = Date.now();
 			cart.products = body.products;
 			const res = await this.model.create(cart);
@@ -112,6 +114,15 @@ class MongoContainer {
 		}
 	};
 
+	removeCart = async (id) => {
+		try {
+			const res = await this.model.deleteMany({ id: id });
+			return { success: true, res: res };
+		} catch (err) {
+			errMessage(err, 'removeCart');
+		}
+	};
+
 	removeFromCart = async (id, id_prod) => {
 		try {
 			let cart = await this.getById(id);
@@ -122,6 +133,16 @@ class MongoContainer {
 			return this.updateById(id, cart);
 		} catch (err) {
 			errMessage(err, 'removeFromCart');
+		}
+	};
+
+	placeOrder = async (cart) => {
+		try {
+			// console.log(cart);
+			const res = await orderModel.create(cart);
+			return res;
+		} catch (err) {
+			errMessage(err, 'placeOrder');
 		}
 	};
 }
