@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"productos\": []\r\n}",
+							"raw": "{   \r\n    \"products\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -33,23 +33,6 @@
 							"path": [
 								"api",
 								"carrito"
-							],
-							"query": [
-								{
-									"key": "title",
-									"value": "caramelos",
-									"disabled": true
-								},
-								{
-									"key": "price",
-									"value": "5000",
-									"disabled": true
-								},
-								{
-									"key": "thumbnail",
-									"value": "jfklwqjoiruqw",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -65,7 +48,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/carrito/1",
+							"raw": "http://localhost:8080/api/carrito/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -74,7 +57,13 @@
 							"path": [
 								"api",
 								"carrito",
-								"1"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -101,12 +90,12 @@
 					"response": []
 				},
 				{
-					"name": "/:id/productos",
+					"name": "/productos",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/carrito/1/productos",
+							"raw": "http://localhost:8080/api/carrito/productos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -115,7 +104,6 @@
 							"path": [
 								"api",
 								"carrito",
-								"1",
 								"productos"
 							]
 						}
@@ -123,13 +111,13 @@
 					"response": []
 				},
 				{
-					"name": "/:id/productos",
+					"name": "/productos/:id_prod",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_prod\": 10\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +125,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/carrito/1/productos",
+							"raw": "http://localhost:8080/api/carrito/productos/:id_prod",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -146,24 +134,13 @@
 							"path": [
 								"api",
 								"carrito",
-								"1",
-								"productos"
+								"productos",
+								":id_prod"
 							],
-							"query": [
+							"variable": [
 								{
-									"key": "title",
-									"value": "caramelos",
-									"disabled": true
-								},
-								{
-									"key": "price",
-									"value": "5000",
-									"disabled": true
-								},
-								{
-									"key": "thumbnail",
-									"value": "jfklwqjoiruqw",
-									"disabled": true
+									"key": "id_prod",
+									"value": "11"
 								}
 							]
 						}
@@ -171,7 +148,7 @@
 					"response": []
 				},
 				{
-					"name": "/:id/productos/:id_prod",
+					"name": "/productos/:id_prod",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -185,7 +162,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/carrito/1/productos/10",
+							"raw": "http://localhost:8080/api/carrito/productos/:id_prod",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -194,9 +171,44 @@
 							"path": [
 								"api",
 								"carrito",
-								"1",
 								"productos",
-								"10"
+								":id_prod"
+							],
+							"variable": [
+								{
+									"key": "id_prod",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/placeorder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"products\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carrito/placeorder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carrito",
+								"placeorder"
 							]
 						}
 					},
@@ -257,7 +269,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/productos/24",
+							"raw": "http://localhost:8080/api/productos/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -266,7 +278,13 @@
 							"path": [
 								"api",
 								"productos",
-								"24"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "24"
+								}
 							]
 						}
 					},
@@ -296,23 +314,6 @@
 							"path": [
 								"api",
 								"productos"
-							],
-							"query": [
-								{
-									"key": "title",
-									"value": "caramelos",
-									"disabled": true
-								},
-								{
-									"key": "price",
-									"value": "5000",
-									"disabled": true
-								},
-								{
-									"key": "thumbnail",
-									"value": "jfklwqjoiruqw",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -333,7 +334,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/productos/25",
+							"raw": "http://localhost:8080/api/productos/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -342,7 +343,13 @@
 							"path": [
 								"api",
 								"productos",
-								"25"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "25"
+								}
 							]
 						}
 					},
@@ -354,7 +361,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/productos/25",
+							"raw": "http://localhost:8080/api/productos/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -363,7 +370,191 @@
 							"path": [
 								"api",
 								"productos",
-								"25"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "/profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/profile",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ch@ion.com\",\r\n    \"password\": \"paso\",\r\n    \"fullname\": \"Champ Ion\",\r\n    \"age\": 99,\r\n    \"address\": \"lala lala argentina\",\r\n    \"avatarurl\": \"https://upload.wikimedia.org/wikipedia/commons/e/e1/Le_lenny_face.jpg\",\r\n    \"phone\": \"+54545454\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ch@ion.com\",\r\n    \"password\": \"paso\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/signout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/signout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
 							]
 						}
 					},
