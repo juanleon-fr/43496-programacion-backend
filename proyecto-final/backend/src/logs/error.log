@@ -1,0 +1,14 @@
+{
+  message: 'Date: 1677108724185 \n' +
+    ' Error while running getById\n' +
+    ' CastError: Cast to ObjectId failed for value "1677108690226" (type string) at path "_id" for model "users"',
+  level: 'error',
+  timestamp: '2023-02-22T23:32:04.186Z'
+}
+{
+  message: 'Date: 1677108742929 \n' +
+    ' Error while running getById\n' +
+    ' CastError: Cast to ObjectId failed for value "1677108690226" (type string) at path "_id" for model "users"',
+  level: 'error',
+  timestamp: '2023-02-22T23:32:22.931Z'
+}

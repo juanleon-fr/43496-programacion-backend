@@ -5,6 +5,7 @@ const users = new Users(userCollection, userSchema);
 
 const getUserInfo = async (req, res, next) => {
 	const email = req.body.email;
+	console.log('llegue al getyser');
 	try {
 		const userInfo = await users.getByEmail(email);
 		if (userInfo === null) {
@@ -43,6 +44,7 @@ const postSignup = async (req, res, next) => {
 			if (result._id !== undefined) {
 				req.body.email = result.email;
 				req.body.password = auxPass;
+				console.log('termine psotsignup');
 				return next();
 			}
 			return res.status(500).send(result);
@@ -55,7 +57,7 @@ const postSignup = async (req, res, next) => {
 
 const postSignin = async (req, res, next) => {
 	//verifico que no haya sesion abierta
-	console.log(req.user);
+	console.log('hola');
 	return res.sendStatus(200);
 };
 

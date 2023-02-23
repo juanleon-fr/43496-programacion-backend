@@ -3,33 +3,32 @@ import { comparePassword } from './bcrypt.js';
 
 const LocalStrategy = passportLocal.Strategy;
 
-const passportConfig = (passport, getUserByEmail, getUserById) => {
-	passport.use(
-		'signin',
-		new LocalStrategy({ passReqToCallback: true }, (email, password, done) => {
-			getUserByEmail(email).then((user) => {
-				console.log(email, password);
-				if (user === null) {
-					console.log('user Not Found with email ' + email);
-					return done(null, false);
-				}
-
-				if (!comparePassword(password, user.password)) {
-					console.log('invalid pass');
-					return done(null, false);
-				}
-				return done(null, user);
-			});
-		})
-	);
-
+function passportConfig(passport, getUserByEmail, getUserById) {
 	passport.serializeUser((user, done) => {
-		done(null, user._id);
+		console.log('serial');
+		return done(null, user.id);
 	});
 
-	passport.deserializeUser((id, done) => {
-		getUserById(id, done);
+	passport.deserializeUser(async (id, done) => {
+		console.log('deserial');
+		return done(null, await getUserById(id));
 	});
-};
+
+	const authenticateUser = async (email, password, done) => {
+		console.log('hola estoy autenticando');
+		const user = await getUserByEmail(email);
+		if (user == null) {
+			console.log('user Not Found');
+			return done(null, false, { message: 'invalid user or password' });
+		}
+		if (!comparePassword(password, user.password)) {
+			console.log('invalid pass');
+			return done(null, false, { message: 'invalid user or password' });
+		}
+		return done(null, user);
+	};
+
+	passport.use(new LocalStrategy('local', { usernameField: 'email', passwordField: 'password' }, authenticateUser));
+}
 
 export default passportConfig;

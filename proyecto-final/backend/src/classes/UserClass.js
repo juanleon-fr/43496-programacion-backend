@@ -24,7 +24,7 @@ class UserClass {
 
 	getById = async (id) => {
 		try {
-			const res = await this.model.find({ _id: id });
+			const res = await this.model.find({ id: id });
 			if (res.length > 0) {
 				return res[0];
 			}
@@ -35,6 +35,7 @@ class UserClass {
 	};
 
 	saveNew = async (user) => {
+		user.id = Date.now();
 		try {
 			const res = await this.model.create(user);
 			return res;
