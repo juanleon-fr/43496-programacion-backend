@@ -1,39 +1,37 @@
 import passport from 'passport';
 
-// const passportSignin = (req, res, next) => {
-// 	// console.log('buenas estoy en el middleware');
-// 	// req.body.username = req.body.email;
-// 	// Reflect.deleteProperty(req.body, 'email');
-// 	// console.log('body parsing', req.body);
-// 	passport.authenticate('local', function (err, user, info) {
-// 		// handle succes or failure
-// 	})(req, res, next);
-// };
 const passportSignin = (req, res, next) => {
-	passport.authenticate('local', function (err, user, info) {
-		if (err) return next(err);
-		if (!user) return res.redirect('/login');
-
+	const obj = { username: req.body.email, password: req.body.password };
+	req.body = obj;
+	passport.authenticate('local', function (error, user, info) {
+		if (error) {
+			return res.status(401).send(error);
+		}
+		if (!user) {
+			return res.status(401).send(info);
+		}
 		req.logIn(user, function (err) {
-			if (err) return next(err);
-			return res.redirect('/account/profile');
+			if (err) {
+				return next(err);
+			}
+			return next();
 		});
 	})(req, res, next);
 };
 
 const checkAuthentication = (req, res, next) => {
 	if (req.isAuthenticated()) {
-		next();
+		return next();
 	} else {
-		res.send('not logged in');
+		return res.status(401).send('not logged in');
 	}
 };
 
-const checkNoSession = async (req, res, next) => {
-	if (!req.isAuthenticated()) {
-		next();
+const checkNoSession = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		return res.sendStatus(400);
 	} else {
-		return res.status(400);
+		return next();
 	}
 };
 

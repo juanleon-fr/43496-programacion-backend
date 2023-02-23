@@ -2,6 +2,11 @@
 import nodeEnv from './utils/dotenv.js';
 import express from 'express';
 
+//MongoDB connection
+import mongooseConnect from './utils/mongooseConnect.js';
+const uri = process.env.MONGO_URI;
+mongooseConnect(uri);
+
 //passport & session
 import passport from 'passport';
 import UserClass from './classes/UserClass.js';
@@ -10,6 +15,7 @@ import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 const { urlencoded, json } = bodyParser;
 
 const app = express();
@@ -19,26 +25,33 @@ const getById = new UserClass().getById;
 const day = 86400 * 1000;
 const minute = 60 * 1000;
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(
-	session({
-		// store: MongoStore.create({ mongoUrl: uri }),
-		secret: 'pruebo con otro string',
-		resave: false,
-		saveUninitialized: false,
+	cookieSession({
+		name: 'session',
+		keys: ['/* secret keys */', 'lalalala'],
+
+		// Cookie Options
+		maxAge: 24 * 60 * 60 * 1000, // 24 hours
 	})
 );
+app.use(
+	session({
+		store: MongoStore.create({ mongoUrl: uri, dbName: process.env.MONGO_DB }),
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			secure: false,
+		},
+	})
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 passportConfig(passport, getByEmail, getById);
-
-//MongoDB connection
-import mongooseConnect from './utils/mongooseConnect.js';
-const uri = process.env.MONGO_URI;
-mongooseConnect(uri);
 
 // //cors
 // nodeEnv !== 'production' ? app.use(nodeEnv.cors()) : 'production';

@@ -5,7 +5,6 @@ const users = new Users(userCollection, userSchema);
 
 const getUserInfo = async (req, res, next) => {
 	const email = req.body.email;
-	console.log('llegue al getyser');
 	try {
 		const userInfo = await users.getByEmail(email);
 		if (userInfo === null) {
@@ -17,9 +16,22 @@ const getUserInfo = async (req, res, next) => {
 	}
 };
 
+const getUserBySession = async (req, res, next) => {
+	const id = req.session.passport.user;
+	try {
+		const userInfo = await users.getById(id);
+		if (userInfo === null) {
+			return res.sendStatus(404);
+		}
+		return res.status(200).json(userInfo);
+	} catch (err) {
+		throw res.status(500).send(err);
+	}
+};
+
 const getSignout = async (req, res, next) => {
-	// verifico que haya sesion abierta
-	//cierro
+	req.logout();
+	return res.sendStatus(200);
 };
 
 const deleteUser = async (req, res, next) => {
@@ -44,7 +56,6 @@ const postSignup = async (req, res, next) => {
 			if (result._id !== undefined) {
 				req.body.email = result.email;
 				req.body.password = auxPass;
-				console.log('termine psotsignup');
 				return next();
 			}
 			return res.status(500).send(result);
@@ -55,10 +66,8 @@ const postSignup = async (req, res, next) => {
 	}
 };
 
-const postSignin = async (req, res, next) => {
-	//verifico que no haya sesion abierta
-	console.log('hola');
+const postSignin = (req, res, next) => {
 	return res.sendStatus(200);
 };
 
-export { getUserInfo, deleteUser, postSignup, postSignin, getSignout };
+export { getUserInfo, getUserBySession, deleteUser, postSignup, postSignin, getSignout };
