@@ -134,7 +134,7 @@
 							"variable": [
 								{
 									"key": "id_prod",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -440,7 +440,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"ch@ion.com\",\r\n    \"password\": \"paso\",\r\n    \"fullname\": \"Champ Ion\",\r\n    \"age\": 99,\r\n    \"address\": \"lala lala argentina\",\r\n    \"avatarurl\": \"https://upload.wikimedia.org/wikipedia/commons/e/e1/Le_lenny_face.jpg\",\r\n    \"phone\": \"+54545454\"\r\n}",
+							"raw": "{\r\n    \"email\": \"ch@ion.com\",\r\n    \"password\": \"paso\",\r\n    \"fullname\": \"Champ Ion\",\r\n    \"age\": 99,\r\n    \"address\": \"lala lala argentina\",\r\n    \"avatarurl\": \"https://upload.wikimedia.org/wikipedia/commons/e/e1/Le_lenny_face.jpg\",\r\n    \"phone\": \"+numero de telefono aqui\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
