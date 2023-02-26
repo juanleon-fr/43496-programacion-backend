@@ -62,7 +62,7 @@ passportConfig(passport, getByEmail, getById);
 
 //winston logger
 import { logger, expressWinston } from './utils/winstonLogger.js';
-// app.use(expressWinston);
+app.use(expressWinston);
 
 //compression
 import compression from 'compression';
