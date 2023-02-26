@@ -1,88 +1,96 @@
-import instancia from '../daos/index.js';
-const carts = new instancia.carritos();
-const products = new instancia.productos();
+import { createOrderService, deleteCartService, deleteItemService, getAllCartsService, getCartService, newCartItemService, newCartService } from '../service/carrito.js';
+import { getUserBySessionService } from '../service/users.js';
+import { sendOrderMail } from '../utils/nodeMailerService.js';
+import { sendSMSBuyer, sendWPPAdmin } from '../utils/TwilioSetup.js';
+import { logger } from '../utils/winstonLogger.js';
 
 const newCart = async (req, res, next) => {
-	const { body } = req;
-	body.id = req.session.passport.user;
-	const cartExists = await carts.getById(body.id);
-	cartExists.id != undefined ? res.send('cart already created') : res.json(await carts.newCart(body));
-	// res.send(await carts.newCart(body));
-	// (await carts.getById(body.id)) == { error: 'producto no encontrado' } ? res.send('cart already created') : res.json(await carts.newCart(body));
+	const prodArray = req.body;
+	const userId = req.session.passport.user;
+	const result = await newCartService(userId, prodArray);
+	if (result == null) {
+		return res.sendStatus(400);
+	}
+	if (typeof result === 'string') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(result);
 };
-
-// const deleteCartByIdOld = async (req, res, next) => {
-// 	const { id } = req.params;
-// 	const result = await carts.deleteById(id);
-// 	res.json(result);
-// };
 
 const deleteCartById = async (req, res, next) => {
 	const id = req.session.passport.user;
-	const result = await carts.deleteById(id);
-	res.json(result);
+	const result = await deleteCartService(id);
+	if (result.deletedCound === 0) {
+		return res.status(404).send('nothing deleted');
+	}
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(result);
 };
-
-// const getCartItemsByIdOld = async (req, res, next) => {
-// 	const { id } = req.params;
-// 	const cart = await carts.getById(id);
-// 	res.json(cart.products);
-// };
 
 const getCartItemsById = async (req, res, next) => {
 	const id = req.session.passport.user;
-	const cart = await carts.getById(id);
-	res.json(cart.products);
+	const result = await getCartService(id);
+	if (result == null) {
+		return res.sendStatus(404);
+	}
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(result.products);
 };
 
 const getCarts = async (req, res, next) => {
-	const cartList = await carts.getAll();
-	res.json(cartList);
+	const result = await getAllCartsService();
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(result);
 };
 
 const newCartItemById = async (req, res, next) => {
 	const id = req.session.passport.user;
 	const { id_prod } = req.params;
-	const producto = await products.getById(id_prod);
-	const cart = await carts.addToCart(id, producto);
-	res.json(cart);
+	const result = await newCartItemService(id, id_prod);
+	if (result == null) {
+		return res.sendStatus(400);
+	}
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(result);
 };
 
-// const newCartItemByIdOld = async (req, res, next) => {
-// 	const { id } = req.params;
-// 	const body = req.body;
-// 	const producto = await products.getById(body.id_prod);
-// 	const cart = await carts.addToCart(id, producto);
-// 	res.json(cart);
-// };
-
 const deleteCartItemById = async (req, res, next) => {
-	const { /*idOld,*/ id_prod } = req.params;
+	const { id_prod } = req.params;
 	const id = req.session.passport.user;
-	const result = await carts.removeFromCart(id, id_prod);
-	res.json(result);
+	const result = await deleteItemService(id, id_prod);
+
+	return res.json(result);
 };
 
 const createOrder = async (req, res, next) => {
 	const id = req.session.passport.user;
-	const doc = await carts.getById(id);
-	const cart = { ...doc._doc };
-	delete cart._id;
-	if (cart.id != undefined) {
-		if (cart.products !== []) {
-			const order = await carts.placeOrder(cart);
-			await carts.removeCart(id);
-			return res.json(order);
-		}
-		return res.send('no items in that cart');
+	const result = await createOrderService(id);
+	if (result == 'no such cart') {
+		return res.sendStatus(404);
 	}
-	return res.send('no such cart');
-};
-
-const emptyCart = async (req, res, next) => {
-	const id = req.session.passport.user;
-	await carts.placeOrder(id);
-	res.json(result);
+	if (result == 'no items in that cart') {
+		return res.sendStatus(400);
+	}
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	const user = await getUserBySessionService(id);
+	try {
+		sendOrderMail(result, user);
+		sendWPPAdmin(result, user, `${result._id}`);
+		sendSMSBuyer(`${result._id}`, user.phone);
+	} catch (err) {
+		logger.error(`${err}`);
+	}
+	return res.status(200).json(result);
 };
 
 export default {

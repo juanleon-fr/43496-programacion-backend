@@ -1,9 +1,5 @@
 import { model } from 'mongoose';
-import { logger } from '../utils/winstonLogger.js';
 import orderModel from '../models/orderModel.js';
-const errMessage = (err, func) => {
-	logger.error(`Date: ${Date.now()} \n Error while running ${func}\n ${err}`);
-};
 
 class MongoContainer {
 	constructor(modelDat) {
@@ -13,137 +9,80 @@ class MongoContainer {
 
 	assignId = async () => {
 		let id;
-		try {
-			const thisList = await this.getAll();
-			if (thisList.length === 0) {
-				id = 1;
-			} else {
-				const lastElement = thisList.slice(-1)[0];
-				id = lastElement.id + 1;
-			}
-			return id;
-		} catch (err) {
-			errMessage(err, 'assignId');
+
+		const thisList = await this.getAll();
+		if (thisList.length === 0) {
+			id = 1;
+		} else {
+			const lastElement = thisList.slice(-1)[0];
+			id = lastElement.id + 1;
 		}
+		return id;
 	};
 
 	getAll = async () => {
-		try {
-			const objs = await this.model.find().sort({ id: 1 });
-			return objs;
-		} catch (err) {
-			errMessage(err, 'getAll');
-		}
+		const objs = await this.model.find().sort({ id: 1 });
+		return objs;
 	};
 
 	getById = async (id) => {
-		try {
-			const res = await this.model.find({ id: id });
-			if (res.length > 0) {
-				return res[0];
-			}
-			return { error: 'producto no encontrado' };
-		} catch (err) {
-			errMessage(err, 'getById');
+		const res = await this.model.find({ id: id });
+		if (res.length > 0) {
+			return res[0];
 		}
+		return null;
 	};
 
 	saveNew = async (obj) => {
-		try {
-			obj.id = await this.assignId();
-			obj.timestamp = Date.now();
-			const res = await this.model.create(obj);
-			return res;
-		} catch (err) {
-			errMessage(err, 'saveNew');
-		}
+		obj.id = await this.assignId();
+		obj.timestamp = Date.now();
+		const res = await this.model.create(obj);
+		return res;
 	};
 
 	updateById = async (id, body) => {
-		try {
-			const docUpdate = await this.model.updateOne({ id: id }, body, { new: true });
-			const res = { ...docUpdate, updated: this.getById(id) };
-			return res;
-		} catch (err) {
-			errMessage(err, 'updateById');
-		}
+		const result = await this.model.updateOne({ id: id }, body, { new: true });
+		return result;
 	};
 
 	deleteById = async (id) => {
-		try {
-			const res = await this.model.deleteOne({ id: id });
-			return { success: true, res: res };
-		} catch (err) {
-			errMessage(err, 'deleteById');
-		}
+		const res = await this.model.deleteOne({ id: id });
+		return res;
 	};
 
 	deleteAll = async () => {
-		try {
-			const res = await this.model.deleteMany({});
-			return { success: true, res: res };
-		} catch (err) {
-			errMessage(err, 'deleteAll');
-		}
+		const res = await this.model.deleteMany({});
+		return res;
 	};
 
-	newCart = async (body) => {
+	newCart = async (id, prods) => {
 		let cart = {};
-		try {
-			cart.id = body.id;
-			cart.timestamp = Date.now();
-			cart.products = body.products;
-			const res = await this.model.create(cart);
-			return res;
-		} catch (err) {
-			errMessage(err, 'newCart');
-		}
+
+		cart.id = id;
+		cart.timestamp = Date.now();
+		cart.products = prods;
+		const res = await this.model.create(cart);
+		return res;
 	};
 
-	addToCart = async (id, product) => {
-		try {
-			let cart = await this.getById(id);
-			const found = cart.products.find((element) => element.id === product.id);
-			if (typeof found !== 'undefined') {
-				return [{ success: false, issue: 'product already in cart' }];
-			}
-			cart.products.push(product);
-			return this.updateById(id, cart);
-		} catch (err) {
-			errMessage(err, 'addToCart');
-		}
+	addToCart = async (id, cart) => {
+		return await this.updateById(id, cart);
 	};
 
 	removeCart = async (id) => {
-		try {
-			const res = await this.model.deleteMany({ id: id });
-			return { success: true, res: res };
-		} catch (err) {
-			errMessage(err, 'removeCart');
-		}
+		const res = await this.model.deleteMany({ id: id });
+		return { success: true, res: res };
 	};
 
 	removeFromCart = async (id, id_prod) => {
-		try {
-			let cart = await this.getById(id);
-			if (isNaN(id_prod)) return [{ success: false, issue: 'invalid id' }];
-			let productInCart = cart.products.find((element) => element.id === Number(id_prod));
-			if (typeof productInCart === 'undefined') return [{ success: false, issue: 'product not present in cart' }];
-			cart.products = cart.products.filter((element) => element.id != id_prod);
-			return this.updateById(id, cart);
-		} catch (err) {
-			errMessage(err, 'removeFromCart');
-		}
+		let cart = await this.getById(id);
+		cart.products = cart.products.filter((element) => element.id != id_prod);
+		return this.updateById(id, { products: cart.products });
 	};
 
 	placeOrder = async (cart) => {
-		try {
-			// console.log(cart);
-			const res = await orderModel.create(cart);
-			return res;
-		} catch (err) {
-			errMessage(err, 'placeOrder');
-		}
+		const res = await orderModel.create(cart);
+		return res;
 	};
 }
 

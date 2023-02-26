@@ -4,7 +4,7 @@ const orderCollection = 'orders';
 
 const orderSchema = new Schema(
 	{
-		id: { type: Number, required: true },
+		userid: { type: Number, required: true },
 		timestamp: { type: Date },
 		products: { type: Array, required: true },
 	},

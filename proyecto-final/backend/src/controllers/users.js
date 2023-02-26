@@ -1,73 +1,64 @@
-import Users from '../classes/UserClass.js';
-import { hashPassword } from '../utils/bcrypt.js';
-import { userCollection, userSchema } from '../models/userModel.js';
-const users = new Users(userCollection, userSchema);
+import { getUserBySessionService, getUserService, deleteUserService, signupService } from '../service/users.js';
+import { sendSignupMail } from '../utils/nodeMailerService.js';
 
 const getUserInfo = async (req, res, next) => {
 	const email = req.body.email;
-	try {
-		const userInfo = await users.getByEmail(email);
-		if (userInfo === null) {
-			return res.sendStatus(404);
-		}
-		return res.status(200).json(userInfo);
-	} catch (err) {
-		throw res.status(500).send(err);
+	const user = await getUserService(email);
+	if (user == null) {
+		return res.status(404);
 	}
+	if (user == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(user);
 };
 
 const getUserBySession = async (req, res, next) => {
 	const id = req.session.passport.user;
-	try {
-		const userInfo = await users.getById(id);
-		if (userInfo === null) {
-			return res.sendStatus(404);
-		}
-		return res.status(200).json(userInfo);
-	} catch (err) {
-		throw res.status(500).send(err);
+	const user = await getUserBySessionService(id);
+	if (user == null) {
+		return res.status(404);
 	}
+	if (user == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(user);
 };
 
-const getSignout = async (req, res, next) => {
-	req.logout();
+const signout = async (req, res, next) => {
+	await req.logout();
 	return res.sendStatus(200);
 };
 
 const deleteUser = async (req, res, next) => {
-	const { id } = req.params;
-	try {
-		const deleted = await userModel.deleteOne({ username: id });
-		const response = deleted.deletedCount !== 0 ? 'res.status(200).json({ success: true, res: deleted })' : 'res.status(404).json({ success: false, res: deleted })';
-		return eval(response);
-	} catch (err) {
-		throw res.status(500).send(err);
-		// throw res.status(500).send(err);
+	const id = req.session.passport.user;
+	const result = await deleteUserService(id);
+	if (result.deletedCound === 0) {
+		return res.status(404).send('nothing deleted');
 	}
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	return res.status(200).json(result);
 };
 
 const postSignup = async (req, res, next) => {
-	const auxPass = req.body.password;
-	req.body.password = hashPassword(req.body.password);
-	const userObj = req.body;
-	try {
-		if ((await users.getByEmail(req.body.email)) === null) {
-			const result = await users.saveNew(userObj);
-			if (result._id !== undefined) {
-				req.body.email = result.email;
-				req.body.password = auxPass;
-				return next();
-			}
-			return res.status(500).send(result);
-		}
-		return res.status(400).send('user already created');
-	} catch (err) {
-		throw res.status(500).send(err);
+	const user = req.body;
+	const password = user.password;
+	const result = await signupService(user);
+	if (result == null) {
+		return res.status(400).send('email already in use');
 	}
+	if (result == 'error') {
+		return res.sendStatus(500);
+	}
+	req.body.password = password;
+	sendSignupMail(user);
+	return next();
 };
 
 const postSignin = (req, res, next) => {
 	return res.sendStatus(200);
 };
 
-export { getUserInfo, getUserBySession, deleteUser, postSignup, postSignin, getSignout };
+export { getUserInfo, getUserBySession, deleteUser, postSignup, postSignin, signout };

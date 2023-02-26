@@ -1,0 +1,214 @@
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:36:24.065Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:37:42.208Z'
+}
+{ level: 'error', timestamp: '2023-02-25T22:37:55.255Z' }
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:38:18.469Z'
+}
+{
+  level: 'error',
+  message: 'upaa! lala is not defined',
+  stack: 'ReferenceError: lala is not defined\n' +
+    '    at createOrderService (file:///W:/Users/Juanleon/Desktop/John%20The%20F/Coder/Backend/43495-programacion-backend/proyecto-final/backend/src/service/carrito.js:107:3)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n' +
+    '    at async createOrder (file:///W:/Users/Juanleon/Desktop/John%20The%20F/Coder/Backend/43495-programacion-backend/proyecto-final/backend/src/controllers/carrito.js:73:17)',
+  timestamp: '2023-02-25T22:38:20.017Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:39:02.783Z'
+}
+{
+  level: 'error',
+  message: ' lala is not defined',
+  stack: 'ReferenceError: lala is not defined\n' +
+    '    at createOrderService (file:///W:/Users/Juanleon/Desktop/John%20The%20F/Coder/Backend/43495-programacion-backend/proyecto-final/backend/src/service/carrito.js:107:3)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n' +
+    '    at async createOrder (file:///W:/Users/Juanleon/Desktop/John%20The%20F/Coder/Backend/43495-programacion-backend/proyecto-final/backend/src/controllers/carrito.js:73:17)',
+  timestamp: '2023-02-25T22:39:05.834Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:39:47.358Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:40:14.469Z'
+}
+{
+  message: 'ReferenceError: lala is not defined',
+  level: 'error',
+  timestamp: '2023-02-25T22:40:16.642Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:40:46.025Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:45:26.502Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:48:12.291Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:50:11.852Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T22:50:18.286Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:01:59.070Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:02:23.477Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:05:32.503Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:06:47.958Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:06:55.192Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:07:26.175Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:08:15.392Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:08:17.619Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:11:01.474Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:11:14.386Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:11:29.715Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:11:32.852Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:16:58.189Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:17:09.867Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:17:12.031Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:17:36.013Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:17:38.809Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:18:57.651Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:19:10.666Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:19:13.101Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:20:10.095Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:20:14.073Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:20:16.327Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:23:21.839Z'
+}
+{
+  message: 'DocumentNotFoundError: No document found for query "{ _id: new ObjectId("63fa872a119214c407eb0ad4") }" on model "orders"',
+  level: 'error',
+  timestamp: '2023-02-25T23:23:23.860Z'
+}
+{
+  message: 'upaa!',
+  level: 'error',
+  timestamp: '2023-02-25T23:23:42.229Z'
+}
+{
+  message: "Error: The 'To' number +542291454288 is not a valid phone number.",
+  level: 'error',
+  timestamp: '2023-02-26T00:05:07.702Z'
+}

@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"products\": []\r\n}",
+							"raw": "[]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,7 +39,7 @@
 					"response": []
 				},
 				{
-					"name": "/:id",
+					"name": "/",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -48,7 +48,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/carrito/:id",
+							"raw": "http://localhost:8080/api/carrito/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -57,13 +57,7 @@
 							"path": [
 								"api",
 								"carrito",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								""
 							]
 						}
 					},
@@ -140,7 +134,7 @@
 							"variable": [
 								{
 									"key": "id_prod",
-									"value": "11"
+									"value": "1"
 								}
 							]
 						}
@@ -283,7 +277,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "24"
+									"value": "25"
 								}
 							]
 						}
@@ -499,11 +493,8 @@
 				},
 				{
 					"name": "/signout",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",

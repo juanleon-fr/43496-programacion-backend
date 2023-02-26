@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 const routeUsers = Router();
-import { getUserInfo, deleteUser, postSignup, getSignout, postSignin, getUserBySession } from '../controllers/users.js';
+import { deleteUser, postSignup, signout, postSignin, getUserBySession } from '../controllers/users.js';
 import { passportSignin, checkAuthentication, checkNoSession } from '../middleware/passportAuth.js';
 
 const app = express();
@@ -11,7 +11,7 @@ routeUsers.post('/signup', checkNoSession, postSignup, passportSignin, postSigni
 
 routeUsers.post('/signin', checkNoSession, passportSignin, postSignin);
 
-routeUsers.get('/signout', checkAuthentication, getSignout);
+routeUsers.delete('/signout', checkAuthentication, signout);
 
 routeUsers.get('/profile', checkAuthentication, getUserBySession);
 

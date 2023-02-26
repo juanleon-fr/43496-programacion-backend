@@ -1,9 +1,5 @@
 import { model } from 'mongoose';
-import { logger } from '../utils/winstonLogger.js';
 import { userCollection, userSchema } from '../models/userModel.js';
-const errMessage = (err, func) => {
-	logger.error(`Date: ${Date.now()} \n Error while running ${func}\n ${err}`);
-};
 
 class UserClass {
 	constructor() {
@@ -18,7 +14,7 @@ class UserClass {
 			}
 			return null;
 		} catch (err) {
-			throw errMessage(err, 'getByEmail');
+			throw new Error({ msg: err, func: 'getByEmail' });
 		}
 	};
 
@@ -30,7 +26,7 @@ class UserClass {
 			}
 			return null;
 		} catch (err) {
-			throw errMessage(err, 'getById');
+			throw new Error({ msg: err, func: 'getById' });
 		}
 	};
 
@@ -40,16 +36,16 @@ class UserClass {
 			const res = await this.model.create(user);
 			return res;
 		} catch (err) {
-			throw errMessage(err, 'saveNew');
+			throw new Error({ msg: err, func: 'saveNew' });
 		}
 	};
 
-	deleteByEmail = async (email) => {
+	deleteById = async (id) => {
 		try {
-			const res = this.model.deleteOne({ email: email });
-			return { success: true, res: res };
+			const res = this.model.deleteOne({ id: id });
+			return res;
 		} catch (err) {
-			throw errMessage(err, 'deleteByEmail');
+			throw new Error({ msg: err, func: 'deleteById' });
 		}
 	};
 }

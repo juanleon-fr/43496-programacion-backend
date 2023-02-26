@@ -21,12 +21,16 @@ https://drive.google.com/file/d/1lqPC_N38kUeoQ_X2muRD7F-x_qF3xn0k/view?usp=share
 
 
 ## Dotenv
-### No se incluirá para futuras entregas
 
 INSTANCIA = mongo
 OPCIONESINSTANCIA = [ memoria, archivo, mongo, firebase ]
 DB = Mongo Atlas
 NODE_ENV = dev
-MONGO_URI = 'mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority'
+MONGO_URI = * URI de Mongo Atlas *
 MONGO_DB = 'backend'
 SESSION_SECRET = cadenalargatotalmentealeatoria
+EMAIL_ADDRESS = * Un Gmail aquí *
+EMAIL_PASSWORD = * Contraseña del Gmail *
+PHONE = * Un número de teléfono aquí *
+
+### No se incluirá para futuras entregas

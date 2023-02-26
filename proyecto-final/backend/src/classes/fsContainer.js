@@ -150,6 +150,15 @@ class FsContainer {
 			errMessage(err, 'removeFromCart');
 		}
 	};
+
+	placeOrder = async (cart) => {
+		try {
+			const res = await orderModel.create(cart);
+			return res;
+		} catch (err) {
+			throw new Error(err);
+		}
+	};
 }
 
 export default FsContainer;

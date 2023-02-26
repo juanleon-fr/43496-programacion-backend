@@ -69,9 +69,9 @@ import compression from 'compression';
 app.use(compression());
 
 //routes
-import routeProductos from './routes/productos.routes.js';
-import routeCarrito from './routes/carrito.routes.js';
-import routeUsers from './routes/users.routes.js';
+import routeProductos from './routes/productos.js';
+import routeCarrito from './routes/carrito.js';
+import routeUsers from './routes/users.js';
 
 app.use('/api/productos', routeProductos);
 app.use('/api/carrito', routeCarrito);

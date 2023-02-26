@@ -89,6 +89,15 @@ class MemContainer {
 		this.list[cartIndex] = setCart;
 		return { success: true, cart: this.list[cartIndex].products };
 	};
+
+	placeOrder = async (cart) => {
+		try {
+			const res = await orderModel.create(cart);
+			return res;
+		} catch (err) {
+			throw new Error(err);
+		}
+	};
 }
 
 export default MemContainer;
