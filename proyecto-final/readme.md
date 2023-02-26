@@ -26,11 +26,17 @@ INSTANCIA = mongo
 OPCIONESINSTANCIA = [ memoria, archivo, mongo, firebase ]
 DB = Mongo Atlas
 NODE_ENV = dev
-MONGO_URI = * URI de Mongo Atlas *
+MONGO_URI = 'mongodb+srv://jleonh:xhGr4Un65dLApsiH@backend-coder.bazq5t4.mongodb.net/?retryWrites=true&w=majority'
 MONGO_DB = 'backend'
 SESSION_SECRET = cadenalargatotalmentealeatoria
-EMAIL_ADDRESS = * Un Gmail aquí *
-EMAIL_PASSWORD = * Contraseña del Gmail *
-PHONE = * Un número de teléfono aquí *
+EMAIL_TO = '* enviar mail a *'
+EMAIL_NAME = 'Servidor de Node.js'
+EMAIL_ADDRESS = '* correo de gmail *'
+EMAIL_PASSWORD = '* contraseña de gmail *'
+TWILIO_SID = '* twiliosid *'
+TWILIO_TOKEN = '* token *'
+TWILIO_NUMBER = '* number *'
+TWILIO_WPP = '* twilio whatsapp *'
+AUX_NUMBER = '* numero de admin *'
 
 ### No se incluirá para futuras entregas
