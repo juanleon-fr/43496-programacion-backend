@@ -33,8 +33,8 @@ app.use(
 		name: 'session',
 		keys: ['/* secret keys */', 'lalalala'],
 
-		// Cookie Options
-		maxAge: 24 * 60 * 60 * 1000, // 24 hours
+		//Cookie Options
+		maxAge: 24 * 60 * 60 * 1000, //24 hours
 	})
 );
 app.use(
