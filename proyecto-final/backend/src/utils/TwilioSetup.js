@@ -1,10 +1,6 @@
 import twilio from 'twilio';
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_TOKEN;
-const twilioNumber = process.env.TWILIO_NUMBER;
+import { accountSid, authToken, twilioNumber, twilioWpp, adminNumber } from '../utils/dotenvExports.js';
 const client = twilio(accountSid, authToken);
-const twilioWpp = process.env.TWILIO_WPP;
-const adminNumber = process.env.AUX_NUMBER;
 
 const sendSMSBuyer = async (idstring, phone) => {
 	let id = idstring;

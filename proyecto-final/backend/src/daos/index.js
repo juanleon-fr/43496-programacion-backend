@@ -6,6 +6,7 @@ import CarritosDaoMongo from './carritos/CarritosDaoMongo.js';
 import ProductosDaoMongo from './productos/ProductosDaoMongo.js';
 import CarritosDaoFb from './carritos/CarritosDaoFb.js';
 import ProductosDaoFb from './productos/ProductosDaoFb.js';
+import { instance } from '../utils/dotenvExports.js';
 
 const instancias = [
 	{ nombre: ProductosDaoMem, id: 'memoria', descripcion: 'productos' },
@@ -21,7 +22,7 @@ const instancias = [
 	{ nombre: CarritosDaoFb, id: 'firebase', descripcion: 'carritos' },
 ];
 
-const instancia = instancias.filter((element) => element.id == process.env.INSTANCIA);
+const instancia = instancias.filter((element) => element.id == instance);
 
 const result = {
 	[instancia[0].descripcion]: instancia[0].nombre,

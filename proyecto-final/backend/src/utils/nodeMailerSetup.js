@@ -1,9 +1,7 @@
 import { createTransport } from 'nodemailer';
 import { logger } from './winstonLogger.js';
 
-const sendToMe = process.env.EMAIL_ADDRESS;
-const password = process.env.EMAIL_PASSWORD;
-const name = process.env.EMAIL_NAME;
+import { sendToMe, password, name } from '../utils/dotenvExports.js';
 
 const transporter = createTransport({
 	service: 'gmail',

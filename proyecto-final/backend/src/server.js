@@ -1,10 +1,10 @@
 //env and express
-import nodeEnv from './utils/dotenv.js';
+import nodeEnv from './utils/dotenvConfig.js';
+import { uri, sessionSecret, mongodb, db, envPort } from './utils/dotenvExports.js';
 import express from 'express';
 
 //MongoDB connection
 import mongooseConnect from './utils/mongooseConnect.js';
-const uri = process.env.MONGO_URI;
 mongooseConnect(uri);
 
 //passport & session
@@ -19,7 +19,7 @@ import cookieSession from 'cookie-session';
 const { urlencoded, json } = bodyParser;
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = envPort || 8080;
 const getByEmail = new UserClass().getByEmail;
 const getById = new UserClass().getById;
 const day = 86400 * 1000;
@@ -41,13 +41,13 @@ app.use(
 	session({
 		store: MongoStore.create({
 			mongoUrl: uri,
-			dbName: process.env.MONGO_DB,
+			dbName: mongodb,
 			mongoOptions: {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
 			},
 		}),
-		secret: process.env.SESSION_SECRET,
+		secret: sessionSecret,
 		resave: false,
 		saveUninitialized: false,
 	})
@@ -57,8 +57,8 @@ app.use(passport.session());
 
 passportConfig(passport, getByEmail, getById);
 
-// //cors
-// nodeEnv !== 'production' ? app.use(nodeEnv.cors()) : 'production';
+//cors
+nodeEnv !== 'production' ? app.use(nodeEnv.cors()) : 'production';
 
 //winston logger
 import { logger, expressWinston } from './utils/winstonLogger.js';
@@ -89,5 +89,5 @@ app.use('/*', (req, res) => {
 });
 
 app.listen(port, () => {
-	nodeEnv !== 'production' ? logger.info(`Running on dev mode. Listening on port http://localhost:${port}. Using ${process.env.DB} as Database.`) : logger.info(`Running on production mode. Listening on port http://localhost:${port}`);
+	nodeEnv !== 'production' ? logger.info(`Running on dev mode. Listening on port http://localhost:${port}. Using ${db} as Database.`) : logger.info(`Running on production mode. Listening on port http://localhost:${port}`);
 });
