@@ -34,7 +34,7 @@ app.use(
 		keys: ['/* secret keys */', 'lalalala'],
 
 		//Cookie Options
-		maxAge: 24 * 60 * 60 * 1000, //24 hours
+		maxAge: 1 * day,
 	})
 );
 app.use(
