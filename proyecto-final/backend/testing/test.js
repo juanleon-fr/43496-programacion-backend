@@ -28,7 +28,6 @@ describe('Prueba de los endpoints de Productos', () => {
 			console.log(`POST: /api/productos/`);
 			const post = generatePost();
 			const res = await request(server).post(`/api/productos`).send(post);
-			console.log('respuesta: ', res.body);
 			auxId = res.body.id;
 			expect(res.status).to.eql(200);
 			expect(res.body).to.be.a('object');
