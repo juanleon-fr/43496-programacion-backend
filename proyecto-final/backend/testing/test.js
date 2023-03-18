@@ -1,6 +1,6 @@
 import request from 'supertest';
-request(`http://localhost:8080`);
 import { expect } from 'chai';
+const server = 'http://localhost:8080';
 
 let auxId;
 
@@ -18,7 +18,7 @@ describe('Prueba de los endpoints de Productos', () => {
 	describe('getAll', () => {
 		it('Status 200. Muestra un array', async () => {
 			console.log(`GET: /api/productos/`);
-			const res = await request.get('/api/productos');
+			const res = await request(server).get('/api/productos');
 			expect(res.status).to.eql(200);
 			expect(res.body).to.be.a('array');
 		});
@@ -27,7 +27,8 @@ describe('Prueba de los endpoints de Productos', () => {
 		it('Status 200. Incorpora un producto nuevo', async () => {
 			console.log(`POST: /api/productos/`);
 			const post = generatePost();
-			const res = await request.post(`/api/productos`).send(post);
+			const res = await request(server).post(`/api/productos`).send(post);
+			console.log('respuesta: ', res.body);
 			auxId = res.body.id;
 			expect(res.status).to.eql(200);
 			expect(res.body).to.be.a('object');
@@ -41,8 +42,8 @@ describe('Prueba de los endpoints de Productos', () => {
 	describe('deleteProdById', () => {
 		it(`Status 200. Elimina el producto generado`, async () => {
 			console.log(`DELETE: /api/productos/${auxId}`);
-			const res = await request.delete(`/api/productos/${auxId}`);
-			expect(res.status).to.eql(202);
+			const res = await request(server).delete(`/api/productos/${auxId}`);
+			expect(res.status).to.eql(200);
 		});
 	});
 });
