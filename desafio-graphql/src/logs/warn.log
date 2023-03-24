@@ -1,0 +1,468 @@
+{
+  meta: {
+    req: {
+      url: '/api/productos',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        'content-type': 'application/json',
+        'content-length': '98',
+        connection: 'close'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos',
+      query: {}
+    },
+    res: { statusCode: 400 },
+    responseTime: 1
+  },
+  level: 'warn',
+  message: 'HTTP POST /api/productos',
+  timestamp: '2023-03-18T03:35:14.098Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"undefined"',
+  kind: 'Number',
+  value: 'undefined',
+  path: 'id',
+  reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!isNaN(val))
+  
+      at castNumber (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast\number.js:27:10)
+      at SchemaNumber.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:376:12)
+      at SchemaNumber.SchemaType.applySetters (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1201:12)
+      at SchemaNumber.SchemaType._castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1648:15)
+      at SchemaNumber.castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:430:14)
+      at SchemaNumber.SchemaType.castForQueryWrapper (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast.js:342:32)
+      at model.Query.Query.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:5341:12)
+      at model.Query.Query._castConditions (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:2214:10)
+      at model.Query.<anonymous> (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:3171:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  },
+  valueType: 'string',
+  level: 'error',
+  timestamp: '2023-03-18T03:35:14.197Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/undefined',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        connection: 'close'
+      },
+      method: 'DELETE',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/undefined',
+      query: {}
+    },
+    res: { statusCode: 500 },
+    responseTime: 29
+  },
+  level: 'error',
+  message: 'HTTP DELETE /api/productos/undefined',
+  timestamp: '2023-03-18T03:35:14.204Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        'content-type': 'application/json',
+        'content-length': '97',
+        connection: 'close'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos',
+      query: {}
+    },
+    res: { statusCode: 400 },
+    responseTime: 1
+  },
+  level: 'warn',
+  message: 'HTTP POST /api/productos',
+  timestamp: '2023-03-18T03:36:22.792Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"undefined"',
+  kind: 'Number',
+  value: 'undefined',
+  path: 'id',
+  reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!isNaN(val))
+  
+      at castNumber (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast\number.js:27:10)
+      at SchemaNumber.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:376:12)
+      at SchemaNumber.SchemaType.applySetters (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1201:12)
+      at SchemaNumber.SchemaType._castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1648:15)
+      at SchemaNumber.castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:430:14)
+      at SchemaNumber.SchemaType.castForQueryWrapper (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast.js:342:32)
+      at model.Query.Query.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:5341:12)
+      at model.Query.Query._castConditions (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:2214:10)
+      at model.Query.<anonymous> (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:3171:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  },
+  valueType: 'string',
+  level: 'error',
+  timestamp: '2023-03-18T03:36:22.818Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/undefined',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        connection: 'close'
+      },
+      method: 'DELETE',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/undefined',
+      query: {}
+    },
+    res: { statusCode: 500 },
+    responseTime: 21
+  },
+  level: 'error',
+  message: 'HTTP DELETE /api/productos/undefined',
+  timestamp: '2023-03-18T03:36:22.823Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        'content-type': 'application/json',
+        'content-length': '96',
+        connection: 'close'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos',
+      query: {}
+    },
+    res: { statusCode: 400 },
+    responseTime: 1
+  },
+  level: 'warn',
+  message: 'HTTP POST /api/productos',
+  timestamp: '2023-03-18T03:37:04.754Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"undefined"',
+  kind: 'Number',
+  value: 'undefined',
+  path: 'id',
+  reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!isNaN(val))
+  
+      at castNumber (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast\number.js:27:10)
+      at SchemaNumber.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:376:12)
+      at SchemaNumber.SchemaType.applySetters (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1201:12)
+      at SchemaNumber.SchemaType._castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1648:15)
+      at SchemaNumber.castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:430:14)
+      at SchemaNumber.SchemaType.castForQueryWrapper (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast.js:342:32)
+      at model.Query.Query.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:5341:12)
+      at model.Query.Query._castConditions (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:2214:10)
+      at model.Query.<anonymous> (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:3171:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  },
+  valueType: 'string',
+  level: 'error',
+  timestamp: '2023-03-18T03:37:04.780Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/undefined',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        connection: 'close'
+      },
+      method: 'DELETE',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/undefined',
+      query: {}
+    },
+    res: { statusCode: 500 },
+    responseTime: 22
+  },
+  level: 'error',
+  message: 'HTTP DELETE /api/productos/undefined',
+  timestamp: '2023-03-18T03:37:04.785Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        'content-type': 'application/json',
+        'content-length': '96',
+        connection: 'close'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos',
+      query: {}
+    },
+    res: { statusCode: 400 },
+    responseTime: 1
+  },
+  level: 'warn',
+  message: 'HTTP POST /api/productos',
+  timestamp: '2023-03-18T03:39:49.266Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"undefined"',
+  kind: 'Number',
+  value: 'undefined',
+  path: 'id',
+  reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!isNaN(val))
+  
+      at castNumber (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast\number.js:27:10)
+      at SchemaNumber.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:376:12)
+      at SchemaNumber.SchemaType.applySetters (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1201:12)
+      at SchemaNumber.SchemaType._castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1648:15)
+      at SchemaNumber.castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:430:14)
+      at SchemaNumber.SchemaType.castForQueryWrapper (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast.js:342:32)
+      at model.Query.Query.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:5341:12)
+      at model.Query.Query._castConditions (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:2214:10)
+      at model.Query.<anonymous> (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:3171:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  },
+  valueType: 'string',
+  level: 'error',
+  timestamp: '2023-03-18T03:39:49.292Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/undefined',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        connection: 'close'
+      },
+      method: 'DELETE',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/undefined',
+      query: {}
+    },
+    res: { statusCode: 500 },
+    responseTime: 23
+  },
+  level: 'error',
+  message: 'HTTP DELETE /api/productos/undefined',
+  timestamp: '2023-03-18T03:39:49.297Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        'content-type': 'application/json',
+        'content-length': '98',
+        connection: 'close'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos',
+      query: {}
+    },
+    res: { statusCode: 400 },
+    responseTime: 1
+  },
+  level: 'warn',
+  message: 'HTTP POST /api/productos',
+  timestamp: '2023-03-18T03:44:58.290Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"undefined"',
+  kind: 'Number',
+  value: 'undefined',
+  path: 'id',
+  reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!isNaN(val))
+  
+      at castNumber (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast\number.js:27:10)
+      at SchemaNumber.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:376:12)
+      at SchemaNumber.SchemaType.applySetters (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1201:12)
+      at SchemaNumber.SchemaType._castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1648:15)
+      at SchemaNumber.castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:430:14)
+      at SchemaNumber.SchemaType.castForQueryWrapper (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast.js:342:32)
+      at model.Query.Query.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:5341:12)
+      at model.Query.Query._castConditions (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:2214:10)
+      at model.Query.<anonymous> (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:3171:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  },
+  valueType: 'string',
+  level: 'error',
+  timestamp: '2023-03-18T03:44:58.316Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/undefined',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        connection: 'close'
+      },
+      method: 'DELETE',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/undefined',
+      query: {}
+    },
+    res: { statusCode: 500 },
+    responseTime: 22
+  },
+  level: 'error',
+  message: 'HTTP DELETE /api/productos/undefined',
+  timestamp: '2023-03-18T03:44:58.322Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        'content-type': 'application/json',
+        'content-length': '96',
+        connection: 'close'
+      },
+      method: 'POST',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos',
+      query: {}
+    },
+    res: { statusCode: 400 },
+    responseTime: 1
+  },
+  level: 'warn',
+  message: 'HTTP POST /api/productos',
+  timestamp: '2023-03-18T03:46:38.412Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"undefined"',
+  kind: 'Number',
+  value: 'undefined',
+  path: 'id',
+  reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!isNaN(val))
+  
+      at castNumber (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast\number.js:27:10)
+      at SchemaNumber.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:376:12)
+      at SchemaNumber.SchemaType.applySetters (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1201:12)
+      at SchemaNumber.SchemaType._castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1648:15)
+      at SchemaNumber.castForQuery (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schema\number.js:430:14)
+      at SchemaNumber.SchemaType.castForQueryWrapper (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\cast.js:342:32)
+      at model.Query.Query.cast (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:5341:12)
+      at model.Query.Query._castConditions (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:2214:10)
+      at model.Query.<anonymous> (W:\Users\Juanleon\Desktop\John The F\Coder\Backend\43495-programacion-backend\proyecto-final\backend\node_modules\mongoose\lib\query.js:3171:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  },
+  valueType: 'string',
+  level: 'error',
+  timestamp: '2023-03-18T03:46:38.437Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/undefined',
+      headers: {
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate',
+        connection: 'close'
+      },
+      method: 'DELETE',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/undefined',
+      query: {}
+    },
+    res: { statusCode: 500 },
+    responseTime: 23
+  },
+  level: 'error',
+  message: 'HTTP DELETE /api/productos/undefined',
+  timestamp: '2023-03-18T03:46:38.442Z'
+}
+{
+  meta: {
+    req: {
+      url: '/api/productos/25',
+      headers: {
+        'user-agent': 'PostmanRuntime/7.31.1',
+        accept: '*/*',
+        'postman-token': 'cf84bdd5-3a82-4252-b157-81dae723aa76',
+        host: 'localhost:8080',
+        'accept-encoding': 'gzip, deflate, br',
+        connection: 'keep-alive'
+      },
+      method: 'GET',
+      httpVersion: '1.1',
+      originalUrl: '/api/productos/25',
+      query: {}
+    },
+    res: { statusCode: 404 },
+    responseTime: 48
+  },
+  level: 'warn',
+  message: 'HTTP GET /api/productos/25',
+  timestamp: '2023-03-18T03:56:14.860Z'
+}
