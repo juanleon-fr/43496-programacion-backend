@@ -1,5 +1,6 @@
 import passportLocal from 'passport-local';
 import { comparePassword } from './bcrypt.js';
+import mongooseConnect from '../utils/mongooseConnect.js';
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -26,4 +27,8 @@ function passportConfig(passport, getUserByEmail, getUserById) {
 	});
 }
 
-export default passportConfig;
+const passportDBConnect = (uri) => {
+	mongooseConnect(uri);
+};
+
+export { passportConfig, passportDBConnect };

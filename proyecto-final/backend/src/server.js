@@ -10,13 +10,14 @@ mongooseConnect(uri);
 //passport & session
 import passport from 'passport';
 import UserClass from './classes/UserClass.js';
-import passportConfig from './utils/passportConfig.js';
+import { passportConfig, passportDBConnect } from './utils/passportConfig.js';
 import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 const { urlencoded, json } = bodyParser;
+passportDBConnect(uri);
 
 const app = express();
 const port = envPort || 8080;
@@ -32,8 +33,6 @@ app.use(
 	cookieSession({
 		name: 'session',
 		keys: ['/* secret keys */', 'lalalala'],
-
-		//Cookie Options
 		maxAge: 1 * day,
 	})
 );
@@ -76,10 +75,6 @@ import routeUsers from './routes/users.js';
 app.use('/api/productos', routeProductos);
 app.use('/api/carrito', routeCarrito);
 app.use('/user', routeUsers);
-
-app.use('/', (req, res) => {
-	res.send(req.session);
-});
 
 //404 routes
 app.use('/*', (req, res) => {
