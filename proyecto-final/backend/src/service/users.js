@@ -48,6 +48,7 @@ const signupService = async (user) => {
 		const hashedPass = hashPassword(user.password);
 		if ((await getUserService(user.email)) == null) {
 			user.password = hashedPass;
+			user.role = { user: 2001 };
 			return await users.saveNew(user);
 		}
 		return null;

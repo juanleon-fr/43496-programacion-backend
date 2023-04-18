@@ -14,7 +14,7 @@ const newCart = async (req, res, next) => {
 	if (typeof result === 'string') {
 		return res.sendStatus(500);
 	}
-	return res.status(200).json(result);
+	return res.status(201).json(result);
 };
 
 const deleteCartById = async (req, res, next) => {
@@ -59,7 +59,7 @@ const newCartItemById = async (req, res, next) => {
 	if (result == 'error') {
 		return res.sendStatus(500);
 	}
-	return res.status(200).json(result);
+	return res.status(20).json(result);
 };
 
 const deleteCartItemById = async (req, res, next) => {
@@ -90,7 +90,7 @@ const createOrder = async (req, res, next) => {
 	} catch (err) {
 		logger.error(`${err}`);
 	}
-	return res.status(200).json(result);
+	return res.status(201).json(result);
 };
 
 export default {

@@ -12,6 +12,7 @@ const userSchema = new Schema(
 		avatarurl: { type: String, required: true },
 		phone: { type: String, required: true },
 		id: { type: String, required: true },
+		role: { type: Object, required: true },
 	},
 	{ versionKey: false }
 );

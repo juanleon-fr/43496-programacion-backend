@@ -31,7 +31,7 @@ const newProd = async (req, res, next) => {
 	if (result == 'error') {
 		return res.sendStatus(500);
 	}
-	return res.status(200).json(result);
+	return res.status(201).json(result);
 };
 
 const updateProdById = async (req, res, next) => {

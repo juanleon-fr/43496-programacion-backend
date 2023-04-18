@@ -3,12 +3,6 @@ const products = new instancia.productos();
 
 import { logger } from '../utils/winstonLogger.js';
 
-// try {
-
-// } catch (err) {
-//     logger.error(err);
-// }
-
 const getProdListService = async () => {
 	try {
 		const result = await products.getAll();
